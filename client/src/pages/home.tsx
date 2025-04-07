@@ -1,21 +1,48 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatedHero } from "@/components/animated-hero";
 import { BackgroundPaths } from "@/components/background-paths";
 import { AboutSection } from "@/components/about-section";
 import { useLocation } from "wouter";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import IntroLoader from "@/components/intro-loader";
 
 export default function Home() {
   const [, navigate] = useLocation();
   const aboutSectionRef = useRef<HTMLDivElement>(null);
+  const [showIntro, setShowIntro] = useState(true);
   
   // Check if user is already authenticated
   useEffect(() => {
     const userRole = sessionStorage.getItem('userRole');
     if (userRole) {
+      // Skip intro and directly navigate to dashboard if authenticated
+      window.forceSkipIntro = true;
       navigate('/dashboard');
     }
   }, [navigate]);
+
+  // Listen for introCompleted state changes
+  useEffect(() => {
+    const checkIntroStatus = () => {
+      if (window.introCompleted) {
+        setShowIntro(false);
+      }
+    };
+    
+    // Check initially
+    checkIntroStatus();
+    
+    // Setup listener for checking intro status
+    window.addEventListener('storage', checkIntroStatus);
+    
+    // Setup a timer to periodically check intro status (backup)
+    const intervalId = setInterval(checkIntroStatus, 200);
+    
+    return () => {
+      window.removeEventListener('storage', checkIntroStatus);
+      clearInterval(intervalId);
+    };
+  }, []);
   
   // Scroll to about section function
   const scrollToAboutSection = () => {
@@ -24,6 +51,11 @@ export default function Home() {
   
   return (
     <div className="min-h-screen flex flex-col relative overflow-x-hidden">
+      {/* Intro loader animation */}
+      <AnimatePresence>
+        {showIntro && <IntroLoader />}
+      </AnimatePresence>
+      
       {/* Hero section with black background and animated paths */}
       <div className="min-h-screen bg-black flex items-center justify-center relative overflow-hidden">
         {/* Background animated paths */}

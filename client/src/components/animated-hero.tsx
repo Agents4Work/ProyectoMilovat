@@ -25,9 +25,9 @@ export const AnimatedHero = memo(function AnimatedHero() {
     []
   );
 
-  // Usamos setTimeout con un intervalo más largo para reducir la frecuencia de cambios
+  // Usamos setTimeout con un intervalo para cambiar las palabras
   useEffect(() => {
-    const interval = 8000; // 8 segundos entre cambios para reducir la frecuencia aún más
+    const interval = 3000; // 3 segundos entre cambios (más rápido que antes)
     
     // Utilizamos el timer estándar para evitar problemas de rendimiento
     const timer = setTimeout(() => {
