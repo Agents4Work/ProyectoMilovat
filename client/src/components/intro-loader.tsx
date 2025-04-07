@@ -112,13 +112,13 @@ const IntroLoader = memo(function IntroLoader() {
     >
       {/* Silueta de edificios en el fondo con animación mejorada */}
       <motion.div 
-        className="absolute bottom-0 w-full h-72 md:h-96 overflow-hidden"
+        className="absolute bottom-0 w-full h-80 md:h-96 overflow-hidden"
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
-        <div className="w-full opacity-25">
-          <BuildingSilhouette className="w-full h-full text-gray-400" />
+        <div className="w-full opacity-40">
+          <BuildingSilhouette className="w-full h-full text-gray-300" />
         </div>
       </motion.div>
       
