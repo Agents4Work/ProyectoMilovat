@@ -2,8 +2,20 @@ import { useEffect, useMemo, useState, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter";
+import Logo from "./logo";
 
-// Optimized with memo for better performance 
+/**
+ * Componente AnimatedHero
+ * 
+ * Este componente muestra el área principal de la página de inicio.
+ * Incluye un texto animado que cambia entre diferentes palabras,
+ * el logo de la aplicación y un botón para iniciar sesión.
+ * 
+ * Características:
+ * - Animación de texto rotativo
+ * - Transiciones suaves
+ * - Control de renderizado para optimización
+ */
 export const AnimatedHero = memo(function AnimatedHero() {
   const [titleNumber, setTitleNumber] = useState(0);
   const [, navigate] = useLocation();
@@ -12,71 +24,48 @@ export const AnimatedHero = memo(function AnimatedHero() {
     []
   );
 
-  // Use requestAnimationFrame for smoother animations
+  // Usamos setTimeout en lugar de requestAnimationFrame para mayor estabilidad
   useEffect(() => {
-    let timeoutId: number;
-    let startTime: number;
-    let frameDuration = 3500; // 3.5 seconds between changes
+    const interval = 5000; // 5 segundos entre cambios para reducir frecuencia
     
-    const animateTitle = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const elapsed = timestamp - startTime;
-      
-      if (elapsed >= frameDuration) {
-        startTime = timestamp;
-        // Update the title
-        setTitleNumber(prev => 
-          prev === titles.length - 1 ? 0 : prev + 1
-        );
-      }
-      
-      // Schedule the next frame
-      timeoutId = requestAnimationFrame(animateTitle);
-    };
+    // Utilizamos el timer estándar para evitar problemas de rendimiento
+    const timer = setTimeout(() => {
+      setTitleNumber(prev => 
+        prev === titles.length - 1 ? 0 : prev + 1
+      );
+    }, interval);
     
-    // Start the animation
-    timeoutId = requestAnimationFrame(animateTitle);
-    
-    // Cleanup
-    return () => cancelAnimationFrame(timeoutId);
-  }, [titles.length]);
+    // Limpieza del timer
+    return () => clearTimeout(timer);
+  }, [titleNumber, titles.length]); // Dependencias actualizadas
 
   return (
-    <motion.div 
-      className="w-full"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
+    <div className="w-full">
       <div className="container mx-auto">
         <div className="flex gap-8 py-10 items-center justify-center flex-col">
+          {/* Logo en la parte superior */}
+          <div className="mb-6">
+            <Logo size="lg" showText={true} textColor="gold" />
+          </div>
+          
           <div className="flex gap-4 flex-col">
             <h1 className="text-4xl md:text-6xl max-w-2xl tracking-tighter text-center font-regular">
-              <motion.span 
-                className="bg-clip-text text-transparent bg-gradient-to-r from-amber-300 via-amber-500 to-amber-600"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-              >
+              <div className="gold-gradient">
                 Una plataforma que es
-              </motion.span>
-              <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1">
-                &nbsp;
+              </div>
+              <div className="relative flex w-full justify-center overflow-hidden text-center h-24 md:pb-4 md:pt-1">
                 <AnimatePresence mode="wait">
                   {titles.map((title, index) => (
                     titleNumber === index && (
                       <motion.span
                         key={index}
-                        className="absolute font-semibold bg-clip-text text-transparent bg-gradient-to-r from-amber-300 via-amber-500 to-amber-600"
-                        initial={{ opacity: 0, y: 50 }}
+                        className="absolute font-semibold gold-gradient mt-2"
+                        initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -50 }}
+                        exit={{ opacity: 0, y: -20 }}
                         transition={{ 
-                          type: "spring", 
-                          stiffness: 80,
-                          damping: 12,
-                          mass: 1.2,
-                          duration: 1.2
+                          duration: 0.8,   // Duración reducida para transiciones más rápidas
+                          ease: "easeInOut"  // Curva de animación más suave
                         }}
                       >
                         {title}
@@ -84,29 +73,25 @@ export const AnimatedHero = memo(function AnimatedHero() {
                     )
                   ))}
                 </AnimatePresence>
-              </span>
+              </div>
             </h1>
           </div>
-          <motion.div 
-            className="flex flex-row gap-3 mt-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.5 }}
-          >
+          
+          <div className="flex flex-row gap-3 mt-8">
             <Button
               onClick={() => {
-                // Store development mode flag in sessionStorage
+                // Guardar indicador de modo de desarrollo en sessionStorage
                 sessionStorage.setItem('isDevelopment', 'true');
-                // Navigate to auth page using wouter's navigate function
+                // Navegar a la página de autenticación usando la función navigate de wouter
                 navigate("/auth");
               }}
               className="bg-amber-500 hover:bg-amber-600 text-black px-6 py-6 rounded-lg font-medium text-lg"
             >
               Iniciar Sesión
             </Button>
-          </motion.div>
+          </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 });

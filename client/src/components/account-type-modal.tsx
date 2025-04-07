@@ -5,12 +5,37 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { User, Building2 } from "lucide-react";
 
+/**
+ * Interfaz AccountTypeModalProps
+ * 
+ * Define las propiedades del modal de selección de tipo de cuenta.
+ * 
+ * @property isOpen - Determina si el modal está visible
+ * @property onClose - Función que se ejecuta al cerrar el modal
+ * @property onRoleSelected - Función que recibe el rol seleccionado ("resident" o "admin")
+ */
 interface AccountTypeModalProps {
   isOpen: boolean;
   onClose: () => void;
   onRoleSelected: (role: "resident" | "admin") => void;
 }
 
+/**
+ * Componente AccountTypeModal
+ * 
+ * Este componente muestra un diálogo modal que permite al usuario
+ * seleccionar su tipo de cuenta: Residente o Administrador.
+ * 
+ * Funcionalidades:
+ * - Muestra dos opciones con iconos y descripciones
+ * - Destaca visualmente la opción seleccionada
+ * - Permite confirmar la selección mediante un botón
+ * - Comunica la selección al componente padre
+ * 
+ * @param isOpen - Estado que controla la visibilidad del modal
+ * @param onClose - Función para cerrar el modal
+ * @param onRoleSelected - Callback que recibe el rol seleccionado
+ */
 export function AccountTypeModal({ isOpen, onClose, onRoleSelected }: AccountTypeModalProps) {
   const [selectedRole, setSelectedRole] = useState<"resident" | "admin">("resident");
   

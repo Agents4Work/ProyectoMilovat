@@ -17,16 +17,49 @@ import {
   Cpu
 } from "lucide-react";
 
+/**
+ * Interfaz NavItem
+ * 
+ * Define la estructura de cada elemento de navegación en la barra lateral.
+ * 
+ * @property icon - Icono que representa visualmente la opción de menú
+ * @property label - Texto descriptivo que aparece junto al icono
+ * @property href - Ruta de navegación que se activará al hacer clic
+ */
 interface NavItem {
   icon: JSX.Element;
   label: string;
   href: string;
 }
 
+/**
+ * Interfaz DashboardSidebarProps
+ * 
+ * Define las propiedades recibidas por el componente DashboardSidebar.
+ * 
+ * @property userRole - Rol del usuario que determina qué opciones de menú se mostrarán
+ *                     "resident" para residentes del edificio
+ *                     "admin" para administradores del sistema
+ */
 interface DashboardSidebarProps {
   userRole: "resident" | "admin";
 }
 
+/**
+ * Componente DashboardSidebar
+ * 
+ * Este componente representa la barra lateral de navegación del panel de control.
+ * Muestra diferentes opciones de menú según el rol del usuario (residente o administrador).
+ * 
+ * Funcionalidades:
+ * - Muestra el logo de Milovat y el rol del usuario
+ * - Presenta un menú de navegación con iconos y etiquetas
+ * - Resalta visualmente la opción de menú activa
+ * - Proporciona una sección para información del usuario y cierre de sesión
+ * - Adapta las opciones de menú según el rol del usuario
+ * 
+ * @param userRole - Rol del usuario ("resident" o "admin")
+ */
 export function DashboardSidebar({ userRole }: DashboardSidebarProps) {
   const [, navigate] = useLocation();
   const [activePath, setActivePath] = useState("/dashboard");

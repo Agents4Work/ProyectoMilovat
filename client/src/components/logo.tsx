@@ -1,5 +1,15 @@
 import { memo } from "react";
+import logoImage from "../assets/Logo-Milotav-Positivo1-2022.png";
 
+/**
+ * Componente Logo
+ * 
+ * Este componente muestra el logo de Milovat. Puede mostrar el logo solo o con texto.
+ * 
+ * @param size - Tamaño del logo (pequeño, mediano o grande)
+ * @param showText - Indica si se debe mostrar el texto "Milovat" junto al logo
+ * @param textColor - Color del texto (blanco o dorado)
+ */
 interface LogoProps {
   size?: "sm" | "md" | "lg";
   showText?: boolean;
@@ -13,36 +23,18 @@ const Logo = memo(function Logo({
 }: LogoProps) {
   
   const sizes = {
-    sm: "h-8 w-8",
-    md: "h-16 w-16",
-    lg: "h-24 w-24",
+    sm: "h-8",
+    md: "h-16",
+    lg: "h-24",
   };
   
   return (
     <div className="flex flex-col items-center">
-      <svg 
-        className={sizes[size]} 
-        viewBox="0 0 100 100" 
-        fill="none" 
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path 
-          d="M50 11L90 34V67L50 90L10 67V34L50 11Z" 
-          fill="#39B7CD"
-        />
-        <path 
-          d="M50 11L90 34L50 57L10 34L50 11Z" 
-          fill="#F7DE79"
-        />
-        <path 
-          d="M50 57L90 34V67L50 90V57Z" 
-          fill="#D4AF37"
-        />
-        <path 
-          d="M50 57L10 34V67L50 90V57Z" 
-          fill="#3B4095"
-        />
-      </svg>
+      <img 
+        src={logoImage} 
+        alt="Logo Milovat" 
+        className={`${sizes[size]} object-contain`}
+      />
       
       {showText && (
         <h1 
