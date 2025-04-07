@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import { AnimatedHero } from "@/components/animated-hero";
 import { BackgroundPaths } from "@/components/background-paths";
-import { DiscoverMore } from "@/components/discover-more";
 import { AboutSection } from "@/components/about-section";
 import { useLocation } from "wouter";
 
@@ -33,8 +32,7 @@ export default function Home() {
         <main className="flex-1 flex flex-col items-center justify-center relative z-10 h-full">
           <AnimatedHero />
           
-          {/* Discover more button with bounce animation */}
-          <DiscoverMore onClick={scrollToAboutSection} />
+          {/* Space for additional content if needed */}
         </main>
       </div>
       

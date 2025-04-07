@@ -65,7 +65,7 @@ export const AnimatedHero = memo(function AnimatedHero() {
                     titleNumber === index && (
                       <motion.span
                         key={index}
-                        className="absolute font-semibold gold-highlight-text mt-2 milovat-text w-full text-center text-5xl md:text-7xl"
+                        className="absolute font-semibold metallic-elegant-text mt-2 milovat-text w-full text-center text-5xl md:text-7xl"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
