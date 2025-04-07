@@ -43,7 +43,7 @@ export const AboutSection = memo(function AboutSection() {
             sistemas de acceso y monitoreo energético en una sola interfaz.
           </p>
           
-          <div className="text-center text-xl md:text-2xl text-white mb-12">
+          <div className="text-center text-xl md:text-2xl text-white mb-8">
             Tu<AnimatedWordCycle 
                 words={[
                     "hogar",
@@ -62,9 +62,8 @@ export const AboutSection = memo(function AboutSection() {
         {/* Componente de características */}
         <FeatureSteps 
           features={features}
-          title="Características Principales"
           autoPlayInterval={4000}
-          className="mt-16"
+          className="mt-6"
         />
       </div>
     </section>

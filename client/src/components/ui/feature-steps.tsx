@@ -43,12 +43,8 @@ export function FeatureSteps({
   }, [progress, features.length, autoPlayInterval])
 
   return (
-    <div className={cn("p-8 md:p-12", className)}>
+    <div className={cn("p-4 md:p-8", className)}>
       <div className="max-w-7xl mx-auto w-full">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-10 text-center bg-clip-text text-transparent bg-gradient-to-r from-amber-300 via-amber-500 to-amber-600">
-          {title}
-        </h2>
-
         <div className="flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-10">
           <div className="order-2 md:order-1 space-y-8">
             {features.map((feature, index) => (
@@ -106,7 +102,7 @@ export function FeatureSteps({
                       <img
                         src={feature.image}
                         alt={feature.step}
-                        className="w-full h-full object-cover transition-transform transform"
+                        className="w-full h-full object-contain transition-transform transform"
                       />
                       <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black via-black/50 to-transparent" />
                     </motion.div>
