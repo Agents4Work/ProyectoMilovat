@@ -2,6 +2,7 @@ import { useEffect, useState, useRef, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { BuildingSilhouette } from "@/components/ui/building-silhouette";
+import AnimatedWordCycle from "@/components/ui/animated-text-cycle";
 import logoImage from "@assets/Logo-Milotav-Positivo1-2022.png";
 
 // Declaramos window.introCompleted y window.forceSkipIntro para el TS
@@ -153,7 +154,7 @@ const IntroLoader = memo(function IntroLoader() {
           </motion.h2>
         </div>
         
-        <div className="text-xl sm:text-2xl md:text-3xl text-white/80 mb-8 leading-relaxed font-light tracking-wide max-w-3xl mx-auto px-4 min-h-[6rem]">
+        <div className="text-xl sm:text-2xl md:text-3xl text-white/80 mb-6 leading-relaxed font-light tracking-wide max-w-3xl mx-auto px-4 min-h-[6rem]">
           <span className="inline-block whitespace-pre-line">{typedText}</span>
           <motion.span 
             className="inline-block ml-1 bg-white/80 w-[2px] h-[1em]"
@@ -161,6 +162,26 @@ const IntroLoader = memo(function IntroLoader() {
             transition={{ duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
           />
         </div>
+
+        <motion.div 
+          className="text-center text-lg sm:text-xl md:text-2xl text-white/90 mb-6"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 1.8 }}
+        >
+          Tu <AnimatedWordCycle 
+              words={[
+                  "hogar",
+                  "edificio",
+                  "propiedad",
+                  "espacio",
+                  "información",
+                  "comodidad"
+              ]}
+              interval={2500}
+              className="bg-clip-text text-transparent bg-gradient-to-r from-amber-300 via-amber-500 to-amber-600" 
+          /> en una sola app
+        </motion.div>
         
         <motion.div 
           className="h-px w-72 mx-auto bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 my-8"
