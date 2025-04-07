@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter";
 import Logo from "./logo";
+import logoImage from "../assets/Logo-Milotav-Positivo1-2022.png";
 
 /**
  * Componente AnimatedHero
@@ -44,12 +45,17 @@ export const AnimatedHero = memo(function AnimatedHero() {
       <div className="container mx-auto">
         <div className="flex gap-8 py-10 items-center justify-center flex-col">
           {/* Logo en la parte superior */}
-          <div className="mb-6">
-            <Logo showText={true} textColor="white" />
+          <div className="mb-6 flex flex-col items-center">
+            <img 
+              src={logoImage} 
+              alt="Logo Milovat" 
+              className="h-24 object-contain" 
+            />
+            <h1 className="text-center text-4xl font-normal mt-4 text-white milovat-text">Milovat</h1>
           </div>
           
           <div className="flex gap-4 flex-col">
-            <h1 className="text-4xl md:text-6xl max-w-2xl tracking-tighter text-center font-regular milovat-text">
+            <h1 className="text-4xl md:text-6xl max-w-2xl tracking-tighter text-center font-regular">
               <div className="gold-gradient">
                 Una plataforma que es
               </div>
@@ -59,7 +65,7 @@ export const AnimatedHero = memo(function AnimatedHero() {
                     titleNumber === index && (
                       <motion.span
                         key={index}
-                        className="absolute font-semibold gold-gradient mt-2 milovat-text"
+                        className="absolute font-semibold gold-gradient-text mt-2"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
