@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatedHero } from "@/components/animated-hero";
 import { BackgroundPaths } from "@/components/background-paths";
 import { AboutSection } from "@/components/about-section";
+import { AnimatedBuildingSection } from "@/components/animated-building-section";
 import { useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import IntroLoader from "@/components/intro-loader";
@@ -93,6 +94,9 @@ export default function Home() {
       <div ref={aboutSectionRef}>
         <AboutSection />
       </div>
+      
+      {/* Animated Building Section with black background */}
+      <AnimatedBuildingSection />
     </div>
   );
 }
