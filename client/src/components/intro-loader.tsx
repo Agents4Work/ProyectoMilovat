@@ -20,11 +20,11 @@ const IntroLoader = memo(function IntroLoader() {
   const startTimeRef = useRef(Date.now());
   const typingCompleteRef = useRef(false);
   
-  // Optimización: tiempo más rápido por carácter para mejorar la fluidez
-  const charSpeed = 25; // ms (más rápido para mejor fluidez)
+  // Velocidad de escritura por carácter (ligeramente más lenta para que coincida con los 4.5 segundos)
+  const charSpeed = 40; // ms
   
-  // Tiempo total mínimo reducido
-  const totalMinTime = 2000; // ms
+  // Tiempo total mínimo 
+  const totalMinTime = 4500; // ms (4.5 segundos)
   
   // Función para omitir la animación
   const skipAnimation = () => {
