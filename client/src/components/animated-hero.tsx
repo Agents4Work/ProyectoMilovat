@@ -41,22 +41,22 @@ export const AnimatedHero = memo(function AnimatedHero() {
   }, [titleNumber, titles.length]); // Dependencias actualizadas
 
   return (
-    <div className="w-full h-screen flex items-center justify-center">
+    <div className="w-full min-h-screen flex items-center justify-center">
       <div className="container mx-auto flex items-center justify-center">
-        <div className="flex gap-8 py-10 items-center justify-center flex-col">
+        <div className="flex gap-8 py-10 items-center justify-center flex-col w-full max-w-2xl">
           {/* Logo en la parte superior */}
-          <div className="mb-6 flex flex-col items-center">
+          <div className="mb-6 flex flex-col items-center w-full">
             <img 
               src={logoImage} 
               alt="Logo Milovat" 
-              className="h-24 object-contain" 
+              className="h-24 object-contain mx-auto" 
             />
-            <h1 className="text-center text-4xl font-bold mt-4 text-white milovat-text">Milovat</h1>
+            <h1 className="text-center text-4xl font-bold mt-4 text-white milovat-text w-full">Milovat</h1>
           </div>
           
-          <div className="flex gap-4 flex-col">
-            <h1 className="text-4xl md:text-6xl max-w-2xl tracking-tighter text-center font-regular">
-              <div className="gold-gradient milovat-text">
+          <div className="flex gap-4 flex-col items-center w-full">
+            <h1 className="text-4xl md:text-6xl tracking-tighter text-center font-regular w-full">
+              <div className="gold-gradient milovat-text w-full text-center">
                 Una plataforma que es
               </div>
               <div className="relative flex w-full justify-center overflow-hidden text-center h-24 md:pb-4 md:pt-1">
@@ -65,7 +65,7 @@ export const AnimatedHero = memo(function AnimatedHero() {
                     titleNumber === index && (
                       <motion.span
                         key={index}
-                        className="absolute font-semibold gold-gradient-text mt-2 milovat-text"
+                        className="absolute font-semibold gold-gradient-text mt-2 milovat-text w-full text-center"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
@@ -83,13 +83,13 @@ export const AnimatedHero = memo(function AnimatedHero() {
             </h1>
           </div>
           
-          <div className="flex flex-row gap-3 mt-8">
+          <div className="flex justify-center mt-8 w-full">
             <Button
               onClick={() => {
                 sessionStorage.setItem('isDevelopment', 'true');
                 navigate("/auth");
               }}
-              className="gold-gradient-bg text-black px-6 py-6 rounded-lg font-medium text-lg hover:opacity-90"
+              className="gold-gradient-bg text-black px-6 py-6 rounded-lg font-medium text-lg hover:opacity-90 mx-auto"
             >
               Iniciar Sesión
             </Button>
