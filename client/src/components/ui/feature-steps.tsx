@@ -46,7 +46,7 @@ export function FeatureSteps({
     <div className={cn("p-4 md:p-8", className)}>
       <div className="max-w-7xl mx-auto w-full">
         <div className="flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-10">
-          <div className="order-2 md:order-1 space-y-8">
+          <div className="order-2 md:order-1 space-y-8 flex flex-col justify-center h-full">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
