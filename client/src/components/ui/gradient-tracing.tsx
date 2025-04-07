@@ -83,75 +83,7 @@ export const GradientTracing: React.FC<GradientTracingProps> = ({
   )
 }
 
-// Versión invertida 180 grados del GradientTracing
-export const GradientTracingReversed: React.FC<GradientTracingProps> = ({
-  width,
-  height,
-  baseColor = "black",
-  gradientColors = ["#F1C40F", "#F1C40F", "#F39C12"],
-  animationDuration = 2,
-  strokeWidth = 2,
-  path = `M0,${height / 2} L${width},${height / 2}`,
-  showLightning = false,
-  onAnimationEnd
-}) => {
-  const gradientId = `pulse-rev-${Math.random().toString(36).substr(2, 9)}`
-  
-  // Usar useEffect para llamar al callback después de un tiempo
-  useEffect(() => {
-    if (onAnimationEnd) {
-      const timer = setTimeout(() => {
-        onAnimationEnd();
-      }, animationDuration * 1000);
-      
-      return () => clearTimeout(timer);
-    }
-  }, [animationDuration, onAnimationEnd]);
 
-  return (
-    <div className="relative" style={{ width, height }}>
-      <svg
-        width={width}
-        height={height}
-        viewBox={`0 0 ${width} ${height}`}
-        fill="none"
-        style={{ transform: 'rotate(180deg)' }}
-      >
-        <path
-          d={path}
-          stroke={baseColor}
-          strokeOpacity="0.2"
-          strokeWidth={strokeWidth}
-        />
-        <path
-          d={path}
-          stroke={`url(#${gradientId})`}
-          strokeLinecap="round"
-          strokeWidth={strokeWidth}
-        />
-        <defs>
-          <motion.linearGradient
-            animate={{
-              x1: [width, 0],
-              x2: [width, 0],
-            }}
-            transition={{
-              duration: animationDuration,
-              repeat: 0,
-              ease: "linear",
-            }}
-            id={gradientId}
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor={gradientColors[0]} stopOpacity="0" />
-            <stop stopColor={gradientColors[1]} />
-            <stop offset="1" stopColor={gradientColors[2]} stopOpacity="0" />
-          </motion.linearGradient>
-        </defs>
-      </svg>
-    </div>
-  )
-}
 
 export const BuildingAnimation: React.FC = () => {
   // Contorno del edificio (sin la línea de abajo)
@@ -200,7 +132,7 @@ export const BuildingAnimation: React.FC = () => {
         {/* Contorno del edificio */}
         <path
           d={buildingPath}
-          stroke="#333"
+          stroke="#665527"
           strokeWidth="8"
           fill="none"
         />
@@ -219,23 +151,29 @@ export const BuildingAnimation: React.FC = () => {
           </foreignObject>
         )}
         
-        {/* Línea derecha que se acerca - usando GradientTracingReversed */}
+        {/* Línea derecha que se acerca - usando una motion.path directa con gradiente invertido */}
         {showRightLine && (
-          <foreignObject x="240" y="590" width="60" height="20">
-            <GradientTracingReversed 
-              width={60} 
-              height={20} 
-              path="M0,10 L60,10" 
-              gradientColors={["#F1C40F", "#F1C40F", "#F39C12"]}
-              animationDuration={2}
-              onAnimationEnd={handleRightLineComplete}
-            />
-          </foreignObject>
+          <motion.path
+            d="M300,600 L240,600"
+            stroke="url(#rightGoldGradient)"
+            strokeWidth="3"
+            strokeLinecap="round"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 2, ease: "linear" }}
+            onAnimationComplete={handleRightLineComplete}
+          />
         )}
         
         {/* Definiciones de gradientes */}
         <defs>
           <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#F1C40F" stopOpacity="0.2" />
+            <stop offset="50%" stopColor="#F39C12" />
+            <stop offset="100%" stopColor="#F1C40F" stopOpacity="0.2" />
+          </linearGradient>
+          
+          <linearGradient id="rightGoldGradient" x1="100%" y1="0%" x2="0%" y2="0%">
             <stop offset="0%" stopColor="#F1C40F" stopOpacity="0.2" />
             <stop offset="50%" stopColor="#F39C12" />
             <stop offset="100%" stopColor="#F1C40F" stopOpacity="0.2" />
