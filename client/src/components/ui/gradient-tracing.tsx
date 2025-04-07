@@ -87,18 +87,8 @@ export const BuildingAnimation: React.FC = () => {
   // Contorno del edificio (sin la línea de abajo)
   const buildingPath = "M60,600 L60,150 L240,150 L240,600";
   
-  // Paths para las animaciones de líneas
-  const leftPath = "M0,600 L60,600";
-  const rightPath = "M300,600 L240,600";
-  
-  // Camino del rayo final
-  const lightningPath = "M150,150 L130,250 L170,250 L110,450 L150,350 L120,350 L150,150";
-
   const [showLeftLine, setShowLeftLine] = useState(false);
   const [showRightLine, setShowRightLine] = useState(false);
-  const [showInternalLeftCurve, setShowInternalLeftCurve] = useState(false);
-  const [showInternalRightCurve, setShowInternalRightCurve] = useState(false);
-  const [showLightning, setShowLightning] = useState(false);
   const [animationComplete, setAnimationComplete] = useState(false);
 
   // Iniciar secuencia de animación
@@ -114,9 +104,6 @@ export const BuildingAnimation: React.FC = () => {
   useEffect(() => {
     if (animationComplete) {
       const timer = setTimeout(() => {
-        setShowLightning(false);
-        setShowInternalLeftCurve(false);
-        setShowInternalRightCurve(false);
         setShowLeftLine(false);
         setShowRightLine(false);
         setAnimationComplete(false);
@@ -128,28 +115,13 @@ export const BuildingAnimation: React.FC = () => {
 
   // Gestionar la secuencia de animación
   const handleLeftLineComplete = () => {
-    setShowInternalLeftCurve(true);
+    setTimeout(() => {
+      setAnimationComplete(true);
+    }, 500);
   };
 
   const handleRightLineComplete = () => {
-    setShowInternalRightCurve(true);
-  };
-
-  const handleLeftCurveComplete = () => {
-    checkBothCurvesComplete();
-  };
-
-  const handleRightCurveComplete = () => {
-    checkBothCurvesComplete();
-  };
-
-  const checkBothCurvesComplete = () => {
-    if (showInternalLeftCurve && showInternalRightCurve) {
-      setShowLightning(true);
-      setTimeout(() => {
-        setAnimationComplete(true);
-      }, 1500);
-    }
+    // No necesitamos hacer nada aquí, ya que estamos simplificando la animación
   };
 
   return (
@@ -159,7 +131,7 @@ export const BuildingAnimation: React.FC = () => {
         <path
           d={buildingPath}
           stroke="#333"
-          strokeWidth="4"
+          strokeWidth="8"
           fill="none"
         />
         
@@ -179,7 +151,7 @@ export const BuildingAnimation: React.FC = () => {
         
         {/* Línea derecha que se acerca - usando GradientTracing */}
         {showRightLine && (
-          <foreignObject x="240" y="590" width="60" height="20">
+          <foreignObject x="240" y="590" width="60" height="20" style={{ transform: 'scaleX(-1)' }}>
             <GradientTracing 
               width={60} 
               height={20} 
@@ -189,47 +161,6 @@ export const BuildingAnimation: React.FC = () => {
               onAnimationEnd={handleRightLineComplete}
             />
           </foreignObject>
-        )}
-        
-        {/* Línea interna izquierda */}
-        {showInternalLeftCurve && (
-          <motion.path
-            d="M60,600 Q150,300 150,150"
-            stroke="url(#goldGradient)"
-            strokeWidth="3"
-            strokeLinecap="round"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-            onAnimationComplete={handleLeftCurveComplete}
-          />
-        )}
-        
-        {/* Línea interna derecha */}
-        {showInternalRightCurve && (
-          <motion.path
-            d="M240,600 Q150,300 150,150"
-            stroke="url(#goldGradient)"
-            strokeWidth="3"
-            strokeLinecap="round"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-            onAnimationComplete={handleRightCurveComplete}
-          />
-        )}
-        
-        {/* Rayo final */}
-        {showLightning && (
-          <motion.path
-            d={lightningPath}
-            stroke="#F1C40F"
-            strokeWidth="4"
-            fill="none"
-            initial={{ opacity: 0, pathLength: 0 }}
-            animate={{ opacity: 1, pathLength: 1 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-          />
         )}
         
         {/* Definiciones de gradientes */}
