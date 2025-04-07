@@ -22,209 +22,112 @@ export const BuildingSilhouette = ({ className, ...props }: BuildingSilhouettePr
       preserveAspectRatio="xMidYMax meet"
       {...props}
     >
-      {/* Silueta de ciudad más orgánica y natural */}
-      <path
-        d="M0,175 
-        L45,175 
-        L45,155 
-        L60,155 
-        L60,140 
-        L85,140 
-        L85,155 
-        L105,155 
-        L105,130 
-        L125,130 
-        L125,170 
-        L140,170 
-        L140,140 
-        L145,140 
-        L145,110 
-        L165,110 
-        L165,170 
-        L195,170 
-        L195,135 
-        L215,135 
-        L215,115 
-        L230,115 
-        L230,95 
-        L240,95 
-        L240,55 
-        L250,55 
-        L250,90 
-        L265,90 
-        L265,145 
-        L280,145 
-        L280,165 
-        L300,165 
-        L300,140 
-        L310,140 
-        L310,120 
-        L325,120 
-        L325,135 
-        L340,135 
-        L340,170 
-        L355,170 
-        L355,150 
-        L370,150 
-        L370,110 
-        L385,110 
-        L385,90 
-        L400,90 
-        L400,70 
-        L410,70 
-        L410,40 
-        L420,40 
-        L420,65 
-        L430,65 
-        L430,100 
-        L445,100 
-        L445,120 
-        L460,120 
-        L460,145 
-        L475,145 
-        L475,160 
-        L490,160 
-        L490,180 
-        L510,180 
-        L510,155 
-        L525,155 
-        L525,135 
-        L535,135 
-        L535,110 
-        L550,110 
-        L550,85 
-        L570,85 
-        L570,105 
-        L585,105 
-        L585,125 
-        L600,125 
-        L600,145 
-        L615,145 
-        L615,160 
-        L630,160 
-        L630,130 
-        L645,130 
-        L645,105 
-        L660,105 
-        L660,85 
-        L675,85 
-        L675,35 
-        L690,35 
-        L690,60 
-        L700,60 
-        L700,75 
-        L715,75 
-        L715,105 
-        L730,105 
-        L730,125 
-        L745,125 
-        L745,140 
-        L760,140 
-        L760,165 
-        L775,165 
-        L775,135 
-        L790,135 
-        L790,115 
-        L805,115 
-        L805,90 
-        L820,90 
-        L820,75 
-        L835,75 
-        L835,60 
-        L850,60 
-        L850,30 
-        L865,30 
-        L865,55 
-        L880,55 
-        L880,70 
-        L895,70 
-        L895,95 
-        L910,95 
-        L910,130 
-        L925,130 
-        L925,155 
-        L940,155 
-        L940,175 
-        L965,175 
-        L965,160 
-        L980,160 
-        L980,135 
-        L995,135 
-        L995,115 
-        L1010,115 
-        L1010,90 
-        L1025,90 
-        L1025,50 
-        L1040,50 
-        L1040,80 
-        L1055,80 
-        L1055,100 
-        L1070,100 
-        L1070,140 
-        L1085,140 
-        L1085,165 
-        L1105,165 
-        L1105,140 
-        L1120,140 
-        L1120,120 
-        L1135,120 
-        L1135,95 
-        L1150,95 
-        L1150,80 
-        L1165,80 
-        L1165,55 
-        L1180,55 
-        L1180,70 
-        L1200,70 
-        L1200,250 L0,250 Z"
-        fill="currentColor"
-        opacity="0.6"
-      />
-      
-      {/* Ventanas en algunos edificios para dar realismo */}
-      <g opacity="0.4">
-        {/* Ventanas dispersas en distintos edificios */}
-        <rect x="240" y="65" width="3" height="3" fill="currentColor" />
-        <rect x="240" y="75" width="3" height="3" fill="currentColor" />
-        <rect x="245" y="65" width="3" height="3" fill="currentColor" />
-        <rect x="245" y="75" width="3" height="3" fill="currentColor" />
+      {/* Edificios y rascacielos de diferentes formas y tamaños */}
+      <g>
+        {/* Edificio con techo puntiagudo */}
+        <path d="M50,180 L50,110 L70,90 L90,110 L90,180 Z" fill="currentColor" opacity="0.8" />
         
-        <rect x="412" y="45" width="3" height="3" fill="currentColor" />
-        <rect x="412" y="55" width="3" height="3" fill="currentColor" />
-        <rect x="417" y="45" width="3" height="3" fill="currentColor" />
-        <rect x="417" y="55" width="3" height="3" fill="currentColor" />
+        {/* Edificio rectangular con ventanas */}
+        <path d="M110,180 L110,100 L150,100 L150,180 Z" fill="currentColor" opacity="0.75" />
+        <rect x="120" y="110" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="120" y="125" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="120" y="140" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="135" y="110" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="135" y="125" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="135" y="140" width="5" height="5" fill="currentColor" opacity="0.4" />
         
-        <rect x="680" y="45" width="2" height="2" fill="currentColor" />
-        <rect x="680" y="53" width="2" height="2" fill="currentColor" />
-        <rect x="680" y="61" width="2" height="2" fill="currentColor" />
-        <rect x="685" y="45" width="2" height="2" fill="currentColor" />
-        <rect x="685" y="53" width="2" height="2" fill="currentColor" />
-        <rect x="685" y="61" width="2" height="2" fill="currentColor" />
+        {/* Rascacielos con antena */}
+        <path d="M180,180 L180,50 L220,50 L220,180 Z" fill="currentColor" opacity="0.85" />
+        <rect x="190" y="60" width="4" height="4" fill="currentColor" opacity="0.4" />
+        <rect x="190" y="70" width="4" height="4" fill="currentColor" opacity="0.4" />
+        <rect x="190" y="80" width="4" height="4" fill="currentColor" opacity="0.4" />
+        <rect x="190" y="90" width="4" height="4" fill="currentColor" opacity="0.4" />
+        <rect x="190" y="100" width="4" height="4" fill="currentColor" opacity="0.4" />
+        <rect x="206" y="60" width="4" height="4" fill="currentColor" opacity="0.4" />
+        <rect x="206" y="70" width="4" height="4" fill="currentColor" opacity="0.4" />
+        <rect x="206" y="80" width="4" height="4" fill="currentColor" opacity="0.4" />
+        <rect x="206" y="90" width="4" height="4" fill="currentColor" opacity="0.4" />
+        <rect x="206" y="100" width="4" height="4" fill="currentColor" opacity="0.4" />
+        <line x1="200" y1="50" x2="200" y2="30" stroke="currentColor" strokeWidth="2" opacity="0.7" />
         
-        <rect x="855" y="35" width="2" height="2" fill="currentColor" />
-        <rect x="855" y="42" width="2" height="2" fill="currentColor" />
-        <rect x="855" y="49" width="2" height="2" fill="currentColor" />
-        <rect x="860" y="35" width="2" height="2" fill="currentColor" />
-        <rect x="860" y="42" width="2" height="2" fill="currentColor" />
-        <rect x="860" y="49" width="2" height="2" fill="currentColor" />
+        {/* Edificio con forma escalonada */}
+        <path d="M240,180 L240,150 L260,150 L260,120 L280,120 L280,90 L300,90 L300,120 L320,120 L320,150 L340,150 L340,180 Z" fill="currentColor" opacity="0.7" />
         
-        <rect x="1030" y="60" width="3" height="3" fill="currentColor" />
-        <rect x="1030" y="70" width="3" height="3" fill="currentColor" />
-        <rect x="1035" y="60" width="3" height="3" fill="currentColor" />
-        <rect x="1035" y="70" width="3" height="3" fill="currentColor" />
+        {/* Torre delgada con coronamiento */}
+        <path d="M370,180 L370,70 L380,70 L380,40 L400,40 L400,70 L410,70 L410,180 Z" fill="currentColor" opacity="0.75" />
+        <rect x="380" y="50" width="20" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="380" y="60" width="20" height="5" fill="currentColor" opacity="0.4" />
         
-        <rect x="1165" y="60" width="2" height="2" fill="currentColor" />
-        <rect x="1165" y="67" width="2" height="2" fill="currentColor" />
-        <rect x="1170" y="60" width="2" height="2" fill="currentColor" />
-        <rect x="1170" y="67" width="2" height="2" fill="currentColor" />
-      </g>
-      
-      {/* Detalles adicionales como antenas o elementos arquitectónicos */}
-      <g opacity="0.7">
-        <line x1="850" y1="30" x2="850" y2="20" stroke="currentColor" strokeWidth="1" />
-        <line x1="675" y1="35" x2="675" y2="25" stroke="currentColor" strokeWidth="1" />
-        <line x1="1025" y1="50" x2="1025" y2="40" stroke="currentColor" strokeWidth="1" />
-        <line x1="410" y1="40" x2="410" y2="30" stroke="currentColor" strokeWidth="1" />
+        {/* Edificio con techo redondeado */}
+        <path d="M440,180 L440,100 A20,20 0 0,1 460,80 A20,20 0 0,1 480,100 L480,180 Z" fill="currentColor" opacity="0.8" />
+        
+        {/* Edificio con múltiples torres */}
+        <path d="M510,180 L510,120 L530,120 L530,80 L550,80 L550,60 L570,60 L570,80 L590,80 L590,120 L610,120 L610,180 Z" fill="currentColor" opacity="0.75" />
+        <line x1="550" y1="60" x2="550" y2="45" stroke="currentColor" strokeWidth="1.5" opacity="0.6" />
+        <line x1="570" y1="60" x2="570" y2="45" stroke="currentColor" strokeWidth="1.5" opacity="0.6" />
+        
+        {/* Edificio moderno de forma irregular */}
+        <path d="M640,180 L640,120 L660,120 L660,70 L685,60 L710,70 L710,120 L730,120 L730,180 Z" fill="currentColor" opacity="0.85" />
+        <rect x="655" y="90" width="15" height="3" fill="currentColor" opacity="0.4" />
+        <rect x="655" y="100" width="15" height="3" fill="currentColor" opacity="0.4" />
+        <rect x="655" y="110" width="15" height="3" fill="currentColor" opacity="0.4" />
+        <rect x="700" y="90" width="15" height="3" fill="currentColor" opacity="0.4" />
+        <rect x="700" y="100" width="15" height="3" fill="currentColor" opacity="0.4" />
+        <rect x="700" y="110" width="15" height="3" fill="currentColor" opacity="0.4" />
+        
+        {/* Rascacielos imponente */}
+        <path d="M760,180 L760,30 L810,30 L810,180 Z" fill="currentColor" opacity="0.9" />
+        <rect x="770" y="40" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="770" y="55" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="770" y="70" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="770" y="85" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="770" y="100" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="770" y="115" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="770" y="130" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="770" y="145" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="795" y="40" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="795" y="55" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="795" y="70" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="795" y="85" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="795" y="100" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="795" y="115" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="795" y="130" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="795" y="145" width="5" height="5" fill="currentColor" opacity="0.4" />
+        
+        {/* Edificio con forma de L */}
+        <path d="M840,180 L840,100 L870,100 L870,130 L900,130 L900,180 Z" fill="currentColor" opacity="0.75" />
+        <rect x="850" y="110" width="4" height="4" fill="currentColor" opacity="0.4" />
+        <rect x="850" y="125" width="4" height="4" fill="currentColor" opacity="0.4" />
+        <rect x="850" y="140" width="4" height="4" fill="currentColor" opacity="0.4" />
+        <rect x="850" y="155" width="4" height="4" fill="currentColor" opacity="0.4" />
+        <rect x="880" y="140" width="4" height="4" fill="currentColor" opacity="0.4" />
+        <rect x="880" y="155" width="4" height="4" fill="currentColor" opacity="0.4" />
+        
+        {/* Rascacielos delgado con antena */}
+        <path d="M930,180 L930,40 L950,40 L950,180 Z" fill="currentColor" opacity="0.8" />
+        <line x1="940" y1="40" x2="940" y2="20" stroke="currentColor" strokeWidth="1.5" opacity="0.7" />
+        
+        {/* Edificio con forma de T */}
+        <path d="M980,180 L980,100 L1020,100 L1020,60 L1060,60 L1060,100 L1100,100 L1100,180 Z" fill="currentColor" opacity="0.85" />
+        <rect x="990" y="110" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="990" y="125" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="990" y="140" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="1030" y="70" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="1030" y="85" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="1030" y="110" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="1030" y="125" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="1030" y="140" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="1050" y="70" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="1050" y="85" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="1085" y="110" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="1085" y="125" width="5" height="5" fill="currentColor" opacity="0.4" />
+        <rect x="1085" y="140" width="5" height="5" fill="currentColor" opacity="0.4" />
+        
+        {/* Edificio con techo inclinado */}
+        <path d="M1130,180 L1130,90 L1150,70 L1170,90 L1170,180 Z" fill="currentColor" opacity="0.8" />
+        
+        {/* Base para unir todos los edificios */}
+        <path d="M0,180 L1200,180 L1200,250 L0,250 Z" fill="currentColor" opacity="0.9" />
       </g>
     </svg>
   );
