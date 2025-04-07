@@ -45,11 +45,11 @@ export const AnimatedHero = memo(function AnimatedHero() {
         <div className="flex gap-8 py-10 items-center justify-center flex-col">
           {/* Logo en la parte superior */}
           <div className="mb-6">
-            <Logo size="lg" showText={true} textColor="gold" />
+            <Logo showText={true} textColor="white" />
           </div>
           
           <div className="flex gap-4 flex-col">
-            <h1 className="text-4xl md:text-6xl max-w-2xl tracking-tighter text-center font-regular">
+            <h1 className="text-4xl md:text-6xl max-w-2xl tracking-tighter text-center font-regular milovat-text">
               <div className="gold-gradient">
                 Una plataforma que es
               </div>
@@ -59,13 +59,13 @@ export const AnimatedHero = memo(function AnimatedHero() {
                     titleNumber === index && (
                       <motion.span
                         key={index}
-                        className="absolute font-semibold gold-gradient mt-2"
+                        className="absolute font-semibold gold-gradient mt-2 milovat-text"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ 
-                          duration: 0.8,   // Duración reducida para transiciones más rápidas
-                          ease: "easeInOut"  // Curva de animación más suave
+                          duration: 0.8,
+                          ease: "easeInOut"
                         }}
                       >
                         {title}
@@ -80,12 +80,10 @@ export const AnimatedHero = memo(function AnimatedHero() {
           <div className="flex flex-row gap-3 mt-8">
             <Button
               onClick={() => {
-                // Guardar indicador de modo de desarrollo en sessionStorage
                 sessionStorage.setItem('isDevelopment', 'true');
-                // Navegar a la página de autenticación usando la función navigate de wouter
                 navigate("/auth");
               }}
-              className="bg-amber-500 hover:bg-amber-600 text-black px-6 py-6 rounded-lg font-medium text-lg"
+              className="gold-gradient-bg text-black px-6 py-6 rounded-lg font-medium text-lg hover:opacity-90"
             >
               Iniciar Sesión
             </Button>

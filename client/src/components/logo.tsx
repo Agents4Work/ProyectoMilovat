@@ -30,20 +30,20 @@ const Logo = memo(function Logo({
   
   return (
     <div className="flex flex-col items-center">
-      <img 
-        src={logoImage} 
-        alt="Logo Milovat" 
-        className={`${sizes[size]} object-contain`}
-      />
-      
-      {showText && (
+      {showText ? (
         <h1 
-          className={`mt-4 text-2xl font-medium ${
+          className={`text-3xl font-medium milovat-text ${
             textColor === "gold" ? "gold-gradient" : "text-white"
           }`}
         >
           Milovat
         </h1>
+      ) : (
+        <img 
+          src={logoImage} 
+          alt="Logo Milovat" 
+          className={`${sizes[size]} object-contain`}
+        />
       )}
     </div>
   );

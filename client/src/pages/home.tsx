@@ -1,7 +1,5 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { AnimatedHero } from "@/components/animated-hero";
-import { BackgroundPaths } from "@/components/background-paths";
-import Logo from "@/components/logo";
 import { useLocation } from "wouter";
 
 export default function Home() {
@@ -17,19 +15,8 @@ export default function Home() {
   
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
-      {/* Background animation */}
-      <BackgroundPaths />
-      
-      {/* Header with logo */}
-      <header className="container mx-auto pt-8 pb-4 px-4 relative z-10">
-        <div className="flex flex-col items-center">
-          <Logo size="lg" />
-          <h1 className="text-center text-4xl font-normal mt-4 text-white">Milovat</h1>
-        </div>
-      </header>
-      
       {/* Main hero section with animated text */}
-      <main className="flex-1 flex flex-col items-center justify-center px-4 relative z-10">
+      <main className="flex-1 flex flex-col items-center justify-center px-4 relative z-10 min-h-screen">
         <AnimatedHero />
         
         <div className="mt-16 text-amber-500 animate-bounce">
