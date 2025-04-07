@@ -137,14 +137,17 @@ export const BuildingAnimation: React.FC = () => {
           fill="none"
         />
         
-        {/* Rayo directo como path SVG - más grande */}
-        <path
-          d="M150,150 L125,250 L175,250 L100,550 L150,350 L100,350 L150,150"
-          stroke="url(#rayoGradient)"
-          strokeWidth="5"
-          fill="none"
-          strokeLinecap="round"
-        />
+        {/* Rayo dentro del edificio usando el componente GradientTracing */}
+        <foreignObject x="60" y="150" width="180" height="450">
+          <GradientTracing 
+            width={180}
+            height={450}
+            path="M90,0 L60,120 L120,120 L45,400 L95,200 L45,200 L90,0"
+            gradientColors={["#F1C40F", "#F1C40F", "#E67E22"]}
+            strokeWidth={6}
+            animationDuration={2}
+          />
+        </foreignObject>
         
         {/* Línea izquierda que se acerca - usando una motion.path directa */}
         {showLeftLine && (
