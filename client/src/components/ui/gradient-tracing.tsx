@@ -132,37 +132,37 @@ export const BuildingAnimation: React.FC = () => {
         {/* Contorno del edificio */}
         <path
           d={buildingPath}
-          stroke="#665527"
+          stroke="#333"
           strokeWidth="8"
           fill="none"
         />
         
-        {/* Línea izquierda que se acerca - usando GradientTracing */}
+        {/* Línea izquierda que se acerca - usando una motion.path directa */}
         {showLeftLine && (
-          <foreignObject x="0" y="590" width="60" height="20">
+          <motion.path
+            d="M0,600 L60,600"
+            stroke="url(#goldGradient)"
+            strokeWidth="3"
+            strokeLinecap="round"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 2, ease: "linear" }}
+            onAnimationComplete={handleLeftLineComplete}
+          />
+        )}
+        
+        {/* Línea derecha que se acerca - usando una motion.path directa con gradiente invertido */}
+        {showRightLine && (
+          <foreignObject x="240" y="590" width="60" height="20" style={{ transform: 'scaleX(-1)' }}>
             <GradientTracing 
               width={60} 
               height={20} 
               path="M0,10 L60,10" 
               gradientColors={["#F1C40F", "#F1C40F", "#F39C12"]}
               animationDuration={2}
-              onAnimationEnd={handleLeftLineComplete}
+              onAnimationEnd={handleRightLineComplete}
             />
           </foreignObject>
-        )}
-        
-        {/* Línea derecha que se acerca - usando una motion.path directa con gradiente invertido */}
-        {showRightLine && (
-          <motion.path
-            d="M300,600 L240,600"
-            stroke="url(#rightGoldGradient)"
-            strokeWidth="3"
-            strokeLinecap="round"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 2, ease: "linear" }}
-            onAnimationComplete={handleRightLineComplete}
-          />
         )}
         
         {/* Definiciones de gradientes */}
