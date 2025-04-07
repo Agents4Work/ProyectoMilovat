@@ -51,7 +51,7 @@ export const AnimatedHero = memo(function AnimatedHero() {
               alt="Logo Milovat" 
               className="h-24 object-contain" 
             />
-            <h1 className="text-center text-4xl font-normal mt-4 text-white milovat-text">Milovat</h1>
+            <h1 className="text-center text-4xl font-bold mt-4 text-white milovat-text">Milovat</h1>
           </div>
           
           <div className="flex gap-4 flex-col">
