@@ -67,7 +67,7 @@ export const GradientTracing: React.FC<GradientTracingProps> = ({
             }}
             transition={{
               duration: animationDuration,
-              repeat: 0,
+              repeat: onAnimationEnd ? 0 : Infinity,
               ease: "linear",
             }}
             id={gradientId}
@@ -136,6 +136,17 @@ export const BuildingAnimation: React.FC = () => {
           strokeWidth="8"
           fill="none"
         />
+        
+        {/* Animación interior del edificio */}
+        <foreignObject x="60" y="150" width="180" height="450">
+          <GradientTracing 
+            width={180} 
+            height={450} 
+            path="M100,0 L75,75 L125,75 L50,400 L100,200 L50,200 L100,0"
+            gradientColors={["#F1C40F", "#F1C40F", "#E67E22"]}
+            animationDuration={6}
+          />
+        </foreignObject>
         
         {/* Línea izquierda que se acerca - usando una motion.path directa */}
         {showLeftLine && (
