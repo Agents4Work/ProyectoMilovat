@@ -84,25 +84,31 @@ export function FeatureSteps({
 
           <div
             className={cn(
-              "order-1 md:order-2 grid grid-cols-3 gap-4 h-[200px] md:h-[300px] lg:h-[400px]"
+              "order-1 md:order-2 relative h-[200px] md:h-[300px] lg:h-[400px] overflow-hidden rounded-lg"
             )}
           >
-            {features.map((feature, index) => (
-              <div 
-                key={index}
-                className={cn(
-                  "rounded-lg overflow-hidden relative",
-                  index === currentFeature ? "ring-2 ring-amber-500" : ""
-                )}
-              >
-                <img
-                  src={feature.image}
-                  alt={feature.step}
-                  className="w-full h-full object-cover transition-transform transform"
-                />
-                <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black via-black/50 to-transparent" />
-              </div>
-            ))}
+            <AnimatePresence mode="wait">
+              {features.map(
+                (feature, index) =>
+                  index === currentFeature && (
+                    <motion.div
+                      key={index}
+                      className="absolute inset-0 rounded-lg overflow-hidden"
+                      initial={{ y: 100, opacity: 0, rotateX: -20 }}
+                      animate={{ y: 0, opacity: 1, rotateX: 0 }}
+                      exit={{ y: -100, opacity: 0, rotateX: 20 }}
+                      transition={{ duration: 0.5, ease: "easeInOut" }}
+                    >
+                      <img
+                        src={feature.image}
+                        alt={feature.step}
+                        className="w-full h-full object-contain transition-transform transform"
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black via-black/50 to-transparent" />
+                    </motion.div>
+                  ),
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </div>
