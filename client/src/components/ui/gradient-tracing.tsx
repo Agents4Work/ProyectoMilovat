@@ -137,49 +137,22 @@ export const BuildingAnimation: React.FC = () => {
           fill="none"
         />
         
-        {/* Líneas de energía internas */}
+        {/* Rayo elegante */}
         <motion.path
-          d="M100,150 L100,450"
-          stroke="url(#goldGradient)"
-          strokeWidth="2"
-          strokeDasharray="5,8"
-          animate={{ 
-            strokeDashoffset: [0, -40] 
-          }}
+          d="M150,170 L110,280 L150,280 L110,390 L150,390 L110,500"
+          stroke="url(#boltGradient)"
+          strokeWidth="4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 1 }}
           transition={{ 
-            duration: 3, 
-            repeat: Infinity, 
-            ease: "linear" 
-          }}
-        />
-        
-        <motion.path
-          d="M200,150 L200,450"
-          stroke="url(#goldGradient)"
-          strokeWidth="2"
-          strokeDasharray="8,10"
-          animate={{ 
-            strokeDashoffset: [0, -40] 
-          }}
-          transition={{ 
-            duration: 3.5, 
-            repeat: Infinity, 
-            ease: "linear" 
-          }}
-        />
-        
-        <motion.path
-          d="M150,150 L150,500"
-          stroke="url(#rightGoldGradient)"
-          strokeWidth="3"
-          strokeDasharray="10,15"
-          animate={{ 
-            strokeDashoffset: [0, -50] 
-          }}
-          transition={{ 
-            duration: 2.5, 
-            repeat: Infinity, 
-            ease: "linear" 
+            duration: 1.5,
+            ease: "easeOut",
+            repeat: Infinity,
+            repeatDelay: 3,
+            repeatType: "reverse"
           }}
         />
         
@@ -223,6 +196,12 @@ export const BuildingAnimation: React.FC = () => {
             <stop offset="0%" stopColor="#F1C40F" stopOpacity="0.2" />
             <stop offset="50%" stopColor="#F39C12" />
             <stop offset="100%" stopColor="#F1C40F" stopOpacity="0.2" />
+          </linearGradient>
+          
+          <linearGradient id="boltGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#F1C40F" />
+            <stop offset="50%" stopColor="#F39C12" />
+            <stop offset="100%" stopColor="#E67E22" />
           </linearGradient>
           
           <motion.linearGradient
