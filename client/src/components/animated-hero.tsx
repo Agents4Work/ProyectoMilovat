@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter";
 import Logo from "./logo";
-import logoImage from "../assets/Logo-Milotav-Positivo1-2022.png";
+import logoImage from "@assets/Logo-Milotav-Positivo1-2022.png";
 
 /**
  * Componente AnimatedHero
@@ -56,7 +56,7 @@ export const AnimatedHero = memo(function AnimatedHero() {
           
           <div className="flex gap-4 flex-col items-center w-full">
             <h1 className="text-4xl md:text-6xl tracking-tighter text-center font-regular w-full">
-              <div className="gold-gradient milovat-text w-full text-center">
+              <div className="gold-gradient-text milovat-text w-full text-center font-semibold">
                 Una plataforma que es
               </div>
               <div className="relative flex w-full justify-center overflow-hidden text-center h-24 md:pb-4 md:pt-1">
@@ -65,7 +65,7 @@ export const AnimatedHero = memo(function AnimatedHero() {
                     titleNumber === index && (
                       <motion.span
                         key={index}
-                        className="absolute font-semibold gold-gradient-text mt-2 milovat-text w-full text-center"
+                        className="absolute font-semibold gold-gradient-text mt-2 milovat-text w-full text-center text-5xl md:text-7xl"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
@@ -89,7 +89,7 @@ export const AnimatedHero = memo(function AnimatedHero() {
                 sessionStorage.setItem('isDevelopment', 'true');
                 navigate("/auth");
               }}
-              className="gold-gradient-bg text-black px-6 py-6 rounded-lg font-medium text-lg hover:opacity-90 mx-auto"
+              className="gold-gradient-text bg-black border border-[#F5A623] px-8 py-6 rounded-lg font-medium text-lg hover:bg-[#111] transition-colors duration-300 mx-auto"
             >
               Iniciar Sesión
             </Button>

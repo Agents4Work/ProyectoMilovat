@@ -1,5 +1,8 @@
+"use client";
+
 import { memo, useMemo } from "react";
 import { motion } from "framer-motion";
+import { useLocation } from "wouter";
 
 // Componente optimizado con memo
 const FloatingPaths = memo(function FloatingPaths({ position }: { position: number }) {
@@ -80,6 +83,7 @@ const FloatingPaths = memo(function FloatingPaths({ position }: { position: numb
 
 // Componente principal optimizado con memo
 export const BackgroundPaths = memo(function BackgroundPaths() {
+    // Eliminamos el hook de useLocation ya que no se utiliza
     return (
         <motion.div 
             className="absolute inset-0 overflow-hidden pointer-events-none"
