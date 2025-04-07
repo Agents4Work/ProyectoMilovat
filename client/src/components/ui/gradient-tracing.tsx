@@ -137,25 +137,6 @@ export const BuildingAnimation: React.FC = () => {
           fill="none"
         />
         
-        {/* Rayo elegante */}
-        <motion.path
-          d="M150,170 L110,280 L150,280 L110,390 L150,390 L110,500"
-          stroke="url(#boltGradient)"
-          strokeWidth="4"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={{ 
-            duration: 1.5,
-            ease: "easeOut",
-            repeat: Infinity,
-            repeatDelay: 3,
-            repeatType: "reverse"
-          }}
-        />
-        
         {/* Línea izquierda que se acerca - usando una motion.path directa */}
         {showLeftLine && (
           <motion.path
