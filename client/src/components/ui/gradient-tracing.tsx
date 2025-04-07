@@ -89,16 +89,20 @@ export const BuildingAnimation: React.FC = () => {
   // Contorno del edificio (sin la línea de abajo)
   const buildingPath = "M60,600 L60,150 L240,150 L240,600";
   
+  // Estados para controlar la secuencia de animación
   const [showLeftLine, setShowLeftLine] = useState(false);
   const [showRightLine, setShowRightLine] = useState(false);
+  const [showLightning, setShowLightning] = useState(false);
   const [animationComplete, setAnimationComplete] = useState(false);
 
   // Iniciar secuencia de animación
   useEffect(() => {
     if (!animationComplete) {
-      // Iniciar con líneas entrantes
+      // Solo iniciar con las líneas laterales
       setShowLeftLine(true);
       setShowRightLine(true);
+      // El rayo se mostrará después
+      setShowLightning(false);
     }
   }, [animationComplete]);
 
@@ -108,6 +112,7 @@ export const BuildingAnimation: React.FC = () => {
       const timer = setTimeout(() => {
         setShowLeftLine(false);
         setShowRightLine(false);
+        setShowLightning(false);
         setAnimationComplete(false);
       }, 2000);
       
@@ -117,13 +122,21 @@ export const BuildingAnimation: React.FC = () => {
 
   // Gestionar la secuencia de animación
   const handleLeftLineComplete = () => {
-    setTimeout(() => {
-      setAnimationComplete(true);
-    }, 500);
+    // No hacemos nada aquí, esperamos a que ambas líneas terminen
   };
 
   const handleRightLineComplete = () => {
-    // No necesitamos hacer nada aquí, ya que estamos simplificando la animación
+    // Cuando la línea derecha termina, activamos el rayo
+    setTimeout(() => {
+      setShowLightning(true);
+    }, 200);
+  };
+
+  // Cuando el rayo termina, completamos la animación
+  const handleLightningComplete = () => {
+    setTimeout(() => {
+      setAnimationComplete(true);
+    }, 500);
   };
 
   return (
@@ -161,6 +174,20 @@ export const BuildingAnimation: React.FC = () => {
               gradientColors={["#F1C40F", "#F1C40F", "#F39C12"]}
               animationDuration={2}
               onAnimationEnd={handleRightLineComplete}
+            />
+          </foreignObject>
+        )}
+        
+        {/* Rayo dorado que sube verticalmente */}
+        {showLightning && (
+          <foreignObject x="100" y="150" width="100" height="200">
+            <GradientTracing 
+              width={100} 
+              height={200}
+              path="M50,200 L35,150 L65,150 L20,50 L50,100 L30,100 L50,0"
+              gradientColors={["#F1C40F", "#F1C40F", "#E67E22"]}
+              animationDuration={1.5}
+              onAnimationEnd={handleLightningComplete}
             />
           </foreignObject>
         )}
