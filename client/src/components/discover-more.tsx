@@ -1,6 +1,5 @@
 import { memo } from "react";
 import { ChevronDown } from "lucide-react";
-import { motion } from "framer-motion";
 
 interface DiscoverMoreProps {
   onClick: () => void;
@@ -12,31 +11,14 @@ export const DiscoverMore = memo(function DiscoverMore({ onClick }: DiscoverMore
       className="flex flex-col items-center mt-8 mb-4 cursor-pointer"
       onClick={onClick}
     >
-      <div className="relative group">
-        <div className="gold-gradient-text font-medium flex flex-col items-center">
-          <motion.span 
-            className="mb-2"
-            animate={{ y: [0, -5, 0] }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-              repeatDelay: 0.5
-            }}
-          >
+      <div className="group">
+        <div className="gold-highlight-text font-medium flex flex-col items-center">
+          <span className="mb-2 bounce-animation">
             Descubre más
-          </motion.span>
-          <motion.div
-            animate={{ y: [0, 5, 0] }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-              repeatDelay: 0.5
-            }}
-          >
-            <ChevronDown className="stroke-[#F5A623]" size={24} />
-          </motion.div>
+          </span>
+          <div className="bounce-animation" style={{ animationDelay: "0.2s" }}>
+            <ChevronDown className="stroke-[#FFB400]" size={24} />
+          </div>
         </div>
       </div>
     </div>
