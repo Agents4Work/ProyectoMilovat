@@ -8,12 +8,9 @@ interface DiscoverMoreProps {
 
 export const DiscoverMore = memo(function DiscoverMore({ onClick }: DiscoverMoreProps) {
   return (
-    <motion.div 
+    <div 
       className="flex flex-col items-center mt-8 mb-4 cursor-pointer"
       onClick={onClick}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
     >
       <div className="relative group">
         <div className="gold-gradient-text font-medium flex flex-col items-center">
@@ -42,6 +39,6 @@ export const DiscoverMore = memo(function DiscoverMore({ onClick }: DiscoverMore
           </motion.div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 });
