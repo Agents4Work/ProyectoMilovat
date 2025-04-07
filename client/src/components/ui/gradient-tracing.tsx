@@ -137,17 +137,51 @@ export const BuildingAnimation: React.FC = () => {
           fill="none"
         />
         
-        {/* Rayo dentro del edificio usando el componente GradientTracing */}
-        <foreignObject x="60" y="150" width="180" height="450">
-          <GradientTracing 
-            width={180}
-            height={450}
-            path="M90,0 L60,120 L120,120 L45,400 L95,200 L45,200 L90,0"
-            gradientColors={["#F1C40F", "#F1C40F", "#E67E22"]}
-            strokeWidth={6}
-            animationDuration={2}
-          />
-        </foreignObject>
+        {/* Líneas de energía internas */}
+        <motion.path
+          d="M100,150 L100,450"
+          stroke="url(#goldGradient)"
+          strokeWidth="2"
+          strokeDasharray="5,8"
+          animate={{ 
+            strokeDashoffset: [0, -40] 
+          }}
+          transition={{ 
+            duration: 3, 
+            repeat: Infinity, 
+            ease: "linear" 
+          }}
+        />
+        
+        <motion.path
+          d="M200,150 L200,450"
+          stroke="url(#goldGradient)"
+          strokeWidth="2"
+          strokeDasharray="8,10"
+          animate={{ 
+            strokeDashoffset: [0, -40] 
+          }}
+          transition={{ 
+            duration: 3.5, 
+            repeat: Infinity, 
+            ease: "linear" 
+          }}
+        />
+        
+        <motion.path
+          d="M150,150 L150,500"
+          stroke="url(#rightGoldGradient)"
+          strokeWidth="3"
+          strokeDasharray="10,15"
+          animate={{ 
+            strokeDashoffset: [0, -50] 
+          }}
+          transition={{ 
+            duration: 2.5, 
+            repeat: Infinity, 
+            ease: "linear" 
+          }}
+        />
         
         {/* Línea izquierda que se acerca - usando una motion.path directa */}
         {showLeftLine && (
