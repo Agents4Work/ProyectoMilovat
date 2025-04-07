@@ -3,6 +3,7 @@ import { AnimatedHero } from "@/components/animated-hero";
 import { BackgroundPaths } from "@/components/background-paths";
 import { AboutSection } from "@/components/about-section";
 import { useLocation } from "wouter";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const [, navigate] = useLocation();
@@ -34,6 +35,26 @@ export default function Home() {
           
           {/* Space for additional content if needed */}
         </main>
+        
+        <motion.div 
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-amber-500 flex flex-col items-center z-20 cursor-pointer hover:scale-110 transition-transform duration-300"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, y: [0, 10, 0] }}
+          transition={{ 
+              opacity: { delay: 2, duration: 1 },
+              y: { 
+                  repeat: Infinity, 
+                  duration: 2, 
+                  ease: "easeInOut" 
+              }
+          }}
+          onClick={scrollToAboutSection}
+        >
+          <p className="text-sm mb-2 font-medium metallic-elegant-text">Descubre más</p>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-400">
+              <path d="M12 5v14M5 12l7 7 7-7"/>
+          </svg>
+        </motion.div>
       </div>
       
       {/* About section with dark gray background */}
