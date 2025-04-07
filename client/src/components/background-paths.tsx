@@ -15,13 +15,9 @@ const FloatingPaths = memo(function FloatingPaths({ position }: { position: numb
             } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${
                 684 - i * 5 * position
             } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
-            // Mejoramos la visibilidad pero reducimos la sobrecarga de renderizado
-            strokeOpacity: 0.15 + i * 0.01,
-            width: 0.3 + i * 0.02,
-            // Agregar un delay personalizado para cada path
-            delay: i * 0.15,
-            // Duración base para cada path
-            duration: 15 + (i % 5) * 4,
+            width: 0.5 + i * 0.03,
+            // Cada camino tiene una duración ligeramente diferente para evitar sincronización
+            duration: 20 + Math.random() * 10,
         }));
     }, [position]);
 
@@ -31,7 +27,6 @@ const FloatingPaths = memo(function FloatingPaths({ position }: { position: numb
                 className="w-full h-full"
                 viewBox="0 0 696 316"
                 fill="none"
-                style={{ willChange: 'transform' }} // Optimización para navegadores modernos
             >
                 <title>Background Paths</title>
                 {paths.map((path) => (
@@ -40,28 +35,17 @@ const FloatingPaths = memo(function FloatingPaths({ position }: { position: numb
                         d={path.d}
                         stroke="url(#goldGradient)"
                         strokeWidth={path.width}
-                        strokeOpacity={path.strokeOpacity}
-                        initial={{ pathLength: 0.1, opacity: 0 }}
+                        strokeOpacity={0.1 + path.id * 0.01}
+                        initial={{ pathLength: 0.3, opacity: 0.2 }}
                         animate={{
                             pathLength: 1,
-                            opacity: [0.2, 0.5, 0.2],
+                            opacity: 0.2,
                             pathOffset: [0, 1],
                         }}
                         transition={{
                             duration: path.duration,
-                            delay: path.delay,
                             repeat: Number.POSITIVE_INFINITY,
                             ease: "linear",
-                            opacity: {
-                                duration: path.duration / 2,
-                                repeat: Number.POSITIVE_INFINITY,
-                                repeatType: "reverse",
-                                ease: "easeInOut",
-                            }
-                        }}
-                        style={{ 
-                            willChange: 'opacity, stroke-dashoffset',
-                            paintOrder: 'stroke' // Mejora el rendimiento de pintura
                         }}
                     />
                 ))}
@@ -69,8 +53,8 @@ const FloatingPaths = memo(function FloatingPaths({ position }: { position: numb
                 <defs>
                     <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                         <stop offset="0%" stopColor="#F7DE79" />
-                        <stop offset="50%" stopColor="#FFD700" />
-                        <stop offset="100%" stopColor="#F7DE79" />
+                        <stop offset="50%" stopColor="#F5A623" />
+                        <stop offset="100%" stopColor="#E8A826" />
                     </linearGradient>
                 </defs>
             </svg>
@@ -85,7 +69,7 @@ export const BackgroundPaths = memo(function BackgroundPaths() {
             className="absolute inset-0 overflow-hidden pointer-events-none"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1.5 }}
+            transition={{ duration: 2 }}
         >
             <FloatingPaths position={1} />
             <FloatingPaths position={-1} />

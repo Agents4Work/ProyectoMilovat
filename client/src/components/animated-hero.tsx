@@ -25,9 +25,9 @@ export const AnimatedHero = memo(function AnimatedHero() {
     []
   );
 
-  // Usamos setTimeout en lugar de requestAnimationFrame para mayor estabilidad
+  // Usamos setTimeout con un intervalo más largo para reducir la frecuencia de cambios
   useEffect(() => {
-    const interval = 5000; // 5 segundos entre cambios para reducir frecuencia
+    const interval = 8000; // 8 segundos entre cambios para reducir la frecuencia aún más
     
     // Utilizamos el timer estándar para evitar problemas de rendimiento
     const timer = setTimeout(() => {
@@ -70,7 +70,7 @@ export const AnimatedHero = memo(function AnimatedHero() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ 
-                          duration: 0.8,
+                          duration: 1.2,
                           ease: "easeInOut"
                         }}
                       >
@@ -89,7 +89,7 @@ export const AnimatedHero = memo(function AnimatedHero() {
                 sessionStorage.setItem('isDevelopment', 'true');
                 navigate("/auth");
               }}
-              className="gold-gradient-text bg-black border border-[#F5A623] px-8 py-6 rounded-lg font-medium text-lg hover:bg-[#111] transition-colors duration-300 mx-auto"
+              className="bg-[#F5A623] text-black px-8 py-6 rounded-lg font-medium text-lg hover:bg-[#E8A826] transition-colors duration-300 mx-auto border-none"
             >
               Iniciar Sesión
             </Button>

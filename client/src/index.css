@@ -69,11 +69,11 @@
   
   .gold-gradient-text {
     background: linear-gradient(90deg, #F7DE79 0%, #F5A623 50%, #E8A826 100%);
-    background-size: 200% auto;
+    background-size: 100% 100%;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0px 1px 3px rgba(255, 215, 0, 0.2);
+    color: #F5A623;
   }
   
   /* Animación de rebote para "Descubre más" */
