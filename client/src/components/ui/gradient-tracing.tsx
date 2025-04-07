@@ -137,16 +137,14 @@ export const BuildingAnimation: React.FC = () => {
           fill="none"
         />
         
-        {/* Animación interior del edificio */}
-        <foreignObject x="60" y="150" width="180" height="450">
-          <GradientTracing 
-            width={180} 
-            height={450} 
-            path="M100,0 L75,75 L125,75 L50,400 L100,200 L50,200 L100,0"
-            gradientColors={["#F1C40F", "#F1C40F", "#E67E22"]}
-            animationDuration={6}
-          />
-        </foreignObject>
+        {/* Rayo directo como path SVG - más grande */}
+        <path
+          d="M150,150 L125,250 L175,250 L100,550 L150,350 L100,350 L150,150"
+          stroke="url(#rayoGradient)"
+          strokeWidth="5"
+          fill="none"
+          strokeLinecap="round"
+        />
         
         {/* Línea izquierda que se acerca - usando una motion.path directa */}
         {showLeftLine && (
@@ -189,6 +187,24 @@ export const BuildingAnimation: React.FC = () => {
             <stop offset="50%" stopColor="#F39C12" />
             <stop offset="100%" stopColor="#F1C40F" stopOpacity="0.2" />
           </linearGradient>
+          
+          <motion.linearGradient
+            animate={{
+              x1: [0, 400],
+              x2: [0, 200],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            id="rayoGradient"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stopColor="#F1C40F" stopOpacity="0" />
+            <stop stopColor="#F1C40F" />
+            <stop offset="1" stopColor="#E67E22" stopOpacity="0" />
+          </motion.linearGradient>
         </defs>
       </svg>
     </div>
