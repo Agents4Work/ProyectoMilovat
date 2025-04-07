@@ -84,7 +84,7 @@ export default function AnimatedWordCycle({
 
       {/* Visible animated word */}
       <motion.span 
-        className="relative inline-block"
+        className="relative inline-block mx-1"
         animate={{ 
           width,
           transition: { 
