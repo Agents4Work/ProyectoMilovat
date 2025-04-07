@@ -14,9 +14,9 @@ export default function Home() {
   }, [navigate]);
   
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
+    <div className="h-screen bg-background flex items-center justify-center relative overflow-hidden">
       {/* Main hero section with animated text */}
-      <main className="flex-1 flex flex-col items-center justify-center px-4 relative z-10 min-h-screen">
+      <main className="flex-1 flex items-center justify-center relative z-10 h-full">
         <AnimatedHero />
       </main>
     </div>

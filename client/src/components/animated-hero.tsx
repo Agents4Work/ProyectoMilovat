@@ -41,8 +41,8 @@ export const AnimatedHero = memo(function AnimatedHero() {
   }, [titleNumber, titles.length]); // Dependencias actualizadas
 
   return (
-    <div className="w-full">
-      <div className="container mx-auto">
+    <div className="w-full h-screen flex items-center justify-center">
+      <div className="container mx-auto flex items-center justify-center">
         <div className="flex gap-8 py-10 items-center justify-center flex-col">
           {/* Logo en la parte superior */}
           <div className="mb-6 flex flex-col items-center">
