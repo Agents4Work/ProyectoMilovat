@@ -56,7 +56,7 @@ export const AnimatedHero = memo(function AnimatedHero() {
           
           <div className="flex gap-4 flex-col">
             <h1 className="text-4xl md:text-6xl max-w-2xl tracking-tighter text-center font-regular">
-              <div className="gold-gradient">
+              <div className="gold-gradient milovat-text">
                 Una plataforma que es
               </div>
               <div className="relative flex w-full justify-center overflow-hidden text-center h-24 md:pb-4 md:pt-1">
@@ -65,7 +65,7 @@ export const AnimatedHero = memo(function AnimatedHero() {
                     titleNumber === index && (
                       <motion.span
                         key={index}
-                        className="absolute font-semibold gold-gradient-text mt-2"
+                        className="absolute font-semibold gold-gradient-text mt-2 milovat-text"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
