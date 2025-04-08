@@ -8,7 +8,7 @@ export function AnimatedBuildingSection() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-0 md:gap-0">
           <div className="w-full md:w-5/12 flex justify-end">
-            <div className="w-full">
+            <div className="w-full h-[700px]">
               <BuildingAnimation />
             </div>
           </div>

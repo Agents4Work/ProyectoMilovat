@@ -212,7 +212,7 @@ const MoneyComponent: React.FC = () => (
 export const BuildingAnimation: React.FC = () => {
   return (
     <div className="relative w-full h-full flex justify-center items-center bg-black overflow-hidden">
-      <svg width="550" height="600" viewBox="0 0 550 600" fill="none" className="mr-0">
+      <svg width="550" height="700" viewBox="0 0 550 700" fill="none" className="mr-0">
         {/* 1. EDIFICIO BLANCO (IZQUIERDA) - Bajado verticalmente */}
         <g transform="translate(70, 50)">
           <BuildingComponent />

@@ -102,7 +102,7 @@ export function FeatureSteps({
                       <img
                         src={feature.image}
                         alt={feature.step}
-                        className="w-full h-full object-cover object-center transition-transform transform"
+                        className="w-full h-full object-contain object-center transition-transform transform"
                       />
                     </motion.div>
                   ),
