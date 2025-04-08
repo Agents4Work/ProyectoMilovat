@@ -6,9 +6,9 @@ import { motion } from "framer-motion"
 // Componente del edificio con contorno blanco (más ancho y moderno)
 const BuildingComponent: React.FC = () => (
   <g>
-    {/* Contorno principal del edificio moderno */}
+    {/* Contorno principal del edificio moderno - Mucho más amplio */}
     <path 
-      d="M20,520 V80 H280 V520 H20 Z" 
+      d="M20,580 V20 H350 V580 H20 Z" 
       stroke="white" 
       strokeWidth="6" 
       fill="none"
@@ -16,81 +16,97 @@ const BuildingComponent: React.FC = () => (
     
     {/* Sección superior con ventanas panorámicas */}
     <path 
-      d="M40,120 H260 V200 H40 Z" 
-      stroke="white" 
-      strokeWidth="3" 
-      fill="none"
-    />
-    
-    {/* Líneas horizontales que dividen los pisos */}
-    <path 
-      d="M40,280 H260 M40,360 H260 M40,440 H260" 
-      stroke="white" 
-      strokeWidth="2" 
-      fill="none"
-    />
-    
-    {/* Ventanas modernas (rectangulares y más grandes) */}
-    <path 
-      d="M50,220 H100 V260 H50 V220 Z
-         M120,220 H180 V260 H120 V220 Z
-         M200,220 H250 V260 H200 V220 Z
-         
-         M50,300 H100 V340 H50 V300 Z
-         M120,300 H180 V340 H120 V300 Z
-         M200,300 H250 V340 H200 V300 Z
-         
-         M50,380 H100 V420 H50 V380 Z
-         M120,380 H180 V420 H120 V380 Z
-         M200,380 H250 V420 H200 V380 Z"
-      stroke="white" 
-      strokeWidth="3" 
-      fill="none"
-    />
-    
-    {/* Líneas verticales de las ventanas panorámicas */}
-    <path 
-      d="M80,120 V200
-         M120,120 V200
-         M160,120 V200
-         M200,120 V200
-         M240,120 V200"
-      stroke="white" 
-      strokeWidth="2" 
-      fill="none"
-    />
-    
-    {/* Entrada principal moderna */}
-    <path 
-      d="M90,520 V460 H210 V520" 
+      d="M40,50 H330 V120 H40 Z" 
       stroke="white" 
       strokeWidth="4" 
       fill="none"
     />
     
-    {/* Detalles de la entrada */}
+    {/* Líneas horizontales que dividen los pisos */}
     <path 
-      d="M110,520 V460 
-         M130,520 V460
-         M150,520 V460
-         M170,520 V460
-         M190,520 V460"
-      stroke="white" 
-      strokeWidth="2" 
-      fill="none"
-    />
-    
-    {/* Entrada secundaria con detalles modernos */}
-    <path 
-      d="M240,520 V480 H270 V520" 
+      d="M40,200 H330 M40,280 H330 M40,360 H330 M40,440 H330" 
       stroke="white" 
       strokeWidth="3" 
       fill="none"
     />
     
+    {/* Ventanas modernas (rectangulares y más grandes) */}
+    <path 
+      d="M60,130 H140 V190 H60 V130 Z
+         M160,130 H240 V190 H160 V130 Z
+         M260,130 H320 V190 H260 V130 Z
+         
+         M60,210 H140 V270 H60 V210 Z
+         M160,210 H240 V270 H160 V210 Z
+         M260,210 H320 V270 H260 V210 Z
+         
+         M60,290 H140 V350 H60 V290 Z
+         M160,290 H240 V350 H160 V290 Z
+         M260,290 H320 V350 H260 V290 Z
+         
+         M60,370 H140 V430 H60 V370 Z
+         M160,370 H240 V430 H160 V370 Z
+         M260,370 H320 V430 H260 V370 Z"
+      stroke="white" 
+      strokeWidth="4" 
+      fill="none"
+    />
+    
+    {/* Líneas verticales de las ventanas panorámicas */}
+    <path 
+      d="M70,50 V120
+         M110,50 V120
+         M150,50 V120
+         M190,50 V120
+         M230,50 V120
+         M270,50 V120
+         M310,50 V120"
+      stroke="white" 
+      strokeWidth="3" 
+      fill="none"
+    />
+    
+    {/* Entrada principal moderna */}
+    <path 
+      d="M100,580 V480 H270 V580" 
+      stroke="white" 
+      strokeWidth="5" 
+      fill="none"
+    />
+    
+    {/* Detalles de la entrada */}
+    <path 
+      d="M120,580 V480 
+         M140,580 V480
+         M160,580 V480
+         M180,580 V480
+         M200,580 V480
+         M220,580 V480
+         M240,580 V480"
+      stroke="white" 
+      strokeWidth="3" 
+      fill="none"
+    />
+    
+    {/* Entrada secundaria con detalles modernos */}
+    <path 
+      d="M290,580 V510 H335 V580" 
+      stroke="white" 
+      strokeWidth="4" 
+      fill="none"
+    />
+    
     {/* Detalles arquitectónicos adicionales */}
-    <line x1="20" y1="100" x2="280" y2="100" stroke="white" strokeWidth="3" />
-    <line x1="20" y1="460" x2="280" y2="460" stroke="white" strokeWidth="3" />
+    <line x1="20" y1="50" x2="350" y2="50" stroke="white" strokeWidth="4" />
+    <line x1="20" y1="480" x2="350" y2="480" stroke="white" strokeWidth="4" />
+    
+    {/* Antena en la parte superior del edificio */}
+    <path 
+      d="M170,20 V-20 M150,-10 H190" 
+      stroke="white" 
+      strokeWidth="4" 
+      fill="none"
+    />
   </g>
 );
 
@@ -203,27 +219,27 @@ const MoneyComponent: React.FC = () => (
 export const BuildingAnimation: React.FC = () => {
   return (
     <div className="relative w-full h-full flex justify-center items-center bg-black overflow-hidden">
-      <svg width="600" height="600" viewBox="0 0 600 600" fill="none">
+      <svg width="800" height="600" viewBox="0 0 800 600" fill="none">
         {/* 1. EDIFICIO BLANCO (IZQUIERDA) */}
         <BuildingComponent />
         
         {/* 2. RAYO CON CONTORNO NARANJA/DORADO GLOW (PRIMERA POSICIÓN DERECHA) */}
-        <g transform="translate(390, 140)">
+        <g transform="translate(550, 140)">
           <LightningComponent />
         </g>
         
         {/* 3. GOTA DE AGUA CON CONTORNO AZUL GLOW (SEGUNDA POSICIÓN) */}
-        <g transform="translate(390, 260)">
+        <g transform="translate(550, 260)">
           <WaterDropComponent />
         </g>
         
         {/* 4. TANQUE DE GAS CON CONTORNO GRIS GLOW (TERCERA POSICIÓN) */}
-        <g transform="translate(390, 380)">
+        <g transform="translate(550, 380)">
           <GasTankComponent />
         </g>
         
         {/* 5. BILLETE CON CONTORNO VERDE GLOW (CUARTA POSICIÓN) */}
-        <g transform="translate(390, 500)">
+        <g transform="translate(550, 500)">
           <MoneyComponent />
         </g>
         
