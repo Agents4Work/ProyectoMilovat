@@ -68,7 +68,7 @@ export const AnimatedTabs = ({
               />
             )}
 
-            <span className="relative block text-black dark:text-white font-medium">
+            <span className="relative block text-white font-medium">
               {tab.title}
             </span>
           </button>
