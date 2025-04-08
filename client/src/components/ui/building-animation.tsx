@@ -11,7 +11,6 @@ export const BuildingAnimation: React.FC = () => {
   
   const [showLeftLine, setShowLeftLine] = useState(false);
   const [showRightLine, setShowRightLine] = useState(false);
-  const [showEnergyPoints, setShowEnergyPoints] = useState(false);
   const [animationComplete, setAnimationComplete] = useState(false);
 
   // Iniciar secuencia de animación
@@ -20,13 +19,6 @@ export const BuildingAnimation: React.FC = () => {
       // Iniciar con líneas entrantes
       setShowLeftLine(true);
       setShowRightLine(true);
-      
-      // Mostrar los puntos de energía después de un tiempo
-      const energyTimer = setTimeout(() => {
-        setShowEnergyPoints(true);
-      }, 1500);
-      
-      return () => clearTimeout(energyTimer);
     }
   }, [animationComplete]);
 
@@ -36,7 +28,6 @@ export const BuildingAnimation: React.FC = () => {
       const timer = setTimeout(() => {
         setShowLeftLine(false);
         setShowRightLine(false);
-        setShowEnergyPoints(false);
         setAnimationComplete(false);
       }, 3000);
       
@@ -58,9 +49,6 @@ export const BuildingAnimation: React.FC = () => {
   return (
     <div className="relative w-full h-full flex justify-center items-center">
       <svg width="300" height="600" viewBox="0 0 300 600" fill="none">
-        {/* Fondo decorativo - Círculos de energía */}
-        <circle cx="150" cy="300" r="100" fill="rgba(243, 156, 18, 0.03)" />
-        
         {/* Contorno del edificio */}
         <path
           d={buildingPath}
@@ -69,99 +57,8 @@ export const BuildingAnimation: React.FC = () => {
           fill="none"
         />
         
-        {/* Elementos decorativos adicionales - Ventanas */}
-        <g opacity="0.5">
-          <rect x="80" y="180" width="20" height="30" fill="rgba(243, 156, 18, 0.1)" />
-          <rect x="115" y="180" width="20" height="30" fill="rgba(243, 156, 18, 0.1)" />
-          <rect x="150" y="180" width="20" height="30" fill="rgba(243, 156, 18, 0.1)" />
-          <rect x="185" y="180" width="20" height="30" fill="rgba(243, 156, 18, 0.1)" />
-          
-          <rect x="80" y="380" width="20" height="30" fill="rgba(243, 156, 18, 0.1)" />
-          <rect x="115" y="380" width="20" height="30" fill="rgba(243, 156, 18, 0.1)" />
-          <rect x="150" y="380" width="20" height="30" fill="rgba(243, 156, 18, 0.1)" />
-          <rect x="185" y="380" width="20" height="30" fill="rgba(243, 156, 18, 0.1)" />
-          
-          <rect x="80" y="430" width="20" height="30" fill="rgba(243, 156, 18, 0.1)" />
-          <rect x="115" y="430" width="20" height="30" fill="rgba(243, 156, 18, 0.1)" />
-          <rect x="150" y="430" width="20" height="30" fill="rgba(243, 156, 18, 0.1)" />
-          <rect x="185" y="430" width="20" height="30" fill="rgba(243, 156, 18, 0.1)" />
-          
-          <rect x="80" y="480" width="20" height="30" fill="rgba(243, 156, 18, 0.1)" />
-          <rect x="115" y="480" width="20" height="30" fill="rgba(243, 156, 18, 0.1)" />
-          <rect x="150" y="480" width="20" height="30" fill="rgba(243, 156, 18, 0.1)" />
-          <rect x="185" y="480" width="20" height="30" fill="rgba(243, 156, 18, 0.1)" />
-          
-          <rect x="80" y="530" width="20" height="30" fill="rgba(243, 156, 18, 0.1)" />
-          <rect x="115" y="530" width="20" height="30" fill="rgba(243, 156, 18, 0.1)" />
-          <rect x="150" y="530" width="20" height="30" fill="rgba(243, 156, 18, 0.1)" />
-          <rect x="185" y="530" width="20" height="30" fill="rgba(243, 156, 18, 0.1)" />
-        </g>
-        
-        {/* Líneas de energía verticales */}
-        <motion.path
-          d="M100,150 L100,220"
-          stroke="rgba(243, 156, 18, 0.2)"
-          strokeWidth="1"
-          strokeDasharray="2 4"
-          initial={{ y: -10, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1.5, delay: 0.5 }}
-        />
-        
-        <motion.path
-          d="M200,150 L200,220"
-          stroke="rgba(243, 156, 18, 0.2)"
-          strokeWidth="1"
-          strokeDasharray="2 4"
-          initial={{ y: -10, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1.5, delay: 0.8 }}
-        />
-        
-        {/* Puntos de energía en el edificio */}
-        {showEnergyPoints && (
-          <>
-            <motion.circle 
-              cx="75" 
-              cy="200" 
-              r="3" 
-              fill="#F39C12" 
-              initial={{ scale: 0 }}
-              animate={{ scale: [0, 1.2, 1] }}
-              transition={{ duration: 0.5 }}
-            />
-            <motion.circle 
-              cx="225" 
-              cy="200" 
-              r="3" 
-              fill="#F39C12" 
-              initial={{ scale: 0 }}
-              animate={{ scale: [0, 1.2, 1] }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            />
-            <motion.circle 
-              cx="75" 
-              cy="400" 
-              r="3" 
-              fill="#F39C12" 
-              initial={{ scale: 0 }}
-              animate={{ scale: [0, 1.2, 1] }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            />
-            <motion.circle 
-              cx="225" 
-              cy="400" 
-              r="3" 
-              fill="#F39C12" 
-              initial={{ scale: 0 }}
-              animate={{ scale: [0, 1.2, 1] }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-            />
-          </>
-        )}
-        
         {/* Demo component en el centro del edificio */}
-        <foreignObject x="75" y="230" width="150" height="150">
+        <foreignObject x="90" y="270" width="120" height="120">
           <LightningDemo />
         </foreignObject>
         
