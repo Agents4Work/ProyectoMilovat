@@ -1,11 +1,17 @@
 import React from "react";
 import { LayoutGrid } from "@/components/ui/grid-layout-complete";
 
-// Definimos las rutas de las imágenes locales
-const edificioInteligentePath = "/images/inteligente.jpg";
-const departamentosPath = "/images/vita del valle.jpg";
-const centralizacionPath = "/images/ChatGPT Image Apr 8, 2025, 03_45_56 PM.png";
-const milovatPath = "/images/Logo-Milotav-Positivo-2022.png";
+// Importamos las imágenes directamente
+import edificioInteligenteImg from "@assets/inteligente.jpg";
+import departamentosImg from "@assets/vita del valle.jpg";
+import centralizacionImg from "@assets/ChatGPT Image Apr 8, 2025, 03_45_56 PM.png";
+import milovatImg from "@assets/Logo-Milotav-Positivo-2022.png";
+
+// Definimos las rutas de las imágenes
+const edificioInteligentePath = edificioInteligenteImg;
+const departamentosPath = departamentosImg;
+const centralizacionPath = centralizacionImg;
+const milovatPath = milovatImg;
 
 // Componente para Edificio Inteligente
 const EdificioInteligente = () => {
