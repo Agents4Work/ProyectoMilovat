@@ -49,17 +49,32 @@ export const BuildingAnimation: React.FC = () => {
   return (
     <div className="relative w-full h-full flex justify-center items-center">
       <svg width="300" height="600" viewBox="0 0 300 600" fill="none">
-        {/* Contorno del edificio */}
+        {/* Fondo del edificio con gradiente */}
+        <path
+          d={buildingPath}
+          fill="url(#buildingBgGradient)"
+          fillOpacity="0.15"
+        />
+        
+        {/* Contorno del edificio con resplandor dorado */}
         <path
           d={buildingPath}
           stroke="#333"
           strokeWidth="8"
           fill="none"
+          filter="url(#buildingGlow)"
+        />
+        <path
+          d={buildingPath}
+          stroke="url(#buildingGradient)"
+          strokeWidth="2"
+          strokeOpacity="0.8"
+          fill="none"
         />
         
         {/* Demo component en el centro del edificio */}
-        <foreignObject x="90" y="270" width="120" height="120">
-          <LightningDemo />
+        <foreignObject x="70" y="200" width="160" height="200">
+          <LightningDemo width={160} height={200} />
         </foreignObject>
         
         {/* Línea izquierda que se acerca - usando una motion.path directa */}
@@ -92,24 +107,53 @@ export const BuildingAnimation: React.FC = () => {
         
         {/* Definiciones de gradientes */}
         <defs>
+          {/* Gradiente dorado para línea izquierda */}
           <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#F1C40F" stopOpacity="0.2" />
             <stop offset="50%" stopColor="#F39C12" />
             <stop offset="100%" stopColor="#F1C40F" stopOpacity="0.2" />
           </linearGradient>
           
+          {/* Gradiente dorado invertido para línea derecha */}
           <linearGradient id="rightGoldGradient" x1="100%" y1="0%" x2="0%" y2="0%">
             <stop offset="0%" stopColor="#F1C40F" stopOpacity="0.2" />
             <stop offset="50%" stopColor="#F39C12" />
             <stop offset="100%" stopColor="#F1C40F" stopOpacity="0.2" />
           </linearGradient>
           
+          {/* Gradiente para el fondo del edificio */}
+          <linearGradient id="buildingBgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#000000" />
+            <stop offset="50%" stopColor="#1a1a1a" />
+            <stop offset="100%" stopColor="#000000" />
+          </linearGradient>
+          
+          {/* Gradiente para el contorno del edificio */}
+          <linearGradient id="buildingGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#F1C40F" stopOpacity="0.7" />
+            <stop offset="50%" stopColor="#F39C12" stopOpacity="0.5" />
+            <stop offset="100%" stopColor="#E67E22" stopOpacity="0.7" />
+          </linearGradient>
+          
+          {/* Filtro de resplandor para el edificio */}
+          <filter id="buildingGlow" x="-10%" y="-10%" width="120%" height="120%">
+            <feGaussianBlur stdDeviation="1" result="blur" />
+            <feFlood floodColor="#F1C40F" floodOpacity="0.2" result="color" />
+            <feComposite in="color" in2="blur" operator="in" result="glow" />
+            <feMerge>
+              <feMergeNode in="glow" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          
+          {/* Gradiente para el rayo */}
           <linearGradient id="boltGradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#F1C40F" />
             <stop offset="50%" stopColor="#F39C12" />
             <stop offset="100%" stopColor="#E67E22" />
           </linearGradient>
           
+          {/* Gradiente animado */}
           <motion.linearGradient
             animate={{
               x1: [0, 400],
