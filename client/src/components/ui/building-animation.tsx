@@ -211,28 +211,30 @@ const MoneyComponent: React.FC = () => (
 // Componente principal de la animación
 export const BuildingAnimation: React.FC = () => {
   return (
-    <div className="relative w-full h-full flex justify-end items-center bg-black overflow-hidden">
-      <svg width="600" height="600" viewBox="0 0 800 600" fill="none" className="mr-0">
+    <div className="relative w-full h-full flex justify-center items-center bg-black overflow-hidden">
+      <svg width="550" height="600" viewBox="0 0 550 600" fill="none" className="mr-0">
         {/* 1. EDIFICIO BLANCO (IZQUIERDA) */}
-        <BuildingComponent />
+        <g transform="translate(100, 0)">
+          <BuildingComponent />
+        </g>
         
         {/* 2. RAYO CON CONTORNO NARANJA/DORADO GLOW (PRIMERA POSICIÓN DERECHA) */}
-        <g transform="translate(435, 100)">
+        <g transform="translate(400, 100)">
           <LightningComponent />
         </g>
         
         {/* 3. GOTA DE AGUA CON CONTORNO AZUL GLOW (SEGUNDA POSICIÓN) */}
-        <g transform="translate(435, 230)">
+        <g transform="translate(400, 230)">
           <WaterDropComponent />
         </g>
         
         {/* 4. TANQUE DE GAS CON CONTORNO GRIS GLOW (TERCERA POSICIÓN) */}
-        <g transform="translate(435, 360)">
+        <g transform="translate(400, 360)">
           <GasTankComponent />
         </g>
         
         {/* 5. BILLETE CON CONTORNO VERDE GLOW (CUARTA POSICIÓN) */}
-        <g transform="translate(435, 490)">
+        <g transform="translate(400, 490)">
           <MoneyComponent />
         </g>
         
