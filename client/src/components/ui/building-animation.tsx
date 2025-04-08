@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 
 // Componente del edificio con contorno blanco (más ancho y moderno)
 const BuildingComponent: React.FC = () => (
-  <g>
+  <g transform="scale(0.8)">
     {/* Contorno principal del edificio moderno - Mucho más amplio */}
     <path 
       d="M20,580 V20 H350 V580 H20 Z" 
