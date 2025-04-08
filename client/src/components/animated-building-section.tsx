@@ -18,13 +18,13 @@ export function AnimatedBuildingSection() {
               Conéctate al futuro residencial
             </h2>
             <p className="text-lg mb-3">
-              En nuestra aplicación, transformamos la gestión de edificios mediante la centralización inteligente de datos. Cada residente accede a información transparente sobre su comunidad, desde consumos energéticos hasta resolución de incidencias, todo en tiempo real.
+              Nuestra aplicación centraliza la gestión de tu edificio inteligente en una sola plataforma intuitiva. Diseñada pensando en las necesidades reales de los residentes, facilita la comunicación y resolución de problemas comunitarios con total transparencia.
             </p>
             <p className="text-lg mb-3">
-              Nuestra tecnología no solo conecta personas, sino que prepara tu edificio para un futuro donde la eficiencia y la sostenibilidad son prioridad. Con interfaces intuitivas y análisis predictivo, convertimos datos en decisiones que mejoran la calidad de vida comunitaria.
+              Con acceso inmediato a reportes de incidencias, seguimiento de paquetería y control de accesos, transformamos la experiencia de vivir en comunidad. Cada notificación, cada alerta de seguridad y cada solicitud queda registrada y visible para todos los interesados.
             </p>
             <p className="text-lg mb-3">
-              Diseñada específicamente para edificios inteligentes, esta plataforma integra sistemas domóticos, seguridad y comunicaciones en una experiencia unificada. Porque creemos que la transparencia y la tecnología son los pilares de las comunidades residenciales del mañana.
+              La transparencia es nuestro compromiso. Desde el registro de visitantes hasta la documentación de incidencias, toda la información relevante está disponible para los residentes autorizados, eliminando la incertidumbre y fortaleciendo la confianza en la administración.
             </p>
           </div>
         </div>
