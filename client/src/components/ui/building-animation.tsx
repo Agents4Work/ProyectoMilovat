@@ -3,63 +3,158 @@
 import React from "react"
 import { motion } from "framer-motion"
 
+// Componente del Rayo con glow naranja/dorado
+const LightningIcon: React.FC = () => (
+  <motion.path 
+    d="M0,0 L-10,25 L5,25 L-5,50 L25,20 L10,20 L20,0 Z"
+    stroke="#FFA500"
+    strokeWidth="2"
+    fill="none"
+    animate={{ 
+      opacity: [0.7, 1, 0.7],
+    }}
+    transition={{
+      duration: 2,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }}
+    filter="url(#lightningGlow)"
+  />
+);
+
+// Componente de Gota de Agua con glow azul
+const WaterDropIcon: React.FC = () => (
+  <motion.path 
+    d="M0,0 C-5,10 -10,20 -10,28 C-10,38 -5,45 0,45 C5,45 10,38 10,28 C10,20 5,10 0,0 Z"
+    stroke="#0088ff"
+    strokeWidth="2"
+    fill="none"
+    animate={{ 
+      scale: [1, 1.1, 1],
+      opacity: [0.7, 1, 0.7],
+    }}
+    transition={{
+      duration: 3,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }}
+    filter="url(#waterGlow)"
+  />
+);
+
+// Componente del Tanque de Gas con glow gris
+const GasTankIcon: React.FC = () => (
+  <motion.g
+    animate={{ 
+      opacity: [0.7, 1, 0.7],
+    }}
+    transition={{
+      duration: 2.5,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }}
+    filter="url(#gasGlow)"
+  >
+    <path 
+      d="M-15,-15 H15 V-10 H20 V-5 H-20 V-10 H-15 V-15 Z" 
+      stroke="#aaaaaa" 
+      strokeWidth="2" 
+      fill="none" 
+    />
+    <path 
+      d="M-20,-5 H20 C20,-5 25,5 25,15 C25,25 20,30 15,35 H-15 C-20,30 -25,25 -25,15 C-25,5 -20,-5 -20,-5 Z" 
+      stroke="#aaaaaa" 
+      strokeWidth="2" 
+      fill="none" 
+    />
+    <path 
+      d="M-20,35 H20 V40 H-20 V35 Z" 
+      stroke="#aaaaaa" 
+      strokeWidth="2" 
+      fill="none" 
+    />
+    <path 
+      d="M-10,40 H-5 V45 H-10 V40 Z M5,40 H10 V45 H5 V40 Z" 
+      stroke="#aaaaaa" 
+      strokeWidth="2" 
+      fill="none" 
+    />
+    <path 
+      d="M0,15 C-2.5,20 -5,25 -5,27 C-5,30 -2.5,32 0,32 C2.5,32 5,30 5,27 C5,25 2.5,20 0,15 Z" 
+      stroke="#aaaaaa" 
+      strokeWidth="1.5" 
+      fill="none" 
+    />
+  </motion.g>
+);
+
+// Componente del Billete con glow verde
+const MoneyIcon: React.FC = () => (
+  <motion.g
+    animate={{ 
+      opacity: [0.7, 1, 0.7],
+      rotate: [0, 3, 0, -3, 0],
+    }}
+    transition={{
+      duration: 4,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }}
+    filter="url(#moneyGlow)"
+  >
+    <rect x="-30" y="-15" width="60" height="30" rx="3" stroke="#00ff44" strokeWidth="2" fill="none" />
+    <rect x="-25" y="-10" width="50" height="20" rx="2" stroke="#00ff44" strokeWidth="1" fill="none" />
+    <circle cx="0" cy="0" r="8" stroke="#00ff44" strokeWidth="1.5" fill="none" />
+    <text x="0" y="4" textAnchor="middle" fill="#00ff44" fontWeight="bold" fontSize="10">$</text>
+    <text x="-20" y="-5" textAnchor="start" fill="#00ff44" fontWeight="bold" fontSize="6">1</text>
+    <text x="20" y="10" textAnchor="end" fill="#00ff44" fontWeight="bold" fontSize="6">1</text>
+  </motion.g>
+);
+
+// Componente principal de la animación
 export const BuildingAnimation: React.FC = () => {
   return (
     <div className="relative w-full h-full flex justify-center items-center bg-black">
-      <svg width="850" height="600" viewBox="0 0 850 600" fill="none">
-        {/* EDIFICIO BLANCO EN LADO IZQUIERDO */}
+      <svg width="300" height="600" viewBox="-150 -300 300 600" fill="none">
+        {/* EDIFICIO BLANCO (centrado en el origen) */}
         <g>
           {/* Contorno del edificio principal */}
           <path 
-            d="M50,500 V100 H250 V500 H50 Z" 
-            stroke="white" 
-            strokeWidth="5" 
-            fill="none"
-          />
-          
-          {/* Ventanas del edificio (5 filas de 3 ventanas) */}
-          <path 
-            d="M80,130 H100 V160 H80 V130 Z
-               M140,130 H160 V160 H140 V130 Z
-               M200,130 H220 V160 H200 V130 Z
-               
-               M80,180 H100 V210 H80 V180 Z
-               M140,180 H160 V210 H140 V180 Z
-               M200,180 H220 V210 H200 V180 Z
-               
-               M80,230 H100 V260 H80 V230 Z
-               M140,230 H160 V260 H140 V230 Z
-               M200,230 H220 V260 H200 V230 Z
-               
-               M80,280 H100 V310 H80 V280 Z
-               M140,280 H160 V310 H140 V280 Z
-               M200,280 H220 V310 H200 V280 Z
-               
-               M80,330 H100 V360 H80 V330 Z
-               M140,330 H160 V360 H140 V330 Z
-               M200,330 H220 V360 H200 V330 Z"
+            d="M-80,150 V-150 H80 V150 H-80 Z" 
             stroke="white" 
             strokeWidth="3" 
             fill="none"
           />
           
-          {/* Entrada del edificio */}
+          {/* Ventanas (4x4 grid) */}
           <path 
-            d="M110,500 V440 H190 V500" 
+            d="M-60,-130 H-40 V-110 H-60 V-130 Z
+               M-20,-130 H0 V-110 H-20 V-130 Z
+               M20,-130 H40 V-110 H20 V-130 Z
+               M60,-130 H40 V-110 H60 V-130 Z
+               
+               M-60,-90 H-40 V-70 H-60 V-90 Z
+               M-20,-90 H0 V-70 H-20 V-90 Z
+               M20,-90 H40 V-70 H20 V-90 Z
+               M60,-90 H40 V-70 H60 V-90 Z
+               
+               M-60,-50 H-40 V-30 H-60 V-50 Z
+               M-20,-50 H0 V-30 H-20 V-50 Z
+               M20,-50 H40 V-30 H20 V-50 Z
+               M60,-50 H40 V-30 H60 V-50 Z
+               
+               M-60,-10 H-40 V10 H-60 V-10 Z
+               M-20,-10 H0 V10 H-20 V-10 Z
+               M20,-10 H40 V10 H20 V-10 Z
+               M60,-10 H40 V10 H60 V-10 Z"
             stroke="white" 
-            strokeWidth="3" 
+            strokeWidth="2" 
             fill="none"
           />
           
-          {/* Líneas verticales en la entrada */}
+          {/* Entrada con líneas verticales */}
           <path 
-            d="M120,500 V440
-               M130,500 V440
-               M140,500 V440
-               M150,500 V440
-               M160,500 V440
-               M170,500 V440
-               M180,500 V440"
+            d="M-40,150 V110 H40 V150 M-40,110 V150 M-30,110 V150 M-20,110 V150 M-10,110 V150 M0,110 V150 M10,110 V150 M20,110 V150 M30,110 V150" 
             stroke="white" 
             strokeWidth="2" 
             fill="none"
@@ -67,123 +162,41 @@ export const BuildingAnimation: React.FC = () => {
           
           {/* Puerta pequeña */}
           <path 
-            d="M240,500 V470 H270 V500" 
+            d="M65,150 V130 H80 V150" 
             stroke="white" 
-            strokeWidth="3" 
+            strokeWidth="2" 
             fill="none"
           />
         </g>
         
-        {/* RAYO CON CONTORNO NARANJA/DORADO CON GLOW */}
-        <motion.g 
-          filter="url(#lightningGlow)" 
-          transform="translate(500, 120)"
-          animate={{ 
-            scale: [1, 1.1, 1],
-            opacity: [0.8, 1, 0.8],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        >
-          <path 
-            d="M20,0 L0,60 L30,60 L10,120 L80,50 L40,50 L60,0 Z" 
-            stroke="#FFA500" 
-            strokeWidth="4" 
-            fill="none"
-          />
-        </motion.g>
+        {/* ICONOS CON EFECTOS GLOW (posicionados alrededor del edificio) */}
         
-        {/* GOTA DE AGUA CON CONTORNO AZUL CON GLOW */}
-        <motion.g 
-          filter="url(#waterGlow)" 
-          transform="translate(500, 250)"
-          animate={{ 
-            scale: [1, 1.15, 1],
-            y: [0, -5, 0],
-            opacity: [0.8, 1, 0.8]
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        >
-          <path 
-            d="M40,0 C20,30 0,60 0,80 C0,102 18,120 40,120 C62,120 80,102 80,80 C80,60 60,30 40,0 Z" 
-            stroke="#0088ff" 
-            strokeWidth="4" 
-            fill="none"
-          />
-          <path 
-            d="M56,80 C56,50 30,56 30,90" 
-            stroke="#0088ff" 
-            strokeWidth="3" 
-            fill="none"
-          />
-        </motion.g>
+        {/* Rayo (parte superior izquierda) */}
+        <g transform="translate(-60, -220)">
+          <LightningIcon />
+        </g>
         
-        {/* TANQUE DE GAS CON CONTORNO GRIS CON GLOW */}
-        <motion.g 
-          filter="url(#gasGlow)" 
-          transform="translate(490, 380)"
-          animate={{ 
-            scale: [1, 1.08, 1],
-            opacity: [0.8, 1, 0.8]
-          }}
-          transition={{
-            duration: 3.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 0.7
-          }}
-        >
-          <path d="M30,0 H70 V10 H80 V20 H20 V10 H30 V0 Z" stroke="#aaaaaa" strokeWidth="4" fill="none" />
-          <path d="M20,20 H80 C80,20 100,40 100,60 C100,90 80,100 70,120 H30 C20,100 0,90 0,60 C0,40 20,20 20,20 Z" 
-                stroke="#aaaaaa" strokeWidth="4" fill="none" />
-          <path d="M20,120 H80 V130 H20 V120 Z" stroke="#aaaaaa" strokeWidth="4" fill="none" />
-          <path d="M30,130 H40 V140 H30 V130 Z M60,130 H70 V140 H60 V130 Z" stroke="#aaaaaa" strokeWidth="4" fill="none" />
-          
-          {/* Gota dentro del tanque */}
-          <path 
-            d="M50,50 C45,60 40,70 40,75 C40,83 45,90 50,90 C55,90 60,83 60,75 C60,70 55,60 50,50 Z" 
-            stroke="#aaaaaa" 
-            strokeWidth="3" 
-            fill="none"
-          />
-        </motion.g>
+        {/* Billete (parte superior) con efecto 'flotante' */}
+        <g transform="translate(40, -220)">
+          <MoneyIcon />
+        </g>
         
-        {/* BILLETE CON CONTORNO VERDE CON GLOW */}
-        <motion.g 
-          filter="url(#moneyGlow)" 
-          transform="translate(470, 520)"
-          animate={{ 
-            rotate: [0, 3, 0, -3, 0],
-            scale: [1, 1.1, 1]
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1.2
-          }}
-        >
-          <rect x="0" y="0" width="140" height="80" rx="5" stroke="#00ff44" strokeWidth="4" fill="none" />
-          <rect x="10" y="10" width="120" height="60" rx="3" stroke="#00ff44" strokeWidth="2" fill="none" />
-          <circle cx="70" cy="40" r="20" stroke="#00ff44" strokeWidth="3" fill="none" />
-          <text x="70" y="48" textAnchor="middle" fill="#00ff44" fontWeight="bold" fontSize="24">$</text>
-          <text x="20" y="28" textAnchor="start" fill="#00ff44" fontWeight="bold" fontSize="16">1</text>
-          <text x="120" y="60" textAnchor="start" fill="#00ff44" fontWeight="bold" fontSize="16">1</text>
-        </motion.g>
+        {/* Gota de agua (esquina) */}
+        <g transform="translate(-90, -170)">
+          <WaterDropIcon />
+        </g>
         
-        {/* Definiciones de filtros de glow */}
+        {/* Tanque de gas (sobre el edificio) */}
+        <g transform="translate(0, -80)">
+          <GasTankIcon />
+        </g>
+        
+        {/* Definiciones de filtros para los efectos glow */}
         <defs>
           {/* Filtro de resplandor azul para agua */}
-          <filter id="waterGlow" x="-30%" y="-30%" width="160%" height="160%">
+          <filter id="waterGlow" x="-300%" y="-300%" width="600%" height="600%">
             <feGaussianBlur stdDeviation="3" result="blur" />
-            <feFlood floodColor="#0088ff" floodOpacity="0.8" result="color" />
+            <feFlood floodColor="#0088ff" floodOpacity="0.9" result="color" />
             <feComposite in="color" in2="blur" operator="in" result="glow" />
             <feMerge>
               <feMergeNode in="glow" />
@@ -192,7 +205,7 @@ export const BuildingAnimation: React.FC = () => {
           </filter>
           
           {/* Filtro de resplandor gris para gas */}
-          <filter id="gasGlow" x="-30%" y="-30%" width="160%" height="160%">
+          <filter id="gasGlow" x="-300%" y="-300%" width="600%" height="600%">
             <feGaussianBlur stdDeviation="3" result="blur" />
             <feFlood floodColor="#aaaaaa" floodOpacity="0.8" result="color" />
             <feComposite in="color" in2="blur" operator="in" result="glow" />
@@ -203,9 +216,9 @@ export const BuildingAnimation: React.FC = () => {
           </filter>
           
           {/* Filtro de resplandor verde para dinero */}
-          <filter id="moneyGlow" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="3" result="blur" />
-            <feFlood floodColor="#00ff44" floodOpacity="0.8" result="color" />
+          <filter id="moneyGlow" x="-300%" y="-300%" width="600%" height="600%">
+            <feGaussianBlur stdDeviation="4" result="blur" />
+            <feFlood floodColor="#00ff44" floodOpacity="1" result="color" />
             <feComposite in="color" in2="blur" operator="in" result="glow" />
             <feMerge>
               <feMergeNode in="glow" />
@@ -214,9 +227,9 @@ export const BuildingAnimation: React.FC = () => {
           </filter>
           
           {/* Filtro de resplandor naranja/dorado para rayo */}
-          <filter id="lightningGlow" x="-30%" y="-30%" width="160%" height="160%">
+          <filter id="lightningGlow" x="-300%" y="-300%" width="600%" height="600%">
             <feGaussianBlur stdDeviation="5" result="blur" />
-            <feFlood floodColor="#FFA500" floodOpacity="0.9" result="color" />
+            <feFlood floodColor="#FFA500" floodOpacity="1" result="color" />
             <feComposite in="color" in2="blur" operator="in" result="glow" />
             <feMerge>
               <feMergeNode in="glow" />
