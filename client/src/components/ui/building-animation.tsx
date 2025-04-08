@@ -1,204 +1,203 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { motion } from "framer-motion"
-import { GradientTracing } from "./gradient-tracing"
-import { LightningDemo } from "./demo"
 
 export const BuildingAnimation: React.FC = () => {
-  // Contorno del edificio (sin la línea de abajo)
-  const buildingPath = "M60,600 L60,150 L240,150 L240,600";
-  
-  const [showLeftLine, setShowLeftLine] = useState(false);
-  const [showRightLine, setShowRightLine] = useState(false);
-  const [animationComplete, setAnimationComplete] = useState(false);
-
-  // Iniciar secuencia de animación
-  useEffect(() => {
-    if (!animationComplete) {
-      // Iniciar con líneas entrantes
-      setShowLeftLine(true);
-      setShowRightLine(true);
-    }
-  }, [animationComplete]);
-
-  // Reiniciar el ciclo de animación cuando se completa
-  useEffect(() => {
-    if (animationComplete) {
-      const timer = setTimeout(() => {
-        setShowLeftLine(false);
-        setShowRightLine(false);
-        setAnimationComplete(false);
-      }, 3000);
-      
-      return () => clearTimeout(timer);
-    }
-  }, [animationComplete]);
-
-  // Gestionar la secuencia de animación
-  const handleLeftLineComplete = () => {
-    setTimeout(() => {
-      setAnimationComplete(true);
-    }, 500);
-  };
-
-  const handleRightLineComplete = () => {
-    // No necesitamos hacer nada aquí, ya que estamos simplificando la animación
-  };
 
   return (
     <div className="relative w-full h-full flex justify-center items-center">
-      <svg width="300" height="600" viewBox="0 0 300 600" fill="none">
-        {/* Fondo del edificio con gradiente */}
-        <path
-          d={buildingPath}
-          fill="url(#buildingBgGradient)"
-          fillOpacity="0.15"
-        />
+      <svg width="850" height="600" viewBox="0 0 850 600" fill="none">
+        {/* División del espacio: izquierda edificio, derecha iconos de servicio */}
         
-        {/* Contorno del edificio con resplandor dorado */}
-        <path
-          d={buildingPath}
-          stroke="#333"
-          strokeWidth="8"
-          fill="none"
-          filter="url(#buildingGlow)"
-        />
-        <path
-          d={buildingPath}
-          stroke="url(#buildingGradient)"
-          strokeWidth="2"
-          strokeOpacity="0.8"
-          fill="none"
-        />
-        
-        {/* Demo component arriba del edificio */}
-        <foreignObject x="70" y="160" width="160" height="200">
-          <LightningDemo width={160} height={200} />
-        </foreignObject>
-        
-        {/* Iconos de servicios con efecto glow */}
-        {/* Gas con brillo blanco (centro/abajo) dentro del edificio */}
+        {/* EDIFICIO BLANCO EN LADO IZQUIERDO */}
         <motion.g 
-          filter="url(#gasGlow)" 
-          transform="translate(130, 500)"
+          filter="url(#buildingGlow)"
           animate={{ 
-            scale: [1, 1.05, 1],
-            y: [0, -5, 0]
+            y: [0, -3, 0],
+            opacity: [0.9, 1, 0.9]
           }}
           transition={{
-            duration: 3,
+            duration: 4,
             repeat: Infinity,
-            ease: "easeInOut",
-            delay: 0.5
+            ease: "easeInOut"
           }}
         >
-          <path d="M25,0 H35 V5 H40 V10 H20 V5 H25 V0 Z" stroke="black" strokeWidth="3" fill="none" />
-          <path d="M10,10 H50 C50,10 60,20 60,30 C60,45 50,50 45,60 H15 C10,50 0,45 0,30 C0,20 10,10 10,10 Z" 
-                stroke="black" strokeWidth="3" fill="none" />
-          <path d="M10,60 H50 V65 H10 V60 Z" stroke="black" strokeWidth="3" fill="none" />
-          <path d="M20,65 H25 V70 H20 V65 Z M35,65 H40 V70 H35 V65 Z" stroke="black" strokeWidth="3" fill="none" />
-          {/* Animación de llama */}
-          <motion.path 
-            d="M30,35 L25,30 L35,30 L30,35 Z" 
-            stroke="black" 
+          {/* Contorno del edificio principal */}
+          <path 
+            d="M50,500 V100 H250 V500 H50 Z" 
+            stroke="white" 
+            strokeWidth="5" 
+            fill="none"
+          />
+          
+          {/* Ventanas del edificio (5 filas de 3 ventanas) */}
+          <path 
+            d="M80,130 H100 V160 H80 V130 Z
+               M140,130 H160 V160 H140 V130 Z
+               M200,130 H220 V160 H200 V130 Z
+               
+               M80,180 H100 V210 H80 V180 Z
+               M140,180 H160 V210 H140 V180 Z
+               M200,180 H220 V210 H200 V180 Z
+               
+               M80,230 H100 V260 H80 V230 Z
+               M140,230 H160 V260 H140 V230 Z
+               M200,230 H220 V260 H200 V230 Z
+               
+               M80,280 H100 V310 H80 V280 Z
+               M140,280 H160 V310 H140 V280 Z
+               M200,280 H220 V310 H200 V280 Z
+               
+               M80,330 H100 V360 H80 V330 Z
+               M140,330 H160 V360 H140 V330 Z
+               M200,330 H220 V360 H200 V330 Z"
+            stroke="white" 
+            strokeWidth="3" 
+            fill="none"
+          />
+          
+          {/* Entrada del edificio */}
+          <path 
+            d="M110,500 V440 H190 V500" 
+            stroke="white" 
+            strokeWidth="3" 
+            fill="none"
+          />
+          
+          {/* Líneas verticales en la entrada */}
+          <path 
+            d="M120,500 V440
+               M130,500 V440
+               M140,500 V440
+               M150,500 V440
+               M160,500 V440
+               M170,500 V440
+               M180,500 V440"
+            stroke="white" 
             strokeWidth="2" 
             fill="none"
-            animate={{ 
-              y: [0, -3, 0],
-              opacity: [0.7, 1, 0.7]
-            }}
-            transition={{
-              duration: 1,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
+          />
+          
+          {/* Puerta pequeña */}
+          <path 
+            d="M240,500 V470 H270 V500" 
+            stroke="white" 
+            strokeWidth="3" 
+            fill="none"
           />
         </motion.g>
         
-        {/* Agua con brillo azul (izquierda) - fuera del edificio */}
+        {/* RAYO CON CONTORNO GLOW AMARILLO (LADO DERECHO-ARRIBA) */}
         <motion.g 
-          filter="url(#waterGlow)" 
-          transform="translate(0, 500)"
+          filter="url(#lightningGlow)" 
+          transform="translate(500, 100)"
           animate={{ 
             scale: [1, 1.1, 1],
-            opacity: [1, 0.8, 1]
+            opacity: [0.8, 1, 0.8],
+            rotate: [0, 2, 0, -2, 0]
           }}
           transition={{
-            duration: 2,
+            duration: 3,
             repeat: Infinity,
             ease: "easeInOut"
           }}
         >
           <path 
-            d="M20,0 C10,15 0,30 0,40 C0,51 9,60 20,60 C31,60 40,51 40,40 C40,30 30,15 20,0 Z"
-            stroke="black" 
-            strokeWidth="3" 
-            fill="none" />
+            d="M20,0 L0,60 L30,60 L10,120 L80,50 L40,50 L60,0 Z" 
+            stroke="white" 
+            strokeWidth="4" 
+            fill="none"
+          />
+        </motion.g>
+        
+        {/* GOTA DE AGUA CON CONTORNO GLOW AZUL (ABAJO DEL RAYO) */}
+        <motion.g 
+          filter="url(#waterGlow)" 
+          transform="translate(520, 250)"
+          animate={{ 
+            scale: [1, 1.15, 1],
+            y: [0, -5, 0],
+            opacity: [0.8, 1, 0.8]
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <path 
+            d="M40,0 C20,30 0,60 0,80 C0,102 18,120 40,120 C62,120 80,102 80,80 C80,60 60,30 40,0 Z" 
+            stroke="white" 
+            strokeWidth="4" 
+            fill="none"
+          />
           <motion.path 
-            d="M28,40 C28,25 15,28 15,45" 
-            stroke="black" 
-            strokeWidth="2" 
+            d="M56,80 C56,50 30,56 30,90" 
+            stroke="white" 
+            strokeWidth="3" 
             fill="none"
             animate={{ pathLength: [0, 1, 0] }}
             transition={{
-              duration: 4,
+              duration: 5,
               repeat: Infinity,
               ease: "easeInOut"
             }}
           />
         </motion.g>
         
-        {/* Dinero con brillo verde (derecha) - fuera del edificio */}
+        {/* TANQUE DE GAS CON CONTORNO GLOW BLANCO (ABAJO DEL AGUA) */}
+        <motion.g 
+          filter="url(#gasGlow)" 
+          transform="translate(510, 390)"
+          animate={{ 
+            scale: [1, 1.08, 1],
+            opacity: [0.8, 1, 0.8]
+          }}
+          transition={{
+            duration: 3.5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.7
+          }}
+        >
+          <path d="M30,0 H70 V10 H80 V20 H20 V10 H30 V0 Z" stroke="white" strokeWidth="4" fill="none" />
+          <path d="M20,20 H80 C80,20 100,40 100,60 C100,90 80,100 70,120 H30 C20,100 0,90 0,60 C0,40 20,20 20,20 Z" 
+                stroke="white" strokeWidth="4" fill="none" />
+          <path d="M20,120 H80 V130 H20 V120 Z" stroke="white" strokeWidth="4" fill="none" />
+          <path d="M30,130 H40 V140 H30 V130 Z M60,130 H70 V140 H60 V130 Z" stroke="white" strokeWidth="4" fill="none" />
+          
+          {/* Gota dentro del tanque */}
+          <path 
+            d="M50,50 C45,60 40,70 40,75 C40,83 45,90 50,90 C55,90 60,83 60,75 C60,70 55,60 50,50 Z" 
+            stroke="white" 
+            strokeWidth="3" 
+            fill="none"
+          />
+        </motion.g>
+        
+        {/* BILLETE CON CONTORNO GLOW VERDE (ABAJO DEL GAS) */}
         <motion.g 
           filter="url(#moneyGlow)" 
-          transform="translate(240, 500)"
+          transform="translate(480, 550)"
           animate={{ 
-            rotate: [0, 5, 0, -5, 0],
-            scale: [1, 1.08, 1]
+            rotate: [0, 3, 0, -3, 0],
+            scale: [1, 1.1, 1]
           }}
           transition={{
             duration: 4,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: 1
+            delay: 1.2
           }}
         >
-          <rect x="0" y="0" width="60" height="40" rx="5" stroke="black" strokeWidth="3" fill="none" />
-          <rect x="5" y="5" width="50" height="30" rx="2" stroke="black" strokeWidth="1.5" fill="none" />
-          <circle cx="30" cy="20" r="12" stroke="black" strokeWidth="2" fill="none" />
-          <text x="30" y="25" textAnchor="middle" fill="black" fontWeight="bold" fontSize="18">$</text>
-          <text x="8" y="15" textAnchor="start" fill="black" fontWeight="bold" fontSize="10">1</text>
-          <text x="52" y="35" textAnchor="start" fill="black" fontWeight="bold" fontSize="10">1</text>
+          <rect x="0" y="0" width="140" height="90" rx="10" stroke="white" strokeWidth="4" fill="none" />
+          <rect x="10" y="10" width="120" height="70" rx="5" stroke="white" strokeWidth="2" fill="none" />
+          <circle cx="70" cy="45" r="25" stroke="white" strokeWidth="3" fill="none" />
+          <text x="70" y="55" textAnchor="middle" fill="white" fontWeight="bold" fontSize="30">$</text>
+          <text x="20" y="30" textAnchor="start" fill="white" fontWeight="bold" fontSize="20">1</text>
+          <text x="120" y="70" textAnchor="start" fill="white" fontWeight="bold" fontSize="20">1</text>
         </motion.g>
-        
-        {/* Línea izquierda que se acerca - usando una motion.path directa */}
-        {showLeftLine && (
-          <motion.path
-            d="M0,600 L60,600"
-            stroke="url(#goldGradient)"
-            strokeWidth="3"
-            strokeLinecap="round"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 3, ease: "linear" }}
-            onAnimationComplete={handleLeftLineComplete}
-          />
-        )}
-        
-        {/* Línea derecha que se acerca - usando una motion.path directa con gradiente invertido */}
-        {showRightLine && (
-          <foreignObject x="240" y="590" width="60" height="20" style={{ transform: 'scaleX(-1)' }}>
-            <GradientTracing 
-              width={60} 
-              height={20} 
-              path="M0,10 L60,10" 
-              gradientColors={["#F1C40F", "#F1C40F", "#F39C12"]}
-              animationDuration={3}
-              onAnimationEnd={handleRightLineComplete}
-            />
-          </foreignObject>
-        )}
         
         {/* Definiciones de gradientes */}
         <defs>
@@ -267,6 +266,17 @@ export const BuildingAnimation: React.FC = () => {
           <filter id="moneyGlow" x="-30%" y="-30%" width="160%" height="160%">
             <feGaussianBlur stdDeviation="3" result="blur" />
             <feFlood floodColor="#00ff44" floodOpacity="0.8" result="color" />
+            <feComposite in="color" in2="blur" operator="in" result="glow" />
+            <feMerge>
+              <feMergeNode in="glow" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          
+          {/* Filtro de resplandor amarillo para rayo */}
+          <filter id="lightningGlow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="5" result="blur" />
+            <feFlood floodColor="#ffcc00" floodOpacity="0.9" result="color" />
             <feComposite in="color" in2="blur" operator="in" result="glow" />
             <feMerge>
               <feMergeNode in="glow" />
