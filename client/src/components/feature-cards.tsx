@@ -1,11 +1,11 @@
 import React from "react";
 import { LayoutGrid } from "@/components/ui/grid-layout-complete";
 
-// Definimos las rutas de las imágenes directamente
-const edificioInteligentePath = "https://i.ibb.co/B3R9Ps2/inteligente.jpg";
-const departamentosPath = "https://i.ibb.co/FVbzbK1/vita-del-valle.jpg";
-const centralizacionPath = "https://i.ibb.co/MDFvyvt/Chat-GPT-Image-Apr-8-2025-03-45-56-PM.png";
-const milovatPath = "https://i.ibb.co/SVsC6V7/Screenshot-2025-04-08-at-3-48-11-p-m.png";
+// Definimos las rutas de las imágenes locales
+const edificioInteligentePath = "/images/inteligente.jpg";
+const departamentosPath = "/images/vita del valle.jpg";
+const centralizacionPath = "/images/ChatGPT Image Apr 8, 2025, 03_45_56 PM.png";
+const milovatPath = "/images/Logo-Milotav-Positivo-2022.png";
 
 // Componente para Edificio Inteligente
 const EdificioInteligente = () => {
