@@ -6,14 +6,14 @@ export function AnimatedBuildingSection() {
   return (
     <section className="w-full bg-black py-16 md:py-24">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-10">
-          <div className="w-full md:w-3/5 flex justify-center">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-2">
+          <div className="w-full md:w-2/3 flex justify-start">
             <div className="w-full">
               <BuildingAnimation />
             </div>
           </div>
           
-          <div className="w-full md:w-2/5 text-white">
+          <div className="w-full md:w-1/3 text-white">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-amber-300 via-amber-500 to-amber-600">
               Tecnología Avanzada
             </h2>
