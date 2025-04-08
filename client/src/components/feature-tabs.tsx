@@ -79,8 +79,8 @@ export function FeatureTabs() {
         <div className="h-[35rem] md:h-[40rem] [perspective:1000px] relative flex flex-col max-w-5xl mx-auto w-full items-start justify-start">
           <AnimatedTabs 
             tabs={tabs} 
-            containerClassName="p-2 bg-zinc-900 rounded-full"
-            activeTabClassName="bg-amber-500/20"
+            containerClassName="p-2 bg-zinc-800 rounded-full border border-amber-500/30"
+            activeTabClassName="bg-amber-500/30 border border-amber-500/50"
             tabClassName="text-white font-medium"
           />
         </div>
