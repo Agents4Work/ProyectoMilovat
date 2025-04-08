@@ -31,7 +31,7 @@ export const AboutSection = memo(function AboutSection() {
   ];
 
   return (
-    <section className="w-full bg-[#0A0A0A] py-20">
+    <section className="w-full bg-[#1e1e1e] py-20">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-5xl font-bold mb-8 milovat-text gold-gradient-text">
