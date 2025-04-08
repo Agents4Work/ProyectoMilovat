@@ -223,18 +223,18 @@ export const BuildingAnimation: React.FC = () => {
           <LightningComponent />
         </g>
         
-        {/* 3. GOTA DE AGUA CON CONTORNO AZUL GLOW (SEGUNDA POSICIÓN) */}
-        <g transform="translate(420, 230)">
+        {/* 3. GOTA DE AGUA CON CONTORNO AZUL GLOW (SEGUNDA POSICIÓN - ELEVADA) */}
+        <g transform="translate(420, 160)">
           <WaterDropComponent />
         </g>
         
-        {/* 4. TANQUE DE GAS CON CONTORNO GRIS GLOW (TERCERA POSICIÓN) */}
-        <g transform="translate(420, 360)">
+        {/* 4. TANQUE DE GAS CON CONTORNO GRIS GLOW (TERCERA POSICIÓN - REAJUSTADA) */}
+        <g transform="translate(420, 280)">
           <GasTankComponent />
         </g>
         
-        {/* 5. BILLETE CON CONTORNO VERDE GLOW (CUARTA POSICIÓN) */}
-        <g transform="translate(420, 490)">
+        {/* 5. BILLETE CON CONTORNO VERDE GLOW (CUARTA POSICIÓN - REAJUSTADA) */}
+        <g transform="translate(420, 400)">
           <MoneyComponent />
         </g>
         
