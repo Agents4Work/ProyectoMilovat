@@ -214,27 +214,27 @@ export const BuildingAnimation: React.FC = () => {
     <div className="relative w-full h-full flex justify-center items-center bg-black overflow-hidden">
       <svg width="550" height="600" viewBox="0 0 550 600" fill="none" className="mr-0">
         {/* 1. EDIFICIO BLANCO (IZQUIERDA) */}
-        <g transform="translate(100, 0)">
+        <g transform="translate(70, 0)">
           <BuildingComponent />
         </g>
         
         {/* 2. RAYO CON CONTORNO NARANJA/DORADO GLOW (PRIMERA POSICIÓN DERECHA) */}
-        <g transform="translate(400, 100)">
+        <g transform="translate(420, 100)">
           <LightningComponent />
         </g>
         
         {/* 3. GOTA DE AGUA CON CONTORNO AZUL GLOW (SEGUNDA POSICIÓN) */}
-        <g transform="translate(400, 230)">
+        <g transform="translate(420, 230)">
           <WaterDropComponent />
         </g>
         
         {/* 4. TANQUE DE GAS CON CONTORNO GRIS GLOW (TERCERA POSICIÓN) */}
-        <g transform="translate(400, 360)">
+        <g transform="translate(420, 360)">
           <GasTankComponent />
         </g>
         
         {/* 5. BILLETE CON CONTORNO VERDE GLOW (CUARTA POSICIÓN) */}
-        <g transform="translate(400, 490)">
+        <g transform="translate(420, 490)">
           <MoneyComponent />
         </g>
         
