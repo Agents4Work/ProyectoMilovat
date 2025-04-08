@@ -1,5 +1,5 @@
 import React from "react";
-import { BuildingAnimation } from "./ui/gradient-tracing";
+import { BuildingAnimation } from "./ui/building-animation";
 import { cn } from "@/lib/utils";
 
 export function AnimatedBuildingSection() {

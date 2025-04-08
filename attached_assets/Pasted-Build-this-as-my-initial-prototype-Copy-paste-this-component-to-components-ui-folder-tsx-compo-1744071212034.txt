@@ -1,7 +1,13 @@
+Build this as my initial prototype
+
+Copy-paste this component to /components/ui folder:
+```tsx
+component.tsx
 "use client"
 
-import React, { useEffect } from "react"
-import { motion } from "framer-motion"
+import React from "react"
+import { motion } from "motion/react"
+import Image from "next/image"
 
 interface GradientTracingProps {
   width: number
@@ -11,33 +17,18 @@ interface GradientTracingProps {
   animationDuration?: number
   strokeWidth?: number
   path?: string
-  showLightning?: boolean
-  onAnimationEnd?: () => void
 }
 
 export const GradientTracing: React.FC<GradientTracingProps> = ({
   width,
   height,
   baseColor = "black",
-  gradientColors = ["#F1C40F", "#F1C40F", "#F39C12"],
+  gradientColors = ["#2EB9DF", "#2EB9DF", "#9E00FF"],
   animationDuration = 2,
   strokeWidth = 2,
   path = `M0,${height / 2} L${width},${height / 2}`,
-  showLightning = false,
-  onAnimationEnd
 }) => {
   const gradientId = `pulse-${Math.random().toString(36).substr(2, 9)}`
-  
-  // Usar useEffect para llamar al callback después de un tiempo
-  useEffect(() => {
-    if (onAnimationEnd) {
-      const timer = setTimeout(() => {
-        onAnimationEnd();
-      }, animationDuration * 1000);
-      
-      return () => clearTimeout(timer);
-    }
-  }, [animationDuration, onAnimationEnd]);
 
   return (
     <div className="relative" style={{ width, height }}>
@@ -67,7 +58,7 @@ export const GradientTracing: React.FC<GradientTracingProps> = ({
             }}
             transition={{
               duration: animationDuration,
-              repeat: onAnimationEnd ? 0 : Infinity,
+              repeat: Infinity,
               ease: "linear",
             }}
             id={gradientId}
@@ -82,3 +73,19 @@ export const GradientTracing: React.FC<GradientTracingProps> = ({
     </div>
   )
 }
+
+
+demo.tsx
+import { GradientTracing } from "@/components/ui/gradient-tracing";
+
+const Demo = () => (
+  <GradientTracing
+    width={200}
+    height={200}
+    path="M100,0 L75,75 L125,75 L50,200 L100,100 L50,100 L100,0"
+    gradientColors={["#F1C40F", "#F1C40F", "#E67E22"]}
+  />
+);
+
+export { Demo };
+```

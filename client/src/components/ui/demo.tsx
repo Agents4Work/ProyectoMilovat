@@ -1,43 +1,23 @@
 "use client"
 
-import React, { useEffect } from "react"
+import React from "react"
 import { motion } from "framer-motion"
 
-interface GradientTracingProps {
-  width: number
-  height: number
-  baseColor?: string
-  gradientColors?: [string, string, string]
-  animationDuration?: number
-  strokeWidth?: number
-  path?: string
-  showLightning?: boolean
-  onAnimationEnd?: () => void
+interface LightningDemoProps {
+  width?: number;
+  height?: number;
 }
 
-export const GradientTracing: React.FC<GradientTracingProps> = ({
-  width,
-  height,
-  baseColor = "black",
-  gradientColors = ["#F1C40F", "#F1C40F", "#F39C12"],
-  animationDuration = 2,
-  strokeWidth = 2,
-  path = `M0,${height / 2} L${width},${height / 2}`,
-  showLightning = false,
-  onAnimationEnd
+export const LightningDemo: React.FC<LightningDemoProps> = ({
+  width = 120,
+  height = 120
 }) => {
   const gradientId = `pulse-${Math.random().toString(36).substr(2, 9)}`
-  
-  // Usar useEffect para llamar al callback después de un tiempo
-  useEffect(() => {
-    if (onAnimationEnd) {
-      const timer = setTimeout(() => {
-        onAnimationEnd();
-      }, animationDuration * 1000);
-      
-      return () => clearTimeout(timer);
-    }
-  }, [animationDuration, onAnimationEnd]);
+  const path = "M60,0 L45,45 L75,45 L30,120 L60,60 L30,60 L60,0"
+  const gradientColors = ["#F1C40F", "#F1C40F", "#E67E22"]
+  const animationDuration = 3
+  const strokeWidth = 2
+  const baseColor = "black"
 
   return (
     <div className="relative" style={{ width, height }}>
@@ -67,7 +47,7 @@ export const GradientTracing: React.FC<GradientTracingProps> = ({
             }}
             transition={{
               duration: animationDuration,
-              repeat: onAnimationEnd ? 0 : Infinity,
+              repeat: Infinity,
               ease: "linear",
             }}
             id={gradientId}
@@ -81,4 +61,4 @@ export const GradientTracing: React.FC<GradientTracingProps> = ({
       </svg>
     </div>
   )
-}
+};
