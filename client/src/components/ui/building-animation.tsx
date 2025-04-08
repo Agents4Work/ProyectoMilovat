@@ -168,15 +168,16 @@ const GasTankComponent: React.FC = () => (
     }}
     filter="url(#gasGlow)"
   >
-    <path d="M-25,-25 H25 V-15 H35 V-5 H-35 V-15 H-25 V-25 Z" stroke="#aaaaaa" strokeWidth="4" fill="none" />
-    <path d="M-35,-5 H35 C35,-5 45,15 45,35 C45,55 35,65 25,75 H-25 C-35,65 -45,55 -45,35 C-45,15 -35,-5 -35,-5 Z" 
+    {/* Reducido el tamaño del tanque de gas */}
+    <path d="M-20,-20 H20 V-12 H28 V-4 H-28 V-12 H-20 V-20 Z" stroke="#aaaaaa" strokeWidth="4" fill="none" />
+    <path d="M-28,-4 H28 C28,-4 36,12 36,28 C36,44 28,52 20,60 H-20 C-28,52 -36,44 -36,28 C-36,12 -28,-4 -28,-4 Z" 
           stroke="#aaaaaa" strokeWidth="4" fill="none" />
-    <path d="M-35,75 H35 V85 H-35 V75 Z" stroke="#aaaaaa" strokeWidth="4" fill="none" />
-    <path d="M-20,85 H-10 V95 H-20 V85 Z M10,85 H20 V95 H10 V85 Z" stroke="#aaaaaa" strokeWidth="4" fill="none" />
+    <path d="M-28,60 H28 V68 H-28 V60 Z" stroke="#aaaaaa" strokeWidth="4" fill="none" />
+    <path d="M-16,68 H-8 V76 H-16 V68 Z M8,68 H16 V76 H8 V68 Z" stroke="#aaaaaa" strokeWidth="4" fill="none" />
     
     {/* Gota dentro del tanque */}
     <path 
-      d="M0,30 C-5,40 -10,45 -10,50 C-10,58 -5,65 0,65 C5,65 10,58 10,50 C10,45 5,40 0,30 Z" 
+      d="M0,24 C-4,32 -8,36 -8,40 C-8,46 -4,52 0,52 C4,52 8,46 8,40 C8,36 4,32 0,24 Z" 
       stroke="#aaaaaa" 
       strokeWidth="3" 
       fill="none" 
@@ -210,28 +211,28 @@ const MoneyComponent: React.FC = () => (
 // Componente principal de la animación
 export const BuildingAnimation: React.FC = () => {
   return (
-    <div className="relative w-full h-full flex justify-start items-center bg-black overflow-hidden -ml-8">
-      <svg width="750" height="600" viewBox="0 0 800 600" fill="none">
+    <div className="relative w-full h-full flex justify-center items-center bg-black overflow-hidden">
+      <svg width="750" height="600" viewBox="0 0 800 600" fill="none" className="mr-4">
         {/* 1. EDIFICIO BLANCO (IZQUIERDA) */}
         <BuildingComponent />
         
         {/* 2. RAYO CON CONTORNO NARANJA/DORADO GLOW (PRIMERA POSICIÓN DERECHA) */}
-        <g transform="translate(420, 100)">
+        <g transform="translate(450, 100)">
           <LightningComponent />
         </g>
         
         {/* 3. GOTA DE AGUA CON CONTORNO AZUL GLOW (SEGUNDA POSICIÓN) */}
-        <g transform="translate(420, 230)">
+        <g transform="translate(450, 230)">
           <WaterDropComponent />
         </g>
         
         {/* 4. TANQUE DE GAS CON CONTORNO GRIS GLOW (TERCERA POSICIÓN) */}
-        <g transform="translate(420, 360)">
+        <g transform="translate(450, 360)">
           <GasTankComponent />
         </g>
         
         {/* 5. BILLETE CON CONTORNO VERDE GLOW (CUARTA POSICIÓN) */}
-        <g transform="translate(420, 490)">
+        <g transform="translate(450, 490)">
           <MoneyComponent />
         </g>
         

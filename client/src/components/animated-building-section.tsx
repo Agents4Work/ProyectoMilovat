@@ -13,7 +13,7 @@ export function AnimatedBuildingSection() {
             </div>
           </div>
           
-          <div className="w-full md:w-1/3 text-white -ml-8 md:-ml-12">
+          <div className="w-full md:w-1/3 text-white text-center md:text-left">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-amber-300 via-amber-500 to-amber-600">
               Tecnología Avanzada
             </h2>
