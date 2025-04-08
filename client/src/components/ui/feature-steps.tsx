@@ -84,7 +84,7 @@ export function FeatureSteps({
 
           <div
             className={cn(
-              "order-1 md:order-2 relative h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden rounded-lg"
+              "order-1 md:order-2 relative h-[250px] md:h-[350px] lg:h-[450px] overflow-hidden rounded-lg"
             )}
           >
             <AnimatePresence mode="wait">
@@ -102,7 +102,7 @@ export function FeatureSteps({
                       <img
                         src={feature.image}
                         alt={feature.step}
-                        className="w-full h-full object-contain object-center transition-transform transform"
+                        className="w-full h-full object-cover object-center transition-transform transform"
                       />
                     </motion.div>
                   ),
