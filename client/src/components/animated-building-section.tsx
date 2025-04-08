@@ -15,22 +15,16 @@ export function AnimatedBuildingSection() {
           
           <div className="w-full md:w-7/12 text-white text-center md:text-left px-0 md:pl-2 md:pr-8 mt-[-120px]">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-amber-300 via-amber-500 to-amber-600">
-              Tecnología Avanzada
+              Conéctate al futuro residencial
             </h2>
             <p className="text-lg mb-3">
-              Nuestra plataforma utiliza tecnología de vanguardia para monitorear y optimizar todos los sistemas de tu edificio en tiempo real.
+              En nuestra aplicación, transformamos la gestión de edificios mediante la centralización inteligente de datos. Cada residente accede a información transparente sobre su comunidad, desde consumos energéticos hasta resolución de incidencias, todo en tiempo real.
             </p>
             <p className="text-lg mb-3">
-              Sensores inteligentes conectados a nuestra red central permiten una gestión eficiente de recursos energéticos, seguridad y mantenimiento preventivo.
+              Nuestra tecnología no solo conecta personas, sino que prepara tu edificio para un futuro donde la eficiencia y la sostenibilidad son prioridad. Con interfaces intuitivas y análisis predictivo, convertimos datos en decisiones que mejoran la calidad de vida comunitaria.
             </p>
             <p className="text-lg mb-3">
-              El sistema aprende de los patrones de uso y adapta automáticamente los parámetros para maximizar el confort y minimizar costos.
-            </p>
-            <p className="text-lg mb-3">
-              La interfaz intuitiva te permite visualizar datos complejos de forma sencilla, facilitando la toma de decisiones informadas.
-            </p>
-            <p className="text-lg">
-              Actualizaciones constantes y soporte técnico garantizan que tu edificio opere con las últimas innovaciones disponibles.
+              Diseñada específicamente para edificios inteligentes, esta plataforma integra sistemas domóticos, seguridad y comunicaciones en una experiencia unificada. Porque creemos que la transparencia y la tecnología son los pilares de las comunidades residenciales del mañana.
             </p>
           </div>
         </div>
