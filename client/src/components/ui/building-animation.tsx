@@ -10,9 +10,10 @@ export const BuildingAnimation: React.FC = () => {
       <svg width="850" height="600" viewBox="0 0 850 600" fill="none">
         {/* División del espacio: izquierda edificio, derecha iconos de servicio */}
         
-        {/* EDIFICIO BLANCO EN LADO IZQUIERDO */}
+        {/* EDIFICIO BLANCO EN LADO IZQUIERDO (AGRANDADO) */}
         <motion.g 
           filter="url(#buildingGlow)"
+          transform="translate(0, -40) scale(1.3)"
           animate={{ 
             y: [0, -3, 0],
             opacity: [0.9, 1, 0.9]
@@ -51,7 +52,11 @@ export const BuildingAnimation: React.FC = () => {
                
                M80,330 H100 V360 H80 V330 Z
                M140,330 H160 V360 H140 V330 Z
-               M200,330 H220 V360 H200 V330 Z"
+               M200,330 H220 V360 H200 V330 Z
+               
+               M80,380 H100 V410 H80 V380 Z
+               M140,380 H160 V410 H140 V380 Z
+               M200,380 H220 V410 H200 V380 Z"
             stroke="white" 
             strokeWidth="3" 
             fill="none"
@@ -91,7 +96,7 @@ export const BuildingAnimation: React.FC = () => {
         {/* RAYO CON CONTORNO GLOW AMARILLO (LADO DERECHO-ARRIBA) */}
         <motion.g 
           filter="url(#lightningGlow)" 
-          transform="translate(500, 100)"
+          transform="translate(450, 100)"
           animate={{ 
             scale: [1, 1.1, 1],
             opacity: [0.8, 1, 0.8],
@@ -114,7 +119,7 @@ export const BuildingAnimation: React.FC = () => {
         {/* GOTA DE AGUA CON CONTORNO GLOW AZUL (ABAJO DEL RAYO) */}
         <motion.g 
           filter="url(#waterGlow)" 
-          transform="translate(520, 250)"
+          transform="translate(450, 230)"
           animate={{ 
             scale: [1, 1.15, 1],
             y: [0, -5, 0],
@@ -146,10 +151,10 @@ export const BuildingAnimation: React.FC = () => {
           />
         </motion.g>
         
-        {/* TANQUE DE GAS CON CONTORNO GLOW BLANCO (ABAJO DEL AGUA) */}
+        {/* TANQUE DE GAS CON CONTORNO GLOW GRIS (ABAJO DEL AGUA) */}
         <motion.g 
           filter="url(#gasGlow)" 
-          transform="translate(510, 390)"
+          transform="translate(445, 370)"
           animate={{ 
             scale: [1, 1.08, 1],
             opacity: [0.8, 1, 0.8]
@@ -179,7 +184,7 @@ export const BuildingAnimation: React.FC = () => {
         {/* BILLETE CON CONTORNO GLOW VERDE (ABAJO DEL GAS) */}
         <motion.g 
           filter="url(#moneyGlow)" 
-          transform="translate(480, 550)"
+          transform="translate(425, 520)"
           animate={{ 
             rotate: [0, 3, 0, -3, 0],
             scale: [1, 1.1, 1]
@@ -251,10 +256,10 @@ export const BuildingAnimation: React.FC = () => {
             </feMerge>
           </filter>
           
-          {/* Filtro de resplandor blanco para gas */}
+          {/* Filtro de resplandor gris para gas */}
           <filter id="gasGlow" x="-30%" y="-30%" width="160%" height="160%">
             <feGaussianBlur stdDeviation="3" result="blur" />
-            <feFlood floodColor="#ffffff" floodOpacity="0.8" result="color" />
+            <feFlood floodColor="#aaaaaa" floodOpacity="0.8" result="color" />
             <feComposite in="color" in2="blur" operator="in" result="glow" />
             <feMerge>
               <feMergeNode in="glow" />
