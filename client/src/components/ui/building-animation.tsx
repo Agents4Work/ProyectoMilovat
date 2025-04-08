@@ -3,70 +3,94 @@
 import React from "react"
 import { motion } from "framer-motion"
 
-// Componente del edificio con contorno blanco
+// Componente del edificio con contorno blanco (más ancho y moderno)
 const BuildingComponent: React.FC = () => (
   <g>
-    {/* Contorno del edificio principal con grosor aumentado */}
+    {/* Contorno principal del edificio moderno */}
     <path 
-      d="M40,500 V100 H200 V500 H40 Z" 
+      d="M20,520 V80 H280 V520 H20 Z" 
       stroke="white" 
-      strokeWidth="5" 
+      strokeWidth="6" 
       fill="none"
     />
     
-    {/* Ventanas del edificio (5 filas de 3 ventanas) */}
+    {/* Sección superior con ventanas panorámicas */}
     <path 
-      d="M70,130 H90 V160 H70 V130 Z
-         M120,130 H140 V160 H120 V130 Z
-         M170,130 H190 V160 H170 V130 Z
-         
-         M70,180 H90 V210 H70 V180 Z
-         M120,180 H140 V210 H120 V180 Z
-         M170,180 H190 V210 H170 V180 Z
-         
-         M70,230 H90 V260 H70 V230 Z
-         M120,230 H140 V260 H120 V230 Z
-         M170,230 H190 V260 H170 V230 Z
-         
-         M70,280 H90 V310 H70 V280 Z
-         M120,280 H140 V310 H120 V280 Z
-         M170,280 H190 V310 H170 V280 Z
-         
-         M70,330 H90 V360 H70 V330 Z
-         M120,330 H140 V360 H120 V330 Z
-         M170,330 H190 V360 H170 V330 Z"
+      d="M40,120 H260 V200 H40 Z" 
       stroke="white" 
       strokeWidth="3" 
       fill="none"
     />
     
-    {/* Entrada del edificio */}
+    {/* Líneas horizontales que dividen los pisos */}
     <path 
-      d="M90,500 V440 H150 V500" 
-      stroke="white" 
-      strokeWidth="3" 
-      fill="none"
-    />
-    
-    {/* Líneas verticales en la entrada */}
-    <path 
-      d="M100,500 V440
-         M110,500 V440
-         M120,500 V440
-         M130,500 V440
-         M140,500 V440"
+      d="M40,280 H260 M40,360 H260 M40,440 H260" 
       stroke="white" 
       strokeWidth="2" 
       fill="none"
     />
     
-    {/* Puerta pequeña */}
+    {/* Ventanas modernas (rectangulares y más grandes) */}
     <path 
-      d="M180,500 V460 H200 V500" 
+      d="M50,220 H100 V260 H50 V220 Z
+         M120,220 H180 V260 H120 V220 Z
+         M200,220 H250 V260 H200 V220 Z
+         
+         M50,300 H100 V340 H50 V300 Z
+         M120,300 H180 V340 H120 V300 Z
+         M200,300 H250 V340 H200 V300 Z
+         
+         M50,380 H100 V420 H50 V380 Z
+         M120,380 H180 V420 H120 V380 Z
+         M200,380 H250 V420 H200 V380 Z"
       stroke="white" 
       strokeWidth="3" 
       fill="none"
     />
+    
+    {/* Líneas verticales de las ventanas panorámicas */}
+    <path 
+      d="M80,120 V200
+         M120,120 V200
+         M160,120 V200
+         M200,120 V200
+         M240,120 V200"
+      stroke="white" 
+      strokeWidth="2" 
+      fill="none"
+    />
+    
+    {/* Entrada principal moderna */}
+    <path 
+      d="M90,520 V460 H210 V520" 
+      stroke="white" 
+      strokeWidth="4" 
+      fill="none"
+    />
+    
+    {/* Detalles de la entrada */}
+    <path 
+      d="M110,520 V460 
+         M130,520 V460
+         M150,520 V460
+         M170,520 V460
+         M190,520 V460"
+      stroke="white" 
+      strokeWidth="2" 
+      fill="none"
+    />
+    
+    {/* Entrada secundaria con detalles modernos */}
+    <path 
+      d="M240,520 V480 H270 V520" 
+      stroke="white" 
+      strokeWidth="3" 
+      fill="none"
+    />
+    
+    {/* Detalles arquitectónicos adicionales */}
+    <line x1="20" y1="100" x2="280" y2="100" stroke="white" strokeWidth="3" />
+    <line x1="20" y1="460" x2="280" y2="460" stroke="white" strokeWidth="3" />
   </g>
 );
 
@@ -75,18 +99,19 @@ const LightningComponent: React.FC = () => (
   <motion.g
     animate={{ 
       opacity: [0.7, 1, 0.7],
+      scale: [1, 1.05, 1],
     }}
     transition={{
-      duration: 2,
+      duration: 3,
       repeat: Infinity,
       ease: "easeInOut"
     }}
     filter="url(#lightningGlow)"
   >
     <path 
-      d="M0,0 L-10,30 L10,30 L-5,60 L30,25 L10,25 L20,0 Z" 
+      d="M0,0 L-15,40 L15,40 L-10,80 L40,30 L15,30 L30,0 Z" 
       stroke="#ffcc00" 
-      strokeWidth="3" 
+      strokeWidth="4" 
       fill="none"
     />
   </motion.g>
@@ -107,15 +132,15 @@ const WaterDropComponent: React.FC = () => (
     filter="url(#waterGlow)"
   >
     <path 
-      d="M0,0 C-10,15 -20,30 -20,40 C-20,55 -10,65 0,65 C10,65 20,55 20,40 C20,30 10,15 0,0 Z" 
+      d="M0,0 C-15,20 -30,40 -30,55 C-30,75 -15,90 0,90 C15,90 30,75 30,55 C30,40 15,20 0,0 Z" 
       stroke="#0088ff" 
-      strokeWidth="3" 
+      strokeWidth="4" 
       fill="none"
     />
     <path 
-      d="M5,40 C5,25 -10,30 -10,50" 
+      d="M10,55 C10,35 -15,40 -15,70" 
       stroke="#0088ff" 
-      strokeWidth="2" 
+      strokeWidth="3" 
       fill="none"
     />
   </motion.g>
@@ -126,25 +151,26 @@ const GasTankComponent: React.FC = () => (
   <motion.g
     animate={{ 
       opacity: [0.7, 1, 0.7],
+      scale: [1, 1.05, 1],
     }}
     transition={{
-      duration: 2.5,
+      duration: 3.5,
       repeat: Infinity,
       ease: "easeInOut"
     }}
     filter="url(#gasGlow)"
   >
-    <path d="M-15,-15 H15 V-10 H20 V-5 H-20 V-10 H-15 V-15 Z" stroke="#aaaaaa" strokeWidth="3" fill="none" />
-    <path d="M-20,-5 H20 C20,-5 25,5 25,15 C25,30 20,35 15,40 H-15 C-20,35 -25,30 -25,15 C-25,5 -20,-5 -20,-5 Z" 
-          stroke="#aaaaaa" strokeWidth="3" fill="none" />
-    <path d="M-20,40 H20 V45 H-20 V40 Z" stroke="#aaaaaa" strokeWidth="3" fill="none" />
-    <path d="M-10,45 H-5 V50 H-10 V45 Z M5,45 H10 V50 H5 V45 Z" stroke="#aaaaaa" strokeWidth="3" fill="none" />
+    <path d="M-25,-25 H25 V-15 H35 V-5 H-35 V-15 H-25 V-25 Z" stroke="#aaaaaa" strokeWidth="4" fill="none" />
+    <path d="M-35,-5 H35 C35,-5 45,15 45,35 C45,55 35,65 25,75 H-25 C-35,65 -45,55 -45,35 C-45,15 -35,-5 -35,-5 Z" 
+          stroke="#aaaaaa" strokeWidth="4" fill="none" />
+    <path d="M-35,75 H35 V85 H-35 V75 Z" stroke="#aaaaaa" strokeWidth="4" fill="none" />
+    <path d="M-20,85 H-10 V95 H-20 V85 Z M10,85 H20 V95 H10 V85 Z" stroke="#aaaaaa" strokeWidth="4" fill="none" />
     
     {/* Gota dentro del tanque */}
     <path 
-      d="M0,15 C-2,20 -4,25 -4,27 C-4,30 -2,32 0,32 C2,32 4,30 4,27 C4,25 2,20 0,15 Z" 
+      d="M0,30 C-5,40 -10,45 -10,50 C-10,58 -5,65 0,65 C5,65 10,58 10,50 C10,45 5,40 0,30 Z" 
       stroke="#aaaaaa" 
-      strokeWidth="2" 
+      strokeWidth="3" 
       fill="none" 
     />
   </motion.g>
@@ -155,6 +181,7 @@ const MoneyComponent: React.FC = () => (
   <motion.g
     animate={{ 
       opacity: [0.7, 1, 0.7],
+      rotate: [0, 3, 0, -3, 0],
     }}
     transition={{
       duration: 4,
@@ -163,12 +190,12 @@ const MoneyComponent: React.FC = () => (
     }}
     filter="url(#moneyGlow)"
   >
-    <rect x="-30" y="-15" width="60" height="30" rx="3" stroke="#00ff44" strokeWidth="3" fill="none" />
-    <rect x="-25" y="-10" width="50" height="20" rx="2" stroke="#00ff44" strokeWidth="2" fill="none" />
-    <circle cx="0" cy="0" r="8" stroke="#00ff44" strokeWidth="2" fill="none" />
-    <text x="0" y="4" textAnchor="middle" fill="#00ff44" fontWeight="bold" fontSize="12">$</text>
-    <text x="-20" y="-5" textAnchor="start" fill="#00ff44" fontWeight="bold" fontSize="8">1</text>
-    <text x="20" y="10" textAnchor="end" fill="#00ff44" fontWeight="bold" fontSize="8">1</text>
+    <rect x="-50" y="-25" width="100" height="50" rx="5" stroke="#00ff44" strokeWidth="4" fill="none" />
+    <rect x="-40" y="-15" width="80" height="30" rx="3" stroke="#00ff44" strokeWidth="3" fill="none" />
+    <circle cx="0" cy="0" r="12" stroke="#00ff44" strokeWidth="3" fill="none" />
+    <text x="0" y="5" textAnchor="middle" fill="#00ff44" fontWeight="bold" fontSize="18">$</text>
+    <text x="-30" y="-8" textAnchor="start" fill="#00ff44" fontWeight="bold" fontSize="12">1</text>
+    <text x="30" y="15" textAnchor="end" fill="#00ff44" fontWeight="bold" fontSize="12">1</text>
   </motion.g>
 );
 
@@ -176,27 +203,27 @@ const MoneyComponent: React.FC = () => (
 export const BuildingAnimation: React.FC = () => {
   return (
     <div className="relative w-full h-full flex justify-center items-center bg-black overflow-hidden">
-      <svg width="500" height="600" viewBox="0 0 500 600" fill="none">
+      <svg width="600" height="600" viewBox="0 0 600 600" fill="none">
         {/* 1. EDIFICIO BLANCO (IZQUIERDA) */}
         <BuildingComponent />
         
         {/* 2. RAYO CON CONTORNO NARANJA/DORADO GLOW (PRIMERA POSICIÓN DERECHA) */}
-        <g transform="translate(330, 140)">
+        <g transform="translate(390, 140)">
           <LightningComponent />
         </g>
         
         {/* 3. GOTA DE AGUA CON CONTORNO AZUL GLOW (SEGUNDA POSICIÓN) */}
-        <g transform="translate(330, 260)">
+        <g transform="translate(390, 260)">
           <WaterDropComponent />
         </g>
         
         {/* 4. TANQUE DE GAS CON CONTORNO GRIS GLOW (TERCERA POSICIÓN) */}
-        <g transform="translate(330, 380)">
+        <g transform="translate(390, 380)">
           <GasTankComponent />
         </g>
         
         {/* 5. BILLETE CON CONTORNO VERDE GLOW (CUARTA POSICIÓN) */}
-        <g transform="translate(330, 500)">
+        <g transform="translate(390, 500)">
           <MoneyComponent />
         </g>
         
