@@ -72,10 +72,105 @@ export const BuildingAnimation: React.FC = () => {
           fill="none"
         />
         
-        {/* Demo component en el centro del edificio */}
-        <foreignObject x="70" y="200" width="160" height="200">
+        {/* Demo component arriba del edificio */}
+        <foreignObject x="70" y="160" width="160" height="200">
           <LightningDemo width={160} height={200} />
         </foreignObject>
+        
+        {/* Iconos de servicios con efecto glow */}
+        {/* Agua con brillo azul (izquierda) */}
+        <motion.g 
+          filter="url(#waterGlow)" 
+          transform="translate(90, 380)"
+          animate={{ 
+            scale: [1, 1.1, 1],
+            opacity: [1, 0.8, 1]
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <path 
+            d="M20,0 C10,15 0,30 0,40 C0,51 9,60 20,60 C31,60 40,51 40,40 C40,30 30,15 20,0 Z"
+            stroke="black" 
+            strokeWidth="3" 
+            fill="none" />
+          <motion.path 
+            d="M28,40 C28,25 15,28 15,45" 
+            stroke="black" 
+            strokeWidth="2" 
+            fill="none"
+            animate={{ pathLength: [0, 1, 0] }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+        </motion.g>
+        
+        {/* Gas con brillo blanco (centro) */}
+        <motion.g 
+          filter="url(#gasGlow)" 
+          transform="translate(130, 380)"
+          animate={{ 
+            scale: [1, 1.05, 1],
+            y: [0, -5, 0]
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.5
+          }}
+        >
+          <path d="M25,0 H35 V5 H40 V10 H20 V5 H25 V0 Z" stroke="black" strokeWidth="3" fill="none" />
+          <path d="M10,10 H50 C50,10 60,20 60,30 C60,45 50,50 45,60 H15 C10,50 0,45 0,30 C0,20 10,10 10,10 Z" 
+                stroke="black" strokeWidth="3" fill="none" />
+          <path d="M10,60 H50 V65 H10 V60 Z" stroke="black" strokeWidth="3" fill="none" />
+          <path d="M20,65 H25 V70 H20 V65 Z M35,65 H40 V70 H35 V65 Z" stroke="black" strokeWidth="3" fill="none" />
+          {/* Animación de llama */}
+          <motion.path 
+            d="M30,35 L25,30 L35,30 L30,35 Z" 
+            stroke="black" 
+            strokeWidth="2" 
+            fill="none"
+            animate={{ 
+              y: [0, -3, 0],
+              opacity: [0.7, 1, 0.7]
+            }}
+            transition={{
+              duration: 1,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+        </motion.g>
+        
+        {/* Dinero con brillo verde (derecha) */}
+        <motion.g 
+          filter="url(#moneyGlow)" 
+          transform="translate(180, 380)"
+          animate={{ 
+            rotate: [0, 5, 0, -5, 0],
+            scale: [1, 1.08, 1]
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        >
+          <rect x="0" y="0" width="60" height="40" rx="5" stroke="black" strokeWidth="3" fill="none" />
+          <rect x="5" y="5" width="50" height="30" rx="2" stroke="black" strokeWidth="1.5" fill="none" />
+          <circle cx="30" cy="20" r="12" stroke="black" strokeWidth="2" fill="none" />
+          <text x="30" y="25" textAnchor="middle" fill="black" fontWeight="bold" fontSize="18">$</text>
+          <text x="8" y="15" textAnchor="start" fill="black" fontWeight="bold" fontSize="10">1</text>
+          <text x="52" y="35" textAnchor="start" fill="black" fontWeight="bold" fontSize="10">1</text>
+        </motion.g>
         
         {/* Línea izquierda que se acerca - usando una motion.path directa */}
         {showLeftLine && (
@@ -139,6 +234,39 @@ export const BuildingAnimation: React.FC = () => {
           <filter id="buildingGlow" x="-10%" y="-10%" width="120%" height="120%">
             <feGaussianBlur stdDeviation="1" result="blur" />
             <feFlood floodColor="#F1C40F" floodOpacity="0.2" result="color" />
+            <feComposite in="color" in2="blur" operator="in" result="glow" />
+            <feMerge>
+              <feMergeNode in="glow" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          
+          {/* Filtro de resplandor azul para agua */}
+          <filter id="waterGlow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feFlood floodColor="#0088ff" floodOpacity="0.8" result="color" />
+            <feComposite in="color" in2="blur" operator="in" result="glow" />
+            <feMerge>
+              <feMergeNode in="glow" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          
+          {/* Filtro de resplandor blanco para gas */}
+          <filter id="gasGlow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feFlood floodColor="#ffffff" floodOpacity="0.8" result="color" />
+            <feComposite in="color" in2="blur" operator="in" result="glow" />
+            <feMerge>
+              <feMergeNode in="glow" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          
+          {/* Filtro de resplandor verde para dinero */}
+          <filter id="moneyGlow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feFlood floodColor="#00ff44" floodOpacity="0.8" result="color" />
             <feComposite in="color" in2="blur" operator="in" result="glow" />
             <feMerge>
               <feMergeNode in="glow" />
