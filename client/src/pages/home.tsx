@@ -3,7 +3,7 @@ import { AnimatedHero } from "@/components/animated-hero";
 import { BackgroundPaths } from "@/components/background-paths";
 import { AboutSection } from "@/components/about-section";
 import { AnimatedBuildingSection } from "@/components/animated-building-section";
-import { FeatureGrid } from "@/components/feature-grid";
+import { FeatureCards } from "@/components/feature-cards";
 import { useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import IntroLoader from "@/components/intro-loader";
@@ -99,8 +99,8 @@ export default function Home() {
       {/* Animated Building Section with black background */}
       <AnimatedBuildingSection />
 
-      {/* Feature Grid Section */}
-      <FeatureGrid />
+      {/* Feature Cards Section */}
+      <FeatureCards />
     </div>
   );
 }
