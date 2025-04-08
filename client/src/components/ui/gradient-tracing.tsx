@@ -109,7 +109,7 @@ export const BuildingAnimation: React.FC = () => {
         setShowLeftLine(false);
         setShowRightLine(false);
         setAnimationComplete(false);
-      }, 2000);
+      }, 3000);
       
       return () => clearTimeout(timer);
     }
@@ -127,7 +127,7 @@ export const BuildingAnimation: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full flex justify-center items-center">
       <svg width="300" height="600" viewBox="0 0 300 600" fill="none">
         {/* Contorno del edificio */}
         <path
@@ -146,7 +146,7 @@ export const BuildingAnimation: React.FC = () => {
             strokeLinecap="round"
             initial={{ pathLength: 0 }}
             animate={{ pathLength: 1 }}
-            transition={{ duration: 2, ease: "linear" }}
+            transition={{ duration: 3, ease: "linear" }}
             onAnimationComplete={handleLeftLineComplete}
           />
         )}
@@ -159,7 +159,7 @@ export const BuildingAnimation: React.FC = () => {
               height={20} 
               path="M0,10 L60,10" 
               gradientColors={["#F1C40F", "#F1C40F", "#F39C12"]}
-              animationDuration={2}
+              animationDuration={3}
               onAnimationEnd={handleRightLineComplete}
             />
           </foreignObject>
@@ -191,7 +191,7 @@ export const BuildingAnimation: React.FC = () => {
               x2: [0, 200],
             }}
             transition={{
-              duration: 6,
+              duration: 9,
               repeat: Infinity,
               ease: "linear",
             }}
