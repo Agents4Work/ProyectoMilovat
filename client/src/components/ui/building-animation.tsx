@@ -78,43 +78,10 @@ export const BuildingAnimation: React.FC = () => {
         </foreignObject>
         
         {/* Iconos de servicios con efecto glow */}
-        {/* Agua con brillo azul (izquierda) */}
-        <motion.g 
-          filter="url(#waterGlow)" 
-          transform="translate(90, 380)"
-          animate={{ 
-            scale: [1, 1.1, 1],
-            opacity: [1, 0.8, 1]
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        >
-          <path 
-            d="M20,0 C10,15 0,30 0,40 C0,51 9,60 20,60 C31,60 40,51 40,40 C40,30 30,15 20,0 Z"
-            stroke="black" 
-            strokeWidth="3" 
-            fill="none" />
-          <motion.path 
-            d="M28,40 C28,25 15,28 15,45" 
-            stroke="black" 
-            strokeWidth="2" 
-            fill="none"
-            animate={{ pathLength: [0, 1, 0] }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-        </motion.g>
-        
-        {/* Gas con brillo blanco (centro) */}
+        {/* Gas con brillo blanco (centro/abajo) dentro del edificio */}
         <motion.g 
           filter="url(#gasGlow)" 
-          transform="translate(130, 380)"
+          transform="translate(130, 500)"
           animate={{ 
             scale: [1, 1.05, 1],
             y: [0, -5, 0]
@@ -149,10 +116,43 @@ export const BuildingAnimation: React.FC = () => {
           />
         </motion.g>
         
-        {/* Dinero con brillo verde (derecha) */}
+        {/* Agua con brillo azul (izquierda) - fuera del edificio */}
+        <motion.g 
+          filter="url(#waterGlow)" 
+          transform="translate(0, 500)"
+          animate={{ 
+            scale: [1, 1.1, 1],
+            opacity: [1, 0.8, 1]
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <path 
+            d="M20,0 C10,15 0,30 0,40 C0,51 9,60 20,60 C31,60 40,51 40,40 C40,30 30,15 20,0 Z"
+            stroke="black" 
+            strokeWidth="3" 
+            fill="none" />
+          <motion.path 
+            d="M28,40 C28,25 15,28 15,45" 
+            stroke="black" 
+            strokeWidth="2" 
+            fill="none"
+            animate={{ pathLength: [0, 1, 0] }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+        </motion.g>
+        
+        {/* Dinero con brillo verde (derecha) - fuera del edificio */}
         <motion.g 
           filter="url(#moneyGlow)" 
-          transform="translate(180, 380)"
+          transform="translate(240, 500)"
           animate={{ 
             rotate: [0, 5, 0, -5, 0],
             scale: [1, 1.08, 1]

@@ -90,23 +90,7 @@ export const LightningDemo: React.FC<LightningDemoProps> = ({
           filter={`url(#${filterId})`}
         />
         
-        {/* Punto de luz en el centro del rayo */}
-        <motion.circle 
-          cx="60" 
-          cy="45" 
-          r="3"
-          fill="#FFF"
-          filter={`url(#${filterId})`}
-          animate={{
-            opacity: [0.1, 1, 0.1],
-            scale: [1, 1.2, 1]
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
+
       </svg>
     </div>
   )
