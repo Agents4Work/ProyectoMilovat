@@ -16,14 +16,14 @@ interface BuildingSilhouetteProps extends React.SVGProps<SVGSVGElement> {
 export const BuildingSilhouette = ({ className, ...props }: BuildingSilhouetteProps) => {
   return (
     <svg
-      viewBox="0 0 1200 400"
+      viewBox="0 0 1200 250"
       xmlns="http://www.w3.org/2000/svg"
       className={cn("w-full h-auto", className)}
       preserveAspectRatio="xMidYMax meet"
       {...props}
     >
       {/* Edificios y rascacielos de diferentes formas y tamaños */}
-      <g transform="translate(0, 120)">
+      <g>
         {/* Edificio con techo puntiagudo */}
         <path d="M50,180 L50,110 L70,90 L90,110 L90,180 Z" fill="currentColor" opacity="0.8" />
         
@@ -126,8 +126,8 @@ export const BuildingSilhouette = ({ className, ...props }: BuildingSilhouettePr
         {/* Edificio con techo inclinado */}
         <path d="M1130,180 L1130,90 L1150,70 L1170,90 L1170,180 Z" fill="currentColor" opacity="0.8" />
         
-        {/* Base para unir todos los edificios - Bajada */}
-        <path d="M0,300 L1200,300 L1200,370 L0,370 Z" fill="currentColor" opacity="0.9" />
+        {/* Base para unir todos los edificios */}
+        <path d="M0,180 L1200,180 L1200,250 L0,250 Z" fill="currentColor" opacity="0.9" />
       </g>
     </svg>
   );
