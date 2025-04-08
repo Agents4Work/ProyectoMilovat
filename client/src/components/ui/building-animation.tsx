@@ -99,14 +99,6 @@ const BuildingComponent: React.FC = () => (
     {/* Detalles arquitectónicos adicionales */}
     <line x1="20" y1="50" x2="350" y2="50" stroke="white" strokeWidth="4" />
     <line x1="20" y1="480" x2="350" y2="480" stroke="white" strokeWidth="4" />
-    
-    {/* Antena en la parte superior del edificio */}
-    <path 
-      d="M170,20 V-20 M150,-10 H190" 
-      stroke="white" 
-      strokeWidth="4" 
-      fill="none"
-    />
   </g>
 );
 
@@ -224,22 +216,22 @@ export const BuildingAnimation: React.FC = () => {
         <BuildingComponent />
         
         {/* 2. RAYO CON CONTORNO NARANJA/DORADO GLOW (PRIMERA POSICIÓN DERECHA) */}
-        <g transform="translate(550, 140)">
+        <g transform="translate(550, 80)">
           <LightningComponent />
         </g>
         
         {/* 3. GOTA DE AGUA CON CONTORNO AZUL GLOW (SEGUNDA POSICIÓN) */}
-        <g transform="translate(550, 260)">
+        <g transform="translate(550, 220)">
           <WaterDropComponent />
         </g>
         
         {/* 4. TANQUE DE GAS CON CONTORNO GRIS GLOW (TERCERA POSICIÓN) */}
-        <g transform="translate(550, 380)">
+        <g transform="translate(550, 370)">
           <GasTankComponent />
         </g>
         
         {/* 5. BILLETE CON CONTORNO VERDE GLOW (CUARTA POSICIÓN) */}
-        <g transform="translate(550, 500)">
+        <g transform="translate(550, 520)">
           <MoneyComponent />
         </g>
         
