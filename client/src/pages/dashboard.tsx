@@ -5,11 +5,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, Users, Package } from "lucide-react";
+import { VisitFormModal } from "@/components/visit-form-modal";
 
 export default function Dashboard() {
   const [, navigate] = useLocation();
   const [userRole, setUserRole] = useState<"resident" | "admin" | null>(null);
   const [pendingPackages, setPendingPackages] = useState(0);
+  const [showVisitForm, setShowVisitForm] = useState(false);
   
   useEffect(() => {
     // Get user role from session storage
@@ -63,7 +65,7 @@ export default function Dashboard() {
               <Button 
                 variant="outline" 
                 className="w-full justify-between p-4 h-auto border-zinc-800 bg-zinc-900/30 hover:bg-zinc-800"
-                onClick={() => navigate('/dashboard/visitas')}
+                onClick={() => setShowVisitForm(true)}
               >
                 <div className="flex items-center">
                   <div className="h-10 w-10 rounded-full bg-amber-500/10 flex items-center justify-center mr-3">
@@ -125,6 +127,12 @@ export default function Dashboard() {
           </div>
         </div>
       </main>
+      
+      {/* Formulario de Visitas Modal */}
+      <VisitFormModal 
+        isOpen={showVisitForm} 
+        onClose={() => setShowVisitForm(false)} 
+      />
     </div>
   );
 }
