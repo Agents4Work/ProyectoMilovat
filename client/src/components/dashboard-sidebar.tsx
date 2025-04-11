@@ -9,7 +9,11 @@ import {
   AlertTriangle,
   FileText,
   Settings,
-  LogOut
+  LogOut,
+  Truck,
+  DollarSign,
+  Ban,
+  Users
 } from "lucide-react";
 
 /**
@@ -65,6 +69,10 @@ export function DashboardSidebar({ userRole }: DashboardSidebarProps) {
     if (location.startsWith('/dashboard/incidencias')) return '/dashboard/incidencias';
     if (location.startsWith('/dashboard/amenidades')) return '/dashboard/amenidades';
     if (location.startsWith('/dashboard/documentos')) return '/dashboard/documentos';
+    if (location.startsWith('/dashboard/proveedores')) return '/dashboard/proveedores';
+    if (location.startsWith('/dashboard/costos')) return '/dashboard/costos';
+    if (location.startsWith('/dashboard/multas')) return '/dashboard/multas';
+    if (location.startsWith('/dashboard/visitas')) return '/dashboard/visitas';
     return '/dashboard';
   };
   
@@ -79,9 +87,16 @@ export function DashboardSidebar({ userRole }: DashboardSidebarProps) {
     { icon: <Settings className="h-5 w-5" />, label: "Configuración", href: "/dashboard/configuracion" },
   ];
   
-  // Add additional items for admin
+  // Opciones específicas para el administrador
   const adminNavItems: NavItem[] = [
-    ...residentNavItems,
+    { icon: <Home className="h-5 w-5" />, label: "Dashboard", href: "/dashboard" },
+    { icon: <Truck className="h-5 w-5" />, label: "Proveedores", href: "/dashboard/proveedores" },
+    { icon: <AlertTriangle className="h-5 w-5" />, label: "Incidentes", href: "/dashboard/incidencias" },
+    { icon: <Calendar className="h-5 w-5" />, label: "Reservas", href: "/dashboard/amenidades" },
+    { icon: <DollarSign className="h-5 w-5" />, label: "Costos", href: "/dashboard/costos" },
+    { icon: <Ban className="h-5 w-5" />, label: "Multas", href: "/dashboard/multas" },
+    { icon: <Users className="h-5 w-5" />, label: "Visitas", href: "/dashboard/visitas" },
+    { icon: <Settings className="h-5 w-5" />, label: "Configuración", href: "/dashboard/configuracion" },
   ];
   
   // Choose the right navigation items based on user role
