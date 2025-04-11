@@ -3,7 +3,6 @@ import { useLocation } from "wouter";
 import { DashboardSidebar } from "@/components/dashboard-sidebar";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Search, FileText, FolderClosed, Grid, List } from "lucide-react";
 
 // Categorías de documentos
@@ -107,31 +106,38 @@ export default function Documentos() {
           </div>
           
           <div className="flex space-x-2">
-            <Tabs defaultValue="Todos" className="w-full">
-              <TabsList className="bg-zinc-800 w-full">
-                <TabsTrigger 
-                  value="Todos" 
-                  className="flex-1 data-[state=active]:bg-amber-500 data-[state=active]:text-black"
-                  onClick={() => setActiveTab("Todos")}
-                >
-                  Todos
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="Públicos" 
-                  className="flex-1 data-[state=active]:bg-amber-500 data-[state=active]:text-black"
-                  onClick={() => setActiveTab("Públicos")}
-                >
-                  Públicos
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="Privados" 
-                  className="flex-1 data-[state=active]:bg-amber-500 data-[state=active]:text-black"
-                  onClick={() => setActiveTab("Privados")}
-                >
-                  Privados
-                </TabsTrigger>
-              </TabsList>
-            </Tabs>
+            <div className="flex bg-zinc-800 rounded-md p-1 w-full">
+              <button
+                className={`flex-1 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                  activeTab === "Todos" 
+                    ? "bg-amber-500 text-black" 
+                    : "text-zinc-400 hover:text-zinc-300"
+                }`}
+                onClick={() => setActiveTab("Todos")}
+              >
+                Todos
+              </button>
+              <button
+                className={`flex-1 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                  activeTab === "Públicos" 
+                    ? "bg-amber-500 text-black" 
+                    : "text-zinc-400 hover:text-zinc-300"
+                }`}
+                onClick={() => setActiveTab("Públicos")}
+              >
+                Públicos
+              </button>
+              <button
+                className={`flex-1 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                  activeTab === "Privados" 
+                    ? "bg-amber-500 text-black" 
+                    : "text-zinc-400 hover:text-zinc-300"
+                }`}
+                onClick={() => setActiveTab("Privados")}
+              >
+                Privados
+              </button>
+            </div>
             
             <Button
               variant="outline"
