@@ -103,15 +103,15 @@ export default function Dashboard() {
             
             <div className="mt-4 flex space-x-2">
               <Button 
-                variant="secondary" 
-                className="bg-zinc-800 hover:bg-zinc-700 border-none flex-1"
+                variant="outline" 
+                className="border-amber-500/30 bg-amber-500/10 text-amber-500 hover:bg-amber-500/20 flex-1"
               >
                 Todos
               </Button>
 
               <Button 
                 variant="outline" 
-                className="border-zinc-800 text-zinc-400 flex-1"
+                className="border-amber-500/30 bg-amber-500/10 text-amber-500 hover:bg-amber-500/20 flex-1"
               >
                 Destacados
               </Button>
