@@ -71,7 +71,7 @@ export default function Dashboard() {
                   <span className="text-white font-medium">A</span>
                 </div>
                 <div className="flex-grow">
-                  <div className="bg-lime-300 dark:bg-lime-400 rounded-full py-3 px-4 mb-2">
+                  <div className="bg-amber-300/80 dark:bg-amber-500/80 rounded-full py-3 px-4 mb-2">
                     <h3 className="font-medium">{anuncioActual.titulo}</h3>
                     <p className="mt-1 text-sm">{anuncioActual.texto}</p>
                   </div>
@@ -81,7 +81,7 @@ export default function Dashboard() {
             </div>
           </div>
           
-          <div className="md:w-64 lg:w-72 bg-lime-300 dark:bg-lime-400 rounded-lg">
+          <div className="md:w-64 lg:w-72 bg-amber-300/80 dark:bg-amber-500/80 rounded-lg">
             <div className="p-4">
               <div className="flex justify-between items-center">
                 <h3 className="font-medium">Todas | Destacadas</h3>
@@ -101,24 +101,24 @@ export default function Dashboard() {
         
         {/* Formulario de visitas */}
         <div 
-          className="mb-6 bg-zinc-400 dark:bg-zinc-600 rounded-lg cursor-pointer hover:bg-zinc-500 dark:hover:bg-zinc-500 transition-colors duration-200"
+          className="mb-6 bg-zinc-400 dark:bg-zinc-600 rounded-lg cursor-pointer hover:bg-amber-400/20 dark:hover:bg-amber-500/20 transition-colors duration-200 border border-amber-300/30 dark:border-amber-500/30"
           onClick={handleVisitasClick}
         >
           <div className="p-6 flex justify-between items-center">
             <h2 className="text-2xl font-bold">Formulario de Visitas</h2>
-            <ArrowRight className="h-10 w-10" />
+            <ArrowRight className="h-10 w-10 text-amber-500 dark:text-amber-400" />
           </div>
         </div>
         
         {/* Paquetería */}
-        <div className="bg-zinc-400 dark:bg-zinc-600 rounded-lg">
+        <div className="bg-zinc-400 dark:bg-zinc-600 rounded-lg border border-amber-300/30 dark:border-amber-500/30">
           <div className="p-6 flex items-center gap-4">
-            <div className="bg-zinc-300 dark:bg-zinc-500 rounded-full p-2">
+            <div className="bg-amber-300/50 dark:bg-amber-500/50 rounded-full p-2">
               <Package className="h-6 w-6" />
             </div>
             <div>
               <h2 className="text-xl font-medium">Paquetes por recoger:</h2>
-              <p className="text-4xl font-bold">0</p>
+              <p className="text-4xl font-bold text-amber-600 dark:text-amber-400">0</p>
             </div>
           </div>
         </div>
