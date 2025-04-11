@@ -6,12 +6,58 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, Users, Package } from "lucide-react";
 import { VisitFormModal } from "@/components/visit-form-modal";
+import { PackageListModal } from "@/components/package-list-modal";
+
+// Interfaz para los paquetes
+interface Paquete {
+  id: string;
+  empresa: string;
+  fechaLlegada: string;
+  hora: string;
+  destinatario: string;
+  estado: "Pendiente" | "Recogido";
+  apartamento: string;
+}
 
 export default function Dashboard() {
   const [, navigate] = useLocation();
   const [userRole, setUserRole] = useState<"resident" | "admin" | null>(null);
-  const [pendingPackages, setPendingPackages] = useState(0);
   const [showVisitForm, setShowVisitForm] = useState(false);
+  const [showPackageList, setShowPackageList] = useState(false);
+
+  // Datos de ejemplo para paquetes
+  const [paquetes] = useState<Paquete[]>([
+    {
+      id: "1",
+      empresa: "Amazon",
+      fechaLlegada: "11 abr 2025",
+      hora: "10:25 AM",
+      destinatario: "Carlos Ramírez",
+      estado: "Pendiente",
+      apartamento: "4B"
+    },
+    {
+      id: "2",
+      empresa: "DHL",
+      fechaLlegada: "10 abr 2025",
+      hora: "15:40 PM",
+      destinatario: "Lucía González",
+      estado: "Pendiente",
+      apartamento: "2A"
+    },
+    {
+      id: "3",
+      empresa: "FedEx",
+      fechaLlegada: "09 abr 2025",
+      hora: "12:15 PM",
+      destinatario: "Carlos Ramírez",
+      estado: "Recogido",
+      apartamento: "4B"
+    }
+  ]);
+  
+  // Calcular el número de paquetes pendientes
+  const pendingPackages = paquetes.filter(p => p.estado === "Pendiente").length;
   
   useEffect(() => {
     // Get user role from session storage
@@ -80,7 +126,7 @@ export default function Dashboard() {
               <Button 
                 variant="outline" 
                 className="w-full justify-between p-4 h-auto border-zinc-800 bg-zinc-900/30 hover:bg-zinc-800"
-                onClick={() => navigate('/dashboard/paquetes')}
+                onClick={() => setShowPackageList(true)}
               >
                 <div className="flex items-center">
                   <div className="h-10 w-10 rounded-full bg-amber-500/10 flex items-center justify-center mr-3">
@@ -132,6 +178,13 @@ export default function Dashboard() {
       <VisitFormModal 
         isOpen={showVisitForm} 
         onClose={() => setShowVisitForm(false)} 
+      />
+      
+      {/* Modal de Paquetes */}
+      <PackageListModal 
+        isOpen={showPackageList} 
+        onClose={() => setShowPackageList(false)} 
+        paquetes={paquetes}
       />
     </div>
   );
