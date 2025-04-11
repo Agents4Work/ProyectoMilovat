@@ -8,6 +8,7 @@ import Auth from "@/pages/auth";
 import Dashboard from "@/pages/dashboard";
 import Configuracion from "@/pages/configuracion";
 import Documentos from "@/pages/documentos";
+import Incidencias from "@/pages/incidencias";
 
 function Router() {
   return (
@@ -17,6 +18,7 @@ function Router() {
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/dashboard/configuracion" component={Configuracion} />
       <Route path="/dashboard/documentos" component={Documentos} />
+      <Route path="/dashboard/incidencias" component={Incidencias} />
       <Route component={NotFound} />
     </Switch>
   );
