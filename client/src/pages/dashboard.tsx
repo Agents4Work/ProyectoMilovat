@@ -4,7 +4,7 @@ import { DashboardSidebar } from "@/components/dashboard-sidebar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Users, Package, Plus } from "lucide-react";
+import { Search, Users, Package } from "lucide-react";
 
 export default function Dashboard() {
   const [, navigate] = useLocation();
@@ -108,12 +108,7 @@ export default function Dashboard() {
               >
                 Todos
               </Button>
-              <Button 
-                variant="outline" 
-                className="border-zinc-800 text-zinc-400 flex-1"
-              >
-                Administración
-              </Button>
+
               <Button 
                 variant="outline" 
                 className="border-zinc-800 text-zinc-400 flex-1"
@@ -121,12 +116,6 @@ export default function Dashboard() {
                 Destacados
               </Button>
             </div>
-            
-            <Button 
-              className="w-full mt-4 bg-amber-500 hover:bg-amber-600 text-black font-medium"
-            >
-              <Plus className="h-4 w-4 mr-2" /> Nuevo Anuncio
-            </Button>
             
             <h3 className="font-medium mt-6 mb-4">Anuncios Recientes</h3>
             
