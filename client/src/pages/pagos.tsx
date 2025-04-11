@@ -11,8 +11,17 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Download, AlertTriangle, FileText } from "lucide-react";
+import { Download, AlertTriangle, FileText, X } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
 
 // Interfaces
 interface Servicio {
@@ -38,6 +47,7 @@ export default function Pagos() {
   const [, navigate] = useLocation();
   const [userRole, setUserRole] = useState<"resident" | "admin" | null>(null);
   const [activeTab, setActiveTab] = useState("servicios");
+  const [showAllMultas, setShowAllMultas] = useState(false);
   
   // Datos de servicios
   const [servicios] = useState<Servicio[]>([
@@ -149,6 +159,65 @@ export default function Pagos() {
     <div className="flex h-screen bg-background">
       {/* Sidebar */}
       <DashboardSidebar userRole={userRole} />
+      
+      {/* Modal de todas las multas */}
+      <Dialog open={showAllMultas} onOpenChange={setShowAllMultas}>
+        <DialogContent className="sm:max-w-[700px] bg-zinc-900 border-zinc-800">
+          <DialogHeader>
+            <DialogTitle>Todas las multas</DialogTitle>
+            <DialogDescription>
+              Listado completo de multas con detalles
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-6 py-4">
+            {multas.map((multa) => (
+              <div key={multa.id} className="bg-black/30 rounded-lg p-4 border border-zinc-800">
+                <div className="flex justify-between items-start mb-3">
+                  <h3 className="font-medium">{multa.motivo}</h3>
+                  <span className={`px-2 py-1 rounded-full text-xs ${
+                    multa.estado === "Pendiente" ? "bg-red-500/20 text-red-400" : "bg-green-500/20 text-green-400"
+                  }`}>
+                    {multa.estado}
+                  </span>
+                </div>
+                <p className="text-sm text-zinc-400 mb-3">{multa.descripcion}</p>
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-zinc-500">Fecha: {multa.fecha}</span>
+                  <span className="font-medium">${multa.monto.toLocaleString('es-MX')}</span>
+                </div>
+                
+                <div className="mt-4 flex justify-end">
+                  {multa.estado === "Pendiente" ? (
+                    <Button className="bg-amber-500 hover:bg-amber-600 text-black" size="sm">
+                      Pagar multa
+                    </Button>
+                  ) : (
+                    <Button variant="outline" size="sm" className="hover:bg-zinc-800"
+                      onClick={() => handleDownloadDocument(multa.id, "multa")}
+                    >
+                      <Download className="mr-2 h-4 w-4" />
+                      Descargar comprobante
+                    </Button>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <DialogFooter>
+            <div className="w-full flex justify-between items-center">
+              <div>
+                <p className="text-sm text-zinc-500">Total de multas: <span className="text-white">{multas.length}</span></p>
+                <p className="text-sm text-zinc-500">Monto total pendiente: <span className="text-white">${totalMultas.toLocaleString('es-MX')}</span></p>
+              </div>
+              <DialogClose asChild>
+                <Button variant="outline">Cerrar</Button>
+              </DialogClose>
+            </div>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
       
       {/* Main content */}
       <main className="flex-1 p-6 overflow-y-auto">
@@ -350,7 +419,11 @@ export default function Pagos() {
                 </div>
               </CardContent>
               <CardFooter>
-                <Button variant="outline" className="w-full hover:bg-zinc-800">
+                <Button 
+                  variant="outline" 
+                  className="w-full hover:bg-zinc-800"
+                  onClick={() => setShowAllMultas(true)}
+                >
                   Ver todas las multas
                 </Button>
               </CardFooter>
