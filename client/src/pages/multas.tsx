@@ -18,6 +18,8 @@ import {
 } from "@/components/ui/table";
 import { Search, DollarSign, Home, Check, AlertCircle } from "lucide-react";
 import { MultaDescripcionModal } from "@/components/multa-descripcion-modal";
+import { NuevaMultaModal } from "@/components/nueva-multa-modal";
+import { toast } from "@/hooks/use-toast";
 
 // Definición de una multa
 interface Multa {
@@ -36,9 +38,10 @@ export default function Multas() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedMulta, setSelectedMulta] = useState<Multa | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [showNuevaMultaModal, setShowNuevaMultaModal] = useState(false);
   
   // Lista de multas (datos de ejemplo)
-  const [multas] = useState<Multa[]>([
+  const [multas, setMultas] = useState<Multa[]>([
     {
       id: "1",
       departamento: "2A",
@@ -102,6 +105,33 @@ export default function Multas() {
   const handleVerDescripcion = (multa: Multa) => {
     setSelectedMulta(multa);
     setShowModal(true);
+  };
+  
+  // Función para abrir el modal de nueva multa
+  const handleMostrarNuevaMultaModal = () => {
+    setShowNuevaMultaModal(true);
+  };
+  
+  // Función para agregar una nueva multa
+  const handleAgregarMulta = (nuevaMultaData: {
+    departamento: string;
+    propietario: string;
+    monto: number;
+    descripcion: string;
+  }) => {
+    // Generar un ID único
+    const nuevoId = (multas.length + 1).toString();
+    
+    // Crear la nueva multa con la fecha actual
+    const nuevaMulta: Multa = {
+      id: nuevoId,
+      ...nuevaMultaData,
+      estatus: 'Incompleto', // Por defecto es incompleto
+      fecha: new Date().toISOString().split('T')[0] // Formato YYYY-MM-DD
+    };
+    
+    // Actualizar la lista de multas
+    setMultas([...multas, nuevaMulta]);
   };
 
   useEffect(() => {
@@ -217,6 +247,7 @@ export default function Multas() {
             <Button 
               variant="outline" 
               className="border-amber-500/30 bg-amber-500/10 text-amber-500 hover:bg-amber-500/20"
+              onClick={handleMostrarNuevaMultaModal}
             >
               Nueva Multa
             </Button>
@@ -294,6 +325,13 @@ export default function Multas() {
           multa={selectedMulta}
         />
       )}
+      
+      {/* Modal de nueva multa */}
+      <NuevaMultaModal
+        isOpen={showNuevaMultaModal}
+        onClose={() => setShowNuevaMultaModal(false)}
+        onSave={handleAgregarMulta}
+      />
     </div>
   );
 }
