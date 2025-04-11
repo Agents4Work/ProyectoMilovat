@@ -30,8 +30,9 @@ interface Incidencia {
   departamento: string;
 }
 
-// No usamos datos de ejemplo predefinidos
-const INCIDENCIAS_EJEMPLO: Incidencia[] = [];
+// Importar lo necesario para las consultas API
+import { apiRequest } from "@/lib/queryClient";
+import { useQuery, useMutation } from "@tanstack/react-query";
 
 export default function Incidencias() {
   const [, navigate] = useLocation();
@@ -39,9 +40,41 @@ export default function Incidencias() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filtroEstado, setFiltroEstado] = useState<IncidenciaEstado>("Todos");
   const [filtroDepartamento, setFiltroDepartamento] = useState<Departamento>("Todos");
-  const [incidencias, setIncidencias] = useState<Incidencia[]>(INCIDENCIAS_EJEMPLO);
-  const [incidenciasFiltradas, setIncidenciasFiltradas] = useState<Incidencia[]>(INCIDENCIAS_EJEMPLO);
+  const [incidenciasFiltradas, setIncidenciasFiltradas] = useState<Incidencia[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  // Obtener las incidencias desde el API
+  const { data: incidencias = [], isLoading, refetch } = useQuery({
+    queryKey: ['/api/incidencias'],
+    queryFn: async () => {
+      const res = await apiRequest('/api/incidencias', { method: 'GET' });
+      return res.json() as Promise<Incidencia[]>;
+    }
+  });
+  
+  // Mutation para crear una nueva incidencia
+  const createIncidenciaMutation = useMutation({
+    mutationFn: async (data: { 
+      titulo: string; 
+      descripcion: string; 
+      fecha: string;
+      estado: "Abierto" | "En Proceso" | "Resuelto";
+      departamento: string; 
+    }) => {
+      const res = await apiRequest('/api/incidencias', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+      return res.json();
+    },
+    onSuccess: () => {
+      // Al crear exitosamente, refrescamos la lista
+      refetch();
+    }
+  });
   
   // Estadísticas para el dashboard
   const contarPorEstado = (estado: "Abierto" | "En Proceso" | "Resuelto") => {
@@ -71,16 +104,17 @@ export default function Incidencias() {
     const opciones: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' };
     const fechaFormateada = fechaActual.toLocaleDateString('es-ES', opciones);
     
-    const nuevaIncidencia: Incidencia = {
-      id: (incidencias.length + 1).toString(),
+    // Llamar a la mutación para crear la incidencia
+    createIncidenciaMutation.mutate({
       titulo: data.titulo,
       descripcion: data.descripcion,
       fecha: fechaFormateada,
       estado: "Abierto",
       departamento: data.departamento
-    };
+    });
     
-    setIncidencias([...incidencias, nuevaIncidencia]);
+    // Cerrar el modal después de crear
+    setIsModalOpen(false);
   };
 
   // Filtrar incidencias basado en búsqueda, estado y departamento
