@@ -11,7 +11,7 @@ import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { Badge } from "@/components/ui/badge";
 import { AlertCircle, Calendar as CalendarIcon, CheckCircle2, Clock } from "lucide-react";
-import { AmenidadModal } from "@/components/amenidad-modal";
+import { AmenidadModal } from "@/components/amenidad-modal"; // Importación del modal para reservar amenidades
 
 // Definición de una amenidad
 interface Amenidad {
@@ -239,7 +239,7 @@ export default function Amenidades() {
       
       {/* Main content */}
       <main className="flex-1 p-6 overflow-y-auto">
-        <h1 className="text-2xl font-medium mb-2">Amenidades</h1>
+        <h1 className="text-2xl font-medium mb-2">Reservas</h1>
         <p className="text-zinc-400 mb-6">Reserva las instalaciones del edificio</p>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

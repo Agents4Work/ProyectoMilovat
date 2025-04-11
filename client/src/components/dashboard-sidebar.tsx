@@ -74,7 +74,7 @@ export function DashboardSidebar({ userRole }: DashboardSidebarProps) {
     { icon: <Home className="h-5 w-5" />, label: "Dashboard", href: "/dashboard" },
     { icon: <CreditCard className="h-5 w-5" />, label: "Pagos", href: "/dashboard/pagos" },
     { icon: <AlertTriangle className="h-5 w-5" />, label: "Incidencias", href: "/dashboard/incidencias" },
-    { icon: <Calendar className="h-5 w-5" />, label: "Amenidades", href: "/dashboard/amenidades" },
+    { icon: <Calendar className="h-5 w-5" />, label: "Reservas", href: "/dashboard/amenidades" },
     { icon: <FileText className="h-5 w-5" />, label: "Documentos", href: "/dashboard/documentos" },
     { icon: <Settings className="h-5 w-5" />, label: "Configuración", href: "/dashboard/configuracion" },
   ];
