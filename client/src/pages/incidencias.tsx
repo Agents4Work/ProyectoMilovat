@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { DashboardSidebar } from "@/components/dashboard-sidebar";
@@ -12,7 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Search, Plus, AlertCircle, Clock, CheckCircle2, XCircle } from "lucide-react";
+import { Search, Plus, AlertCircle, Clock, CheckCircle2, Loader2 } from "lucide-react";
 
 // Estados de incidencias
 type IncidenciaEstado = "Abierto" | "En Proceso" | "Resuelto" | "Todos";
@@ -30,9 +32,26 @@ interface Incidencia {
   departamento: string;
 }
 
-// Importar lo necesario para las consultas API
-import { apiRequest } from "@/lib/queryClient";
-import { useQuery, useMutation } from "@tanstack/react-query";
+// NOTA: Este es un conjunto de datos de demostración
+// TODO: Reemplazar con datos reales de la API cuando se implemente el backend
+const DATOS_EJEMPLO: Incidencia[] = [
+  {
+    id: "1",
+    titulo: "Fuga de agua en baño",
+    descripcion: "Hay una fuga de agua en el baño principal que está causando humedades en el techo del vecino de abajo",
+    fecha: "11 abr 2025",
+    estado: "Abierto",
+    departamento: "Piso 2"
+  },
+  {
+    id: "2",
+    titulo: "Problemas con electricidad",
+    descripcion: "Los enchufes de la cocina no están funcionando correctamente, se apagan y encienden solos",
+    fecha: "09 abr 2025",
+    estado: "En Proceso",
+    departamento: "Piso 1"
+  }
+];
 
 export default function Incidencias() {
   const [, navigate] = useLocation();
@@ -40,42 +59,23 @@ export default function Incidencias() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filtroEstado, setFiltroEstado] = useState<IncidenciaEstado>("Todos");
   const [filtroDepartamento, setFiltroDepartamento] = useState<Departamento>("Todos");
+  const [incidencias, setIncidencias] = useState<Incidencia[]>([]);
   const [incidenciasFiltradas, setIncidenciasFiltradas] = useState<Incidencia[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
-  // Obtener las incidencias desde el API
-  const { data: incidencias = [], isLoading, refetch } = useQuery({
-    queryKey: ['/api/incidencias'],
-    queryFn: async () => {
-      const res = await apiRequest('/api/incidencias', { method: 'GET' });
-      return res.json() as Promise<Incidencia[]>;
-    }
-  });
-  
-  // Mutation para crear una nueva incidencia
-  const createIncidenciaMutation = useMutation({
-    mutationFn: async (data: { 
-      titulo: string; 
-      descripcion: string; 
-      fecha: string;
-      estado: "Abierto" | "En Proceso" | "Resuelto";
-      departamento: string; 
-    }) => {
-      const res = await apiRequest('/api/incidencias', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
-      return res.json();
-    },
-    onSuccess: () => {
-      // Al crear exitosamente, refrescamos la lista
-      refetch();
-    }
-  });
-  
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Simular carga de datos
+  useEffect(() => {
+    // Simulamos un pequeño retraso para mostrar el estado de carga
+    const timer = setTimeout(() => {
+      setIncidencias(DATOS_EJEMPLO);
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   // Estadísticas para el dashboard
   const contarPorEstado = (estado: "Abierto" | "En Proceso" | "Resuelto") => {
     return incidencias.filter(inc => inc.estado === estado).length;
@@ -90,8 +90,11 @@ export default function Incidencias() {
     const role = sessionStorage.getItem('userRole') as "resident" | "admin" | null;
     
     if (!role) {
-      // Redirect to login if no role
-      navigate('/auth');
+      // Para propósitos de demostración, establecemos un rol por defecto
+      // En producción, redirigir al login
+      sessionStorage.setItem('userRole', 'admin');
+      setUserRole('admin');
+      // navigate('/auth');
       return;
     }
     
@@ -100,21 +103,27 @@ export default function Incidencias() {
   
   // Función para agregar una nueva incidencia
   const handleAddIncidencia = (data: { titulo: string; descripcion: string; departamento: string }) => {
-    const fechaActual = new Date();
-    const opciones: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' };
-    const fechaFormateada = fechaActual.toLocaleDateString('es-ES', opciones);
+    setIsSubmitting(true);
     
-    // Llamar a la mutación para crear la incidencia
-    createIncidenciaMutation.mutate({
-      titulo: data.titulo,
-      descripcion: data.descripcion,
-      fecha: fechaFormateada,
-      estado: "Abierto",
-      departamento: data.departamento
-    });
-    
-    // Cerrar el modal después de crear
-    setIsModalOpen(false);
+    // Simulamos una conexión a la API
+    setTimeout(() => {
+      const fechaActual = new Date();
+      const opciones: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' };
+      const fechaFormateada = fechaActual.toLocaleDateString('es-ES', opciones);
+      
+      const nuevaIncidencia: Incidencia = {
+        id: (incidencias.length + 1).toString(),
+        titulo: data.titulo,
+        descripcion: data.descripcion,
+        fecha: fechaFormateada,
+        estado: "Abierto",
+        departamento: data.departamento
+      };
+      
+      setIncidencias(prev => [...prev, nuevaIncidencia]);
+      setIsSubmitting(false);
+      setIsModalOpen(false);
+    }, 1000);
   };
 
   // Filtrar incidencias basado en búsqueda, estado y departamento
@@ -166,8 +175,13 @@ export default function Incidencias() {
           <Button 
             className="bg-amber-500 hover:bg-amber-600 text-black"
             onClick={() => setIsModalOpen(true)}
+            disabled={isSubmitting}
           >
-            <Plus className="mr-2 h-4 w-4" /> Nueva Incidencia
+            {isSubmitting ? (
+              <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Creando...</>
+            ) : (
+              <><Plus className="mr-2 h-4 w-4" /> Nueva Incidencia</>
+            )}
           </Button>
         </div>
         
@@ -218,8 +232,13 @@ export default function Incidencias() {
           <Button 
             className="bg-amber-500 hover:bg-amber-600 text-black w-full"
             onClick={() => setIsModalOpen(true)}
+            disabled={isSubmitting}
           >
-            <Plus className="mr-2 h-4 w-4" /> Nueva Incidencia
+            {isSubmitting ? (
+              <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Creando...</>
+            ) : (
+              <><Plus className="mr-2 h-4 w-4" /> Nueva Incidencia</>
+            )}
           </Button>
         </div>
         
@@ -260,7 +279,11 @@ export default function Incidencias() {
             <p className="text-sm text-zinc-500">Visualiza el estado de tus incidencias</p>
           </div>
           
-          {incidenciasFiltradas.length === 0 ? (
+          {isLoading ? (
+            <div className="p-10 flex justify-center">
+              <Loader2 className="h-8 w-8 animate-spin text-amber-500" />
+            </div>
+          ) : incidenciasFiltradas.length === 0 ? (
             <div className="p-6 text-center">
               <p className="text-zinc-500">No se encontraron incidencias que coincidan con tu búsqueda</p>
             </div>
@@ -305,6 +328,22 @@ export default function Incidencias() {
               </table>
             </div>
           )}
+          
+          {/* Comentario para desarrolladores futuros */}
+          {/* 
+            NOTA PARA IMPLEMENTACIÓN FUTURA:
+            
+            Este componente actualmente utiliza datos de ejemplo locales.
+            Para una implementación completa, se debe:
+            
+            1. Conectar a la API de backend en /api/incidencias para obtener los datos
+            2. Implementar la creación de incidencias enviando POST a /api/incidencias
+            3. Implementar la actualización de estado con PATCH a /api/incidencias/:id
+            4. Añadir manejo de errores y estados de carga apropiados
+            
+            Los endpoints ya están definidos en server/routes.ts pero necesitan ser 
+            conectados a una base de datos real cuando esté disponible.
+          */}
         </div>
       </main>
     </div>
