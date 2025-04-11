@@ -62,7 +62,7 @@ export function DashboardSidebar({ userRole }: DashboardSidebarProps) {
   const getActivePath = () => {
     if (location.startsWith('/dashboard/configuracion')) return '/dashboard/configuracion';
     if (location.startsWith('/dashboard/pagos')) return '/dashboard/pagos';
-    if (location.startsWith('/dashboard/incidentes')) return '/dashboard/incidentes';
+    if (location.startsWith('/dashboard/incidencias')) return '/dashboard/incidencias';
     if (location.startsWith('/dashboard/reservas')) return '/dashboard/reservas';
     if (location.startsWith('/dashboard/documentos')) return '/dashboard/documentos';
     return '/dashboard';
@@ -73,7 +73,7 @@ export function DashboardSidebar({ userRole }: DashboardSidebarProps) {
   const residentNavItems: NavItem[] = [
     { icon: <Home className="h-5 w-5" />, label: "Dashboard", href: "/dashboard" },
     { icon: <CreditCard className="h-5 w-5" />, label: "Pagos", href: "/dashboard/pagos" },
-    { icon: <AlertTriangle className="h-5 w-5" />, label: "Incidentes", href: "/dashboard/incidentes" },
+    { icon: <AlertTriangle className="h-5 w-5" />, label: "Incidencias", href: "/dashboard/incidencias" },
     { icon: <Calendar className="h-5 w-5" />, label: "Reservas", href: "/dashboard/reservas" },
     { icon: <FileText className="h-5 w-5" />, label: "Documentos", href: "/dashboard/documentos" },
     { icon: <Settings className="h-5 w-5" />, label: "Configuración", href: "/dashboard/configuracion" },
