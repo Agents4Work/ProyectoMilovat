@@ -24,6 +24,12 @@ export default function Dashboard() {
   const [userRole, setUserRole] = useState<"resident" | "admin" | null>(null);
   const [showVisitForm, setShowVisitForm] = useState(false);
   const [showPackageList, setShowPackageList] = useState(false);
+  
+  // Información del usuario actual (simulación)
+  const [currentUser] = useState({
+    nombre: "Carlos Ramírez", 
+    apartamento: "4B"
+  });
 
   // Datos de ejemplo para paquetes
   const [paquetes] = useState<Paquete[]>([
@@ -56,8 +62,13 @@ export default function Dashboard() {
     }
   ]);
   
-  // Calcular el número de paquetes pendientes
-  const pendingPackages = paquetes.filter(p => p.estado === "Pendiente").length;
+  // Filtrar paquetes solo para el usuario actual
+  const paquetesUsuario = paquetes.filter(p => 
+    userRole === "admin" || p.apartamento === currentUser.apartamento
+  );
+  
+  // Calcular el número de paquetes pendientes del usuario actual
+  const pendingPackages = paquetesUsuario.filter(p => p.estado === "Pendiente").length;
   
   useEffect(() => {
     // Get user role from session storage
@@ -184,7 +195,7 @@ export default function Dashboard() {
       <PackageListModal 
         isOpen={showPackageList} 
         onClose={() => setShowPackageList(false)} 
-        paquetes={paquetes}
+        paquetes={paquetesUsuario}
       />
     </div>
   );
