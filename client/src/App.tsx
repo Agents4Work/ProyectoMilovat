@@ -9,6 +9,7 @@ import Dashboard from "@/pages/dashboard";
 import Configuracion from "@/pages/configuracion";
 import Documentos from "@/pages/documentos";
 import Incidencias from "@/pages/incidencias";
+import Pagos from "@/pages/pagos";
 
 function Router() {
   return (
@@ -19,6 +20,7 @@ function Router() {
       <Route path="/dashboard/configuracion" component={Configuracion} />
       <Route path="/dashboard/documentos" component={Documentos} />
       <Route path="/dashboard/incidencias" component={Incidencias} />
+      <Route path="/dashboard/pagos" component={Pagos} />
       <Route component={NotFound} />
     </Switch>
   );
