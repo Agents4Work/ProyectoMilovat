@@ -13,6 +13,8 @@ export default function Configuracion() {
   const [userRole, setUserRole] = useState<"resident" | "admin" | null>(null);
   const [activeTab, setActiveTab] = useState<"perfil" | "seguridad" | "notificaciones">("perfil");
   
+
+  
   // Form states
   const [nombre, setNombre] = useState("Usuario de Desarrollo");
   const [correo, setCorreo] = useState("dev@milovat.com");

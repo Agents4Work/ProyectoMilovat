@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter";
 import Logo from "@/components/logo";
@@ -56,8 +56,19 @@ interface DashboardSidebarProps {
  * @param userRole - Rol del usuario ("resident" o "admin")
  */
 export function DashboardSidebar({ userRole }: DashboardSidebarProps) {
-  const [, navigate] = useLocation();
-  const [activePath, setActivePath] = useState("/dashboard");
+  const [location, navigate] = useLocation();
+  
+  // Determinar qué ruta está activa basado en la ubicación actual
+  const getActivePath = () => {
+    if (location.startsWith('/dashboard/configuracion')) return '/dashboard/configuracion';
+    if (location.startsWith('/dashboard/pagos')) return '/dashboard/pagos';
+    if (location.startsWith('/dashboard/incidentes')) return '/dashboard/incidentes';
+    if (location.startsWith('/dashboard/reservas')) return '/dashboard/reservas';
+    if (location.startsWith('/dashboard/documentos')) return '/dashboard/documentos';
+    return '/dashboard';
+  };
+  
+  const activePath = getActivePath();
   
   const residentNavItems: NavItem[] = [
     { icon: <Home className="h-5 w-5" />, label: "Dashboard", href: "/dashboard" },
@@ -75,9 +86,10 @@ export function DashboardSidebar({ userRole }: DashboardSidebarProps) {
   
   // Choose the right navigation items based on user role
   const navItems = userRole === "admin" ? adminNavItems : residentNavItems;
+
+
   
   const handleNavigation = (href: string) => {
-    setActivePath(href);
     navigate(href);
   };
   
@@ -97,8 +109,8 @@ export function DashboardSidebar({ userRole }: DashboardSidebarProps) {
           <Logo size="sm" />
           <h1 className="text-xl gold-gradient font-medium">milovat</h1>
         </div>
-        <p className="text-sm text-sidebar-foreground/70 mt-1 capitalize">
-          {userRole}
+        <p className="text-sm text-sidebar-foreground/70 mt-1">
+          {userRole === "resident" ? "Residente" : "Administrador"}
         </p>
       </div>
       
