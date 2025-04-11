@@ -11,6 +11,7 @@ import Documentos from "@/pages/documentos";
 import Incidencias from "@/pages/incidencias";
 import Pagos from "@/pages/pagos";
 import Amenidades from "@/pages/amenidades";
+import Multas from "@/pages/multas";
 
 function Router() {
   return (
@@ -23,6 +24,7 @@ function Router() {
       <Route path="/dashboard/incidencias" component={Incidencias} />
       <Route path="/dashboard/pagos" component={Pagos} />
       <Route path="/dashboard/amenidades" component={Amenidades} />
+      <Route path="/dashboard/multas" component={Multas} />
       <Route component={NotFound} />
     </Switch>
   );
