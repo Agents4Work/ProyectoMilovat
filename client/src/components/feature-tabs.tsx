@@ -1,5 +1,6 @@
 import React from 'react';
-import { AnimatedTabs } from '@/components/ui/tabs';
+// Utilizamos nuestro componente personalizado AnimatedTabs
+import { AnimatedTabs } from '@/components/ui/animated-tabs';
 
 export function FeatureTabs() {
   const tabs = [
