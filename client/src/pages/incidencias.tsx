@@ -15,7 +15,7 @@ import {
 import { Search, Plus, AlertCircle, Clock, CheckCircle2, XCircle } from "lucide-react";
 
 // Estados de incidencias
-type IncidenciaEstado = "Abierto" | "En Proceso" | "Resuelto" | "Cerrado" | "Todos";
+type IncidenciaEstado = "Abierto" | "En Proceso" | "Resuelto" | "Todos";
 
 // Departamentos
 type Departamento = "Piso 1" | "Piso 2" | "Piso 3" | "Deudores" | "Todos";
@@ -26,29 +26,12 @@ interface Incidencia {
   titulo: string;
   descripcion: string;
   fecha: string;
-  estado: "Abierto" | "En Proceso" | "Resuelto" | "Cerrado";
+  estado: "Abierto" | "En Proceso" | "Resuelto";
   departamento: string;
 }
 
-// Datos de ejemplo para incidencias
-const INCIDENCIAS_EJEMPLO: Incidencia[] = [
-  {
-    id: "1",
-    titulo: "Fuga de agua en baño",
-    descripcion: "Hay una fuga de agua en el baño principal que está causando humedades en el techo del vecino de abajo",
-    fecha: "11 abr 2025",
-    estado: "Abierto",
-    departamento: "Piso 2"
-  },
-  {
-    id: "2",
-    titulo: "Problemas con electricidad",
-    descripcion: "Los enchufes de la cocina no están funcionando correctamente, se apagan y encienden solos",
-    fecha: "09 abr 2025",
-    estado: "En Proceso",
-    departamento: "Piso 1"
-  }
-];
+// No usamos datos de ejemplo predefinidos
+const INCIDENCIAS_EJEMPLO: Incidencia[] = [];
 
 export default function Incidencias() {
   const [, navigate] = useLocation();
@@ -61,14 +44,13 @@ export default function Incidencias() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   
   // Estadísticas para el dashboard
-  const contarPorEstado = (estado: "Abierto" | "En Proceso" | "Resuelto" | "Cerrado") => {
+  const contarPorEstado = (estado: "Abierto" | "En Proceso" | "Resuelto") => {
     return incidencias.filter(inc => inc.estado === estado).length;
   };
   
   const numAbiertas = contarPorEstado("Abierto");
   const numEnProceso = contarPorEstado("En Proceso");
   const numResueltos = contarPorEstado("Resuelto");
-  const numCerrados = contarPorEstado("Cerrado");
   
   useEffect(() => {
     // Get user role from session storage
@@ -192,7 +174,6 @@ export default function Incidencias() {
                 <SelectItem value="Abierto">Abierto</SelectItem>
                 <SelectItem value="En Proceso">En Proceso</SelectItem>
                 <SelectItem value="Resuelto">Resuelto</SelectItem>
-                <SelectItem value="Cerrado">Cerrado</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
@@ -209,7 +190,7 @@ export default function Incidencias() {
         </div>
         
         {/* Cards de estado */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           <div className="bg-zinc-900/70 border border-zinc-800 rounded-lg p-4">
             <div className="flex justify-between items-start mb-3">
               <span className="text-sm text-zinc-400">Incidencias Abiertas</span>
@@ -235,15 +216,6 @@ export default function Incidencias() {
             </div>
             <h3 className="text-3xl font-bold mb-1">{numResueltos}</h3>
             <p className="text-xs text-zinc-500">Esperando confirmación</p>
-          </div>
-          
-          <div className="bg-zinc-900/70 border border-zinc-800 rounded-lg p-4">
-            <div className="flex justify-between items-start mb-3">
-              <span className="text-sm text-zinc-400">Cerrados</span>
-              <XCircle className="h-5 w-5 text-zinc-500" />
-            </div>
-            <h3 className="text-3xl font-bold mb-1">{numCerrados}</h3>
-            <p className="text-xs text-zinc-500">Completados</p>
           </div>
         </div>
         
