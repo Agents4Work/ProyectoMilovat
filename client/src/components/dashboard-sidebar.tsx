@@ -5,16 +5,11 @@ import Logo from "@/components/logo";
 import {
   Home,
   CreditCard,
-  Bell,
   Calendar,
-  Users,
-  Package,
   AlertTriangle,
   FileText,
   Settings,
-  LogOut,
-  Building,
-  Cpu
+  LogOut
 } from "lucide-react";
 
 /**
@@ -66,12 +61,9 @@ export function DashboardSidebar({ userRole }: DashboardSidebarProps) {
   
   const residentNavItems: NavItem[] = [
     { icon: <Home className="h-5 w-5" />, label: "Dashboard", href: "/dashboard" },
-    { icon: <CreditCard className="h-5 w-5" />, label: "Mis Pagos", href: "/dashboard/pagos" },
-    { icon: <Bell className="h-5 w-5" />, label: "Anuncios", href: "/dashboard/anuncios" },
+    { icon: <CreditCard className="h-5 w-5" />, label: "Pagos", href: "/dashboard/pagos" },
+    { icon: <AlertTriangle className="h-5 w-5" />, label: "Incidentes", href: "/dashboard/incidentes" },
     { icon: <Calendar className="h-5 w-5" />, label: "Reservas", href: "/dashboard/reservas" },
-    { icon: <Users className="h-5 w-5" />, label: "Visitas", href: "/dashboard/visitas" },
-    { icon: <Package className="h-5 w-5" />, label: "Paquetería", href: "/dashboard/paqueteria" },
-    { icon: <AlertTriangle className="h-5 w-5" />, label: "Reclamos", href: "/dashboard/reclamos" },
     { icon: <FileText className="h-5 w-5" />, label: "Documentos", href: "/dashboard/documentos" },
     { icon: <Settings className="h-5 w-5" />, label: "Configuración", href: "/dashboard/configuracion" },
   ];
@@ -79,8 +71,6 @@ export function DashboardSidebar({ userRole }: DashboardSidebarProps) {
   // Add additional items for admin
   const adminNavItems: NavItem[] = [
     ...residentNavItems,
-    { icon: <Building className="h-5 w-5" />, label: "Proveedores", href: "/dashboard/proveedores" },
-    { icon: <Cpu className="h-5 w-5" />, label: "Sensores", href: "/dashboard/sensores" },
   ];
   
   // Choose the right navigation items based on user role
