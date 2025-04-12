@@ -29,6 +29,7 @@ interface NuevaMultaModalProps {
     propietario: string;
     monto: number;
     descripcion: string;
+    fecha: string;
   }) => void;
 }
 

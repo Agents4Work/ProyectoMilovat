@@ -101,6 +101,16 @@ export default function Multas() {
   const multasCompletas = multas.filter(multa => multa.estatus === "Completo").length;
   const porcentajeCompleto = Math.round((multasCompletas / multas.length) * 100);
 
+  // Formatear fecha para mostrarla en formato legible
+  const formatearFecha = (fechaStr: string) => {
+    const fecha = new Date(fechaStr);
+    return fecha.toLocaleDateString('es-ES', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+  };
+  
   // Abrir modal de descripción
   const handleVerDescripcion = (multa: Multa) => {
     setSelectedMulta(multa);
@@ -137,16 +147,16 @@ export default function Multas() {
     propietario: string;
     monto: number;
     descripcion: string;
+    fecha: string;
   }) => {
     // Generar un ID único
     const nuevoId = (multas.length + 1).toString();
     
-    // Crear la nueva multa con la fecha actual
+    // Crear la nueva multa
     const nuevaMulta: Multa = {
       id: nuevoId,
       ...nuevaMultaData,
       estatus: 'Incompleto', // Por defecto es incompleto
-      fecha: new Date().toISOString().split('T')[0] // Formato YYYY-MM-DD
     };
     
     // Actualizar la lista de multas
@@ -289,8 +299,9 @@ export default function Multas() {
                   <TableHead className="w-[100px]">Departamento</TableHead>
                   <TableHead>Nombre del Propietario</TableHead>
                   <TableHead className="w-[120px]">Monto</TableHead>
+                  <TableHead className="w-[120px]">Fecha</TableHead>
                   <TableHead className="w-[120px]">Estatus</TableHead>
-                  <TableHead className="w-[180px]">Descripción</TableHead>
+                  <TableHead className="w-[150px]">Descripción</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -300,6 +311,7 @@ export default function Multas() {
                       <TableCell className="font-medium">{multa.departamento}</TableCell>
                       <TableCell>{multa.propietario}</TableCell>
                       <TableCell>${multa.monto.toLocaleString()}</TableCell>
+                      <TableCell>{formatearFecha(multa.fecha)}</TableCell>
                       <TableCell>
                         <Badge 
                           className={`${
@@ -325,7 +337,7 @@ export default function Multas() {
                   ))
                 ) : (
                   <TableRow>
-                    <TableCell colSpan={5} className="text-center h-24 text-zinc-500">
+                    <TableCell colSpan={6} className="text-center h-24 text-zinc-500">
                       No se encontraron multas
                     </TableCell>
                   </TableRow>
