@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import { DashboardSidebar } from "@/components/dashboard-sidebar";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Users, Package, PlusCircle, AlertTriangle, Calendar, Megaphone, ChevronRight, Settings, Briefcase } from "lucide-react";
+import { Search, Users, Package, PlusCircle, AlertTriangle, Calendar, Megaphone, ChevronRight, Settings, Briefcase, DollarSign } from "lucide-react";
 import { VisitFormModal } from "@/components/visit-form-modal";
 import { PackageListModal } from "@/components/package-list-modal";
 import { CrearAnuncioModal } from "@/components/crear-anuncio-modal";
@@ -234,38 +234,231 @@ export default function Dashboard() {
               </CardContent>
             </Card>
             
-            {/* Action Buttons */}
-            <div className="mt-6 space-y-4">
-              {/* Formulario de Visitas Button */}
-              <Button 
-                variant="outline" 
-                className="w-full justify-between p-4 h-auto border-zinc-800 bg-zinc-900/30 hover:bg-zinc-800"
-                onClick={() => setShowVisitForm(true)}
-              >
-                <div className="flex items-center">
-                  <div className="h-10 w-10 rounded-full bg-amber-500/10 flex items-center justify-center mr-3">
-                    <Users className="h-5 w-5 text-amber-500" />
-                  </div>
-                  <span>Formulario de Visitas</span>
+            {/* Cuadro de overview - solo para administradores */}
+            {userRole === "admin" && (
+              <div className="mt-6">
+                <h2 className="text-xl font-medium mb-4">Resumen del Edificio</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {/* Tarjeta de Visitantes */}
+                  <Card className="border-zinc-800 bg-zinc-900/50">
+                    <CardHeader className="pb-2">
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="text-sm font-medium text-zinc-400">Visitantes</CardTitle>
+                        <Users className="h-4 w-4 text-amber-500" />
+                      </div>
+                    </CardHeader>
+                    <CardContent className="pt-2">
+                      <div className="flex flex-col">
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-zinc-500">Hoy:</span>
+                          <span className="text-lg font-bold text-zinc-300">12</span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-zinc-500">Registrados:</span>
+                          <span className="text-sm text-zinc-400">26</span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-zinc-500">Completados:</span>
+                          <span className="text-sm text-zinc-400">14</span>
+                        </div>
+                      </div>
+                    </CardContent>
+                    <CardFooter className="pt-0">
+                      <Button
+                        variant="ghost"
+                        className="w-full justify-between text-xs text-amber-500 hover:text-amber-600 p-0"
+                        onClick={() => navigate('/dashboard/visitas')}
+                      >
+                        <span>Ver detalles</span>
+                        <ChevronRight className="h-3 w-3" />
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                  
+                  {/* Tarjeta de Costos */}
+                  <Card className="border-zinc-800 bg-zinc-900/50">
+                    <CardHeader className="pb-2">
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="text-sm font-medium text-zinc-400">Costos</CardTitle>
+                        <DollarSign className="h-4 w-4 text-amber-500" />
+                      </div>
+                    </CardHeader>
+                    <CardContent className="pt-2">
+                      <div className="flex flex-col">
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-zinc-500">Recaudado:</span>
+                          <span className="text-lg font-bold text-zinc-300">50%</span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-zinc-500">Pendiente:</span>
+                          <span className="text-sm text-zinc-400">$125,000</span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-zinc-500">Con multas:</span>
+                          <span className="text-sm text-zinc-400">4 departamentos</span>
+                        </div>
+                      </div>
+                    </CardContent>
+                    <CardFooter className="pt-0">
+                      <Button
+                        variant="ghost"
+                        className="w-full justify-between text-xs text-amber-500 hover:text-amber-600 p-0"
+                        onClick={() => navigate('/dashboard/costos')}
+                      >
+                        <span>Ver detalles</span>
+                        <ChevronRight className="h-3 w-3" />
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                  
+                  {/* Tarjeta de Amenidades */}
+                  <Card className="border-zinc-800 bg-zinc-900/50">
+                    <CardHeader className="pb-2">
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="text-sm font-medium text-zinc-400">Amenidades</CardTitle>
+                        <Calendar className="h-4 w-4 text-amber-500" />
+                      </div>
+                    </CardHeader>
+                    <CardContent className="pt-2">
+                      <div className="flex flex-col">
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-zinc-500">Reservas hoy:</span>
+                          <span className="text-lg font-bold text-zinc-300">3</span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-zinc-500">Más popular:</span>
+                          <span className="text-sm text-zinc-400">Alberca</span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-zinc-500">Total semanal:</span>
+                          <span className="text-sm text-zinc-400">18 reservas</span>
+                        </div>
+                      </div>
+                    </CardContent>
+                    <CardFooter className="pt-0">
+                      <Button
+                        variant="ghost"
+                        className="w-full justify-between text-xs text-amber-500 hover:text-amber-600 p-0"
+                        onClick={() => navigate('/dashboard/amenidades')}
+                      >
+                        <span>Ver detalles</span>
+                        <ChevronRight className="h-3 w-3" />
+                      </Button>
+                    </CardFooter>
+                  </Card>
                 </div>
-                <span className="text-zinc-500">&rarr;</span>
-              </Button>
-              
-              {/* Paquetes por recoger Button */}
-              <Button 
-                variant="outline" 
-                className="w-full justify-between p-4 h-auto border-zinc-800 bg-zinc-900/30 hover:bg-zinc-800"
-                onClick={() => setShowPackageList(true)}
-              >
-                <div className="flex items-center">
-                  <div className="h-10 w-10 rounded-full bg-amber-500/10 flex items-center justify-center mr-3">
-                    <Package className="h-5 w-5 text-amber-500" />
-                  </div>
-                  <span>Paquetes por recoger</span>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                  {/* Tarjeta de Proveedores */}
+                  <Card className="border-zinc-800 bg-zinc-900/50">
+                    <CardHeader className="pb-2">
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="text-sm font-medium text-zinc-400">Proveedores</CardTitle>
+                        <Briefcase className="h-4 w-4 text-amber-500" />
+                      </div>
+                    </CardHeader>
+                    <CardContent className="pt-2">
+                      <div className="flex flex-col">
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-zinc-500">Total activos:</span>
+                          <span className="text-lg font-bold text-zinc-300">8</span>
+                        </div>
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="text-xs text-zinc-500">Por renovar:</span>
+                          <span className="text-sm text-zinc-400">2 contratos</span>
+                        </div>
+                        <div className="flex flex-wrap gap-1 mt-1">
+                          <Badge variant="outline" className="text-[10px] h-5 border-zinc-700 bg-zinc-800/50 text-zinc-400">Seguridad</Badge>
+                          <Badge variant="outline" className="text-[10px] h-5 border-zinc-700 bg-zinc-800/50 text-zinc-400">Limpieza</Badge>
+                          <Badge variant="outline" className="text-[10px] h-5 border-zinc-700 bg-zinc-800/50 text-zinc-400">Mantenimiento</Badge>
+                        </div>
+                      </div>
+                    </CardContent>
+                    <CardFooter className="pt-0">
+                      <Button
+                        variant="ghost"
+                        className="w-full justify-between text-xs text-amber-500 hover:text-amber-600 p-0"
+                        onClick={() => navigate('/dashboard/proveedores')}
+                      >
+                        <span>Ver detalles</span>
+                        <ChevronRight className="h-3 w-3" />
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                  
+                  {/* Tarjeta de Incidencias */}
+                  <Card className="border-zinc-800 bg-zinc-900/50">
+                    <CardHeader className="pb-2">
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="text-sm font-medium text-zinc-400">Incidencias</CardTitle>
+                        <AlertTriangle className="h-4 w-4 text-amber-500" />
+                      </div>
+                    </CardHeader>
+                    <CardContent className="pt-2">
+                      <div className="flex flex-col">
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-zinc-500">Sin resolver:</span>
+                          <span className="text-lg font-bold text-zinc-300">5</span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-zinc-500">Nuevas hoy:</span>
+                          <span className="text-sm text-zinc-400">2 incidencias</span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-zinc-500">Total mensual:</span>
+                          <span className="text-sm text-zinc-400">14 reportes</span>
+                        </div>
+                      </div>
+                    </CardContent>
+                    <CardFooter className="pt-0">
+                      <Button
+                        variant="ghost"
+                        className="w-full justify-between text-xs text-amber-500 hover:text-amber-600 p-0"
+                        onClick={() => navigate('/dashboard/incidencias')}
+                      >
+                        <span>Ver detalles</span>
+                        <ChevronRight className="h-3 w-3" />
+                      </Button>
+                    </CardFooter>
+                  </Card>
                 </div>
-                <span className="px-2 py-1 rounded bg-zinc-800 text-xs">{pendingPackages}</span>
-              </Button>
-            </div>
+              </div>
+            )}
+            
+            {/* Action Buttons - solo para residentes */}
+            {userRole === "resident" && (
+              <div className="mt-6 space-y-4">
+                {/* Formulario de Visitas Button */}
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-between p-4 h-auto border-zinc-800 bg-zinc-900/30 hover:bg-zinc-800"
+                  onClick={() => setShowVisitForm(true)}
+                >
+                  <div className="flex items-center">
+                    <div className="h-10 w-10 rounded-full bg-amber-500/10 flex items-center justify-center mr-3">
+                      <Users className="h-5 w-5 text-amber-500" />
+                    </div>
+                    <span>Formulario de Visitas</span>
+                  </div>
+                  <span className="text-zinc-500">&rarr;</span>
+                </Button>
+                
+                {/* Paquetes por recoger Button */}
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-between p-4 h-auto border-zinc-800 bg-zinc-900/30 hover:bg-zinc-800"
+                  onClick={() => setShowPackageList(true)}
+                >
+                  <div className="flex items-center">
+                    <div className="h-10 w-10 rounded-full bg-amber-500/10 flex items-center justify-center mr-3">
+                      <Package className="h-5 w-5 text-amber-500" />
+                    </div>
+                    <span>Paquetes por recoger</span>
+                  </div>
+                  <span className="px-2 py-1 rounded bg-zinc-800 text-xs">{pendingPackages}</span>
+                </Button>
+              </div>
+            )}
           </div>
           
           {/* Right Sidebar */}
