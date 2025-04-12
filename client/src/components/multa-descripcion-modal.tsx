@@ -18,12 +18,14 @@ interface MultaDescripcionModalProps {
     descripcion: string;
     fecha: string;
   };
+  onMarcarComoPagado?: (multaId: string) => void;
 }
 
 export function MultaDescripcionModal({
   isOpen,
   onClose,
-  multa
+  multa,
+  onMarcarComoPagado
 }: MultaDescripcionModalProps) {
   // Formateo de fecha
   const formatearFecha = (fechaStr: string) => {
@@ -99,9 +101,10 @@ export function MultaDescripcionModal({
             Cerrar
           </Button>
           
-          {multa.estatus === "Incompleto" && (
+          {multa.estatus === "Incompleto" && onMarcarComoPagado && (
             <Button 
               className="bg-amber-500 hover:bg-amber-600 text-black"
+              onClick={() => onMarcarComoPagado(multa.id)}
             >
               Marcar como Pagado
             </Button>

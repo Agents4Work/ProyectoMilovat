@@ -107,6 +107,25 @@ export default function Multas() {
     setShowModal(true);
   };
   
+  // Función para marcar una multa como pagada
+  const handleMarcarComoPagado = (multaId: string) => {
+    // Actualizar el estado de la multa a "Completo"
+    setMultas(multas.map(multa => 
+      multa.id === multaId 
+        ? { ...multa, estatus: 'Completo' } 
+        : multa
+    ));
+    
+    // Cerrar el modal
+    setShowModal(false);
+    
+    // Mostrar mensaje de confirmación
+    toast({
+      title: "Estado actualizado",
+      description: "La multa ha sido marcada como pagada",
+    });
+  };
+  
   // Función para abrir el modal de nueva multa
   const handleMostrarNuevaMultaModal = () => {
     setShowNuevaMultaModal(true);
@@ -323,6 +342,7 @@ export default function Multas() {
           isOpen={showModal}
           onClose={() => setShowModal(false)}
           multa={selectedMulta}
+          onMarcarComoPagado={handleMarcarComoPagado}
         />
       )}
       

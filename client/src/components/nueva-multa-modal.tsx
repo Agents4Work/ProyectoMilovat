@@ -42,6 +42,7 @@ export function NuevaMultaModal({
   const [propietario, setPropietario] = useState("");
   const [monto, setMonto] = useState("");
   const [descripcion, setDescripcion] = useState("");
+  const [fecha, setFecha] = useState(new Date().toISOString().split('T')[0]); // Formato YYYY-MM-DD
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Función para verificar si el formulario es válido
@@ -52,7 +53,8 @@ export function NuevaMultaModal({
       monto.trim() !== "" && 
       !isNaN(Number(monto)) && 
       Number(monto) > 0 &&
-      descripcion.trim() !== ""
+      descripcion.trim() !== "" &&
+      fecha.trim() !== ""
     );
   };
 
@@ -62,6 +64,7 @@ export function NuevaMultaModal({
     setPropietario("");
     setMonto("");
     setDescripcion("");
+    setFecha(new Date().toISOString().split('T')[0]);
     setIsSubmitting(false);
   };
 
@@ -83,7 +86,8 @@ export function NuevaMultaModal({
       departamento,
       propietario,
       monto: Number(monto),
-      descripcion
+      descripcion,
+      fecha
     };
 
     // Simulamos un breve retraso para guardar
@@ -167,6 +171,19 @@ export function NuevaMultaModal({
                 placeholder="0.00"
               />
             </div>
+          </div>
+          
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="fecha" className="text-right">
+              Fecha de Emisión
+            </Label>
+            <Input
+              id="fecha"
+              type="date"
+              value={fecha}
+              onChange={(e) => setFecha(e.target.value)}
+              className="col-span-3 bg-zinc-900 border-zinc-800"
+            />
           </div>
           
           <div className="grid grid-cols-4 items-start gap-4">
