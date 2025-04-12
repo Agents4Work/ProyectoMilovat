@@ -13,6 +13,7 @@ import Pagos from "@/pages/pagos";
 import Amenidades from "@/pages/amenidades";
 import Multas from "@/pages/multas";
 import Visitas from "@/pages/visitas";
+import Costos from "@/pages/costos";
 
 function Router() {
   return (
@@ -27,6 +28,7 @@ function Router() {
       <Route path="/dashboard/amenidades" component={Amenidades} />
       <Route path="/dashboard/multas" component={Multas} />
       <Route path="/dashboard/visitas" component={Visitas} />
+      <Route path="/dashboard/costos" component={Costos} />
       <Route component={NotFound} />
     </Switch>
   );
