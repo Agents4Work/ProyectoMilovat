@@ -14,6 +14,7 @@ import Amenidades from "@/pages/amenidades";
 import Multas from "@/pages/multas";
 import Visitas from "@/pages/visitas";
 import Costos from "@/pages/costos";
+import Proveedores from "@/pages/proveedores";
 
 function Router() {
   return (
@@ -29,6 +30,7 @@ function Router() {
       <Route path="/dashboard/multas" component={Multas} />
       <Route path="/dashboard/visitas" component={Visitas} />
       <Route path="/dashboard/costos" component={Costos} />
+      <Route path="/dashboard/proveedores" component={Proveedores} />
       <Route component={NotFound} />
     </Switch>
   );
