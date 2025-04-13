@@ -9,7 +9,7 @@ export function FeatureTabs() {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-1 flex items-center justify-center">
           <img 
-            src="/images/Screenshot 2025-04-12 at 7.55.18 p.m..png" 
+            src="/assets/dashboard.png" 
             alt="Vista del Dashboard" 
             className="object-cover w-full rounded-xl shadow-lg" 
           />
@@ -22,7 +22,7 @@ export function FeatureTabs() {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-1 flex items-center justify-center">
           <img 
-            src="/images/Screenshot 2025-04-12 at 7.55.37 p.m..png" 
+            src="/assets/pagos.png" 
             alt="Gestión de Pagos" 
             className="object-cover w-full rounded-xl shadow-lg"  
           />
@@ -35,7 +35,7 @@ export function FeatureTabs() {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-1 flex items-center justify-center">
           <img 
-            src="/images/Screenshot 2025-04-12 at 7.55.47 p.m..png" 
+            src="/assets/incidencias.png" 
             alt="Gestión de Incidencias" 
             className="object-cover w-full rounded-xl shadow-lg"  
           />
@@ -48,7 +48,7 @@ export function FeatureTabs() {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-1 flex items-center justify-center">
           <img 
-            src="/images/Screenshot 2025-04-12 at 7.55.58 p.m..png" 
+            src="/assets/reservas.png" 
             alt="Gestión de Reservas" 
             className="object-cover w-full rounded-xl shadow-lg"  
           />
@@ -61,7 +61,7 @@ export function FeatureTabs() {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-1 flex items-center justify-center">
           <img 
-            src="/images/tabs/Screenshot 2025-04-12 at 7.56.11 p.m..png" 
+            src="/assets/documentos.png" 
             alt="Gestión de Documentos" 
             className="object-cover w-full rounded-xl shadow-lg"  
           />
