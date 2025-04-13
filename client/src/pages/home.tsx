@@ -5,6 +5,7 @@ import { AboutSection } from "@/components/about-section";
 import { AnimatedBuildingSection } from "@/components/animated-building-section";
 import { FeatureCards } from "@/components/feature-cards";
 import { FeatureTabs } from "@/components/feature-tabs";
+import { Footer } from "@/components/footer";
 import { useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import IntroLoader from "@/components/intro-loader";
@@ -105,6 +106,9 @@ export default function Home() {
 
       {/* Feature Tabs Section */}
       <FeatureTabs />
+      
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
