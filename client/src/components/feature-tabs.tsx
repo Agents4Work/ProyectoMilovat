@@ -100,13 +100,13 @@ export function FeatureTabs() {
         </h2>
         <div className="h-[25rem] md:h-[30rem] relative flex flex-col max-w-3xl mx-auto w-full items-center justify-start">
           {/* Tab Controls */}
-          <div className="flex flex-row items-center justify-center p-2 overflow-x-auto mx-auto mb-6 bg-zinc-800 rounded-full border border-amber-500/30">
+          <div className="flex flex-row items-center justify-center p-3 overflow-x-auto w-full max-w-2xl mx-auto mb-8 bg-zinc-800 rounded-2xl border border-amber-500/30">
             {tabs.map((tab, index) => (
               <button
                 key={tab.value}
                 onClick={() => handleTabChange(tab.value, index)}
-                className={`relative px-5 py-2 mx-1 rounded-full transition-all duration-300 ease-out focus:outline-none text-white font-medium whitespace-nowrap
-                  ${activeTab === tab.value ? "bg-amber-500/30 border border-amber-500/50" : ""}`}
+                className={`relative flex-1 px-5 py-3 mx-2 rounded-xl transition-all duration-300 ease-out focus:outline-none text-white text-base md:text-lg font-medium whitespace-nowrap
+                  ${activeTab === tab.value ? "bg-amber-500/30 border-2 border-amber-500/70" : "hover:bg-zinc-700/50"}`}
               >
                 {tab.title}
               </button>
