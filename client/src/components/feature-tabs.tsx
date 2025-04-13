@@ -17,26 +17,13 @@ export function FeatureTabs() {
       ),
     },
     {
-      title: "Anuncios",
-      value: "anuncios",
+      title: "Pagos",
+      value: "pagos",
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-6 text-xl md:text-4xl font-bold text-white">
           <img 
-            src="/images/tabs/Anuncios.png" 
-            alt="Gestión de Anuncios" 
-            className="object-contain w-full h-full rounded-xl"  
-          />
-        </div>
-      ),
-    },
-    {
-      title: "Visitas",
-      value: "visitas",
-      content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-6 text-xl md:text-4xl font-bold text-white">
-          <img 
-            src="/images/tabs/Visitas.png" 
-            alt="Gestión de Visitas" 
+            src="/images/tabs/Pagos.png" 
+            alt="Gestión de Pagos" 
             className="object-contain w-full h-full rounded-xl"  
           />
         </div>
@@ -50,6 +37,32 @@ export function FeatureTabs() {
           <img 
             src="/images/tabs/Incidencias.png" 
             alt="Gestión de Incidencias" 
+            className="object-contain w-full h-full rounded-xl"  
+          />
+        </div>
+      ),
+    },
+    {
+      title: "Reservas",
+      value: "reservas",
+      content: (
+        <div className="w-full overflow-hidden relative h-full rounded-2xl p-6 text-xl md:text-4xl font-bold text-white">
+          <img 
+            src="/images/tabs/Reservas.png" 
+            alt="Gestión de Reservas" 
+            className="object-contain w-full h-full rounded-xl"  
+          />
+        </div>
+      ),
+    },
+    {
+      title: "Documentos",
+      value: "documentos",
+      content: (
+        <div className="w-full overflow-hidden relative h-full rounded-2xl p-6 text-xl md:text-4xl font-bold text-white">
+          <img 
+            src="/images/tabs/Documentos.png" 
+            alt="Gestión de Documentos" 
             className="object-contain w-full h-full rounded-xl"  
           />
         </div>
