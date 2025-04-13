@@ -74,7 +74,7 @@ export function FeatureTabs() {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-1 flex items-center justify-center">
           <img 
-            src="/images/tabs/Screenshot 2025-04-12 at 7.56.19 p.m..png" 
+            src="/assets/configuracion.png" 
             alt="Configuración de Usuario" 
             className="object-cover w-full rounded-xl shadow-lg"  
           />
