@@ -72,38 +72,41 @@ export function ScrollImagesSection() {
       </div>
 
       <div className="w-full overflow-hidden">
-        <div className="flex flex-col space-y-12">
-          <ScrollVelocity velocity={3}>
+        <div className="flex flex-col space-y-10 py-10">
+          {/* Primera fila con velocidad positiva */}
+          <ScrollVelocity velocity={2.5}>
             {imagesRow1.map(({ src, alt }, index) => (
               <div
                 key={`row1-${index}`}
-                className="relative h-[10rem] w-[15rem] md:h-[12rem] md:w-[18rem] xl:h-[16rem] xl:w-[24rem] rounded-lg overflow-hidden"
+                className="relative h-[6rem] w-[9rem] md:h-[8rem] md:w-[12rem] xl:h-[12rem] xl:w-[18rem] rounded-lg overflow-hidden mx-2"
               >
                 <img
                   src={src}
                   alt={alt}
-                  className="w-full h-full object-cover rounded-lg transition-transform duration-300 hover:scale-105"
+                  className="h-full w-full object-cover object-center rounded-lg transition-transform duration-300 hover:scale-105"
                 />
               </div>
             ))}
           </ScrollVelocity>
 
-          <ScrollVelocity velocity={-3}>
+          {/* Segunda fila con velocidad negativa */}
+          <ScrollVelocity velocity={-2.5}>
             {imagesRow2.map(({ src, alt }, index) => (
               <div
                 key={`row2-${index}`}
-                className="relative h-[10rem] w-[15rem] md:h-[12rem] md:w-[18rem] xl:h-[16rem] xl:w-[24rem] rounded-lg overflow-hidden"
+                className="relative h-[6rem] w-[9rem] md:h-[8rem] md:w-[12rem] xl:h-[12rem] xl:w-[18rem] rounded-lg overflow-hidden mx-2"
               >
                 <img
                   src={src}
                   alt={alt}
-                  className="w-full h-full object-cover rounded-lg transition-transform duration-300 hover:scale-105"
+                  className="h-full w-full object-cover object-center rounded-lg transition-transform duration-300 hover:scale-105"
                 />
               </div>
             ))}
           </ScrollVelocity>
 
-          <ScrollVelocity velocity={5} className="py-6 bg-amber-500/20 rounded-full">
+          {/* Texto con desplazamiento más rápido */}
+          <ScrollVelocity velocity={3.5} className="py-6 bg-amber-500/20 rounded-full text-white">
             Milovat • Administración de Edificios • Comunidad • Confort • Seguridad • Tranquilidad
           </ScrollVelocity>
         </div>
