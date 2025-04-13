@@ -1,0 +1,113 @@
+import { useEffect, useMemo, useState, memo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { useLocation } from "wouter";
+
+// Optimizado con memo para evitar renderizados innecesarios
+export const AnimatedHero = memo(function AnimatedHero() {
+  const [titleNumber, setTitleNumber] = useState(0);
+  const [, navigate] = useLocation();
+  const titles = useMemo(
+    () => ["Segura", "Confiable", "Centralizada"],
+    []
+  );
+
+  // Optimización: usamos requestAnimationFrame para animaciones más fluidas
+  // Aumentamos el tiempo entre cambios para crear más tensión
+  useEffect(() => {
+    let timeoutId: number;
+    let startTime: number;
+    let frameDuration = 3500; // 3.5 segundos entre cambios (aumentado para más tensión)
+    
+    const animateTitle = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      
+      if (elapsed >= frameDuration) {
+        startTime = timestamp;
+        // Actualizamos el título
+        setTitleNumber(prev => 
+          prev === titles.length - 1 ? 0 : prev + 1
+        );
+      }
+      
+      // Programamos el siguiente frame
+      timeoutId = requestAnimationFrame(animateTitle);
+    };
+    
+    // Iniciamos la animación
+    timeoutId = requestAnimationFrame(animateTitle);
+    
+    // Limpieza
+    return () => cancelAnimationFrame(timeoutId);
+  }, [titles.length]);
+
+  return (
+    <motion.div 
+      className="w-full"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="container mx-auto">
+        <div className="flex gap-8 py-10 items-center justify-center flex-col">
+          <div className="flex gap-4 flex-col">
+            <h1 className="text-4xl md:text-6xl max-w-2xl tracking-tighter text-center font-regular">
+              <motion.span 
+                className="bg-clip-text text-transparent bg-gradient-to-r from-amber-300 via-amber-500 to-amber-600"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              >
+                Una plataforma que es
+              </motion.span>
+              <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1">
+                &nbsp;
+                <AnimatePresence mode="wait">
+                  {titles.map((title, index) => (
+                    titleNumber === index && (
+                      <motion.span
+                        key={index}
+                        className="absolute font-semibold bg-clip-text text-transparent bg-gradient-to-r from-amber-300 via-amber-500 to-amber-600"
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -50 }}
+                        transition={{ 
+                          type: "spring", 
+                          stiffness: 80,  // Reducido para movimiento más lento
+                          damping: 12,    // Ajustado para más tensión
+                          mass: 1.2,      // Aumentado para dar sensación de peso
+                          duration: 1.2   // Duración total más larga
+                        }}
+                      >
+                        {title}
+                      </motion.span>
+                    )
+                  ))}
+                </AnimatePresence>
+              </span>
+            </h1>
+          </div>
+          <motion.div 
+            className="flex flex-row gap-3 mt-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.5 }}
+          >
+            <Button
+              onClick={() => {
+                // No establecer el rol todavía, solo indicar que es un modo de desarrollo
+                sessionStorage.setItem('isDevelopment', 'true');
+                // Ir a la página de autenticación que mostrará el diálogo de selección de rol
+                window.location.href = "/auth";
+              }}
+              className="bg-amber-500 hover:bg-amber-600 text-black px-6 py-6 rounded-lg font-medium text-lg"
+            >
+              Iniciar Sesión
+            </Button>
+          </motion.div>
+        </div>
+      </div>
+    </motion.div>
+  );
+});
