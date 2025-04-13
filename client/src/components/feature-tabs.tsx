@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { DemoImages } from './demo-images';
 
 export function FeatureTabs() {
   const tabs = [
@@ -9,7 +10,7 @@ export function FeatureTabs() {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-1 flex items-center justify-center">
           <img 
-            src="/assets/dashboard.png" 
+            src={DemoImages.Dashboard} 
             alt="Vista del Dashboard" 
             className="object-cover w-full rounded-xl shadow-lg" 
           />
@@ -22,7 +23,7 @@ export function FeatureTabs() {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-1 flex items-center justify-center">
           <img 
-            src="/assets/pagos.png" 
+            src={DemoImages.Pagos} 
             alt="Gestión de Pagos" 
             className="object-cover w-full rounded-xl shadow-lg"  
           />
@@ -35,7 +36,7 @@ export function FeatureTabs() {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-1 flex items-center justify-center">
           <img 
-            src="/assets/incidencias.png" 
+            src={DemoImages.Incidencias} 
             alt="Gestión de Incidencias" 
             className="object-cover w-full rounded-xl shadow-lg"  
           />
@@ -48,7 +49,7 @@ export function FeatureTabs() {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-1 flex items-center justify-center">
           <img 
-            src="/assets/reservas.png" 
+            src={DemoImages.Reservas} 
             alt="Gestión de Reservas" 
             className="object-cover w-full rounded-xl shadow-lg"  
           />
@@ -61,7 +62,7 @@ export function FeatureTabs() {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-1 flex items-center justify-center">
           <img 
-            src="/assets/documentos.png" 
+            src={DemoImages.Documentos} 
             alt="Gestión de Documentos" 
             className="object-cover w-full rounded-xl shadow-lg"  
           />
@@ -74,7 +75,7 @@ export function FeatureTabs() {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-1 flex items-center justify-center">
           <img 
-            src="/assets/configuracion.png" 
+            src={DemoImages.Configuracion} 
             alt="Configuración de Usuario" 
             className="object-cover w-full rounded-xl shadow-lg"  
           />
@@ -97,7 +98,7 @@ export function FeatureTabs() {
         <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center text-white">
           Todo lo que necesitas en un solo lugar
         </h2>
-        <div className="h-[30rem] md:h-[35rem] relative flex flex-col max-w-4xl mx-auto w-full items-center justify-start">
+        <div className="h-[25rem] md:h-[30rem] relative flex flex-col max-w-3xl mx-auto w-full items-center justify-start">
           {/* Tab Controls */}
           <div className="flex flex-row items-center justify-center p-2 overflow-x-auto mx-auto mb-6 bg-zinc-800 rounded-full border border-amber-500/30">
             {tabs.map((tab, index) => (
