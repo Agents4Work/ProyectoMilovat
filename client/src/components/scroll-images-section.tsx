@@ -61,7 +61,7 @@ const imagesRow2 = [
 
 export function ScrollImagesSection() {
   return (
-    <section className="w-full bg-gradient-to-b from-black to-zinc-900 py-20">
+    <section className="w-full bg-zinc-900 py-20">
       <div className="container mx-auto px-4 text-center mb-16">
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
           Milovat, Administración de Edificios
