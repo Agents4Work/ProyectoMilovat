@@ -7,11 +7,11 @@ export function FeatureTabs() {
       title: "Dashboard",
       value: "dashboard",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-6 text-xl md:text-4xl font-bold text-white">
+        <div className="w-full overflow-hidden relative h-full rounded-2xl p-2 text-xl md:text-4xl font-bold text-white flex items-center justify-center">
           <img 
-            src="/images/tabs/Dashboard.png" 
+            src="@assets/Screenshot 2025-04-12 at 7.47.11 p.m..png" 
             alt="Vista del Dashboard" 
-            className="object-contain w-full h-full rounded-xl" 
+            className="object-contain max-w-full max-h-full rounded-xl shadow-lg" 
           />
         </div>
       ),
@@ -20,11 +20,11 @@ export function FeatureTabs() {
       title: "Pagos",
       value: "pagos",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-6 text-xl md:text-4xl font-bold text-white">
+        <div className="w-full overflow-hidden relative h-full rounded-2xl p-2 text-xl md:text-4xl font-bold text-white flex items-center justify-center">
           <img 
-            src="/images/tabs/Pagos.png" 
+            src="@assets/Screenshot 2025-04-12 at 7.47.33 p.m..png" 
             alt="Gestión de Pagos" 
-            className="object-contain w-full h-full rounded-xl"  
+            className="object-contain max-w-full max-h-full rounded-xl shadow-lg"  
           />
         </div>
       ),
@@ -33,11 +33,11 @@ export function FeatureTabs() {
       title: "Incidencias",
       value: "incidencias",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-6 text-xl md:text-4xl font-bold text-white">
+        <div className="w-full overflow-hidden relative h-full rounded-2xl p-2 text-xl md:text-4xl font-bold text-white flex items-center justify-center">
           <img 
-            src="/images/tabs/Incidencias.png" 
+            src="@assets/Screenshot 2025-04-12 at 7.47.46 p.m..png" 
             alt="Gestión de Incidencias" 
-            className="object-contain w-full h-full rounded-xl"  
+            className="object-contain max-w-full max-h-full rounded-xl shadow-lg"  
           />
         </div>
       ),
@@ -46,11 +46,11 @@ export function FeatureTabs() {
       title: "Reservas",
       value: "reservas",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-6 text-xl md:text-4xl font-bold text-white">
+        <div className="w-full overflow-hidden relative h-full rounded-2xl p-2 text-xl md:text-4xl font-bold text-white flex items-center justify-center">
           <img 
-            src="/images/tabs/Reservas.png" 
+            src="@assets/Screenshot 2025-04-12 at 7.48.00 p.m..png" 
             alt="Gestión de Reservas" 
-            className="object-contain w-full h-full rounded-xl"  
+            className="object-contain max-w-full max-h-full rounded-xl shadow-lg"  
           />
         </div>
       ),
@@ -59,11 +59,11 @@ export function FeatureTabs() {
       title: "Documentos",
       value: "documentos",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-6 text-xl md:text-4xl font-bold text-white">
+        <div className="w-full overflow-hidden relative h-full rounded-2xl p-2 text-xl md:text-4xl font-bold text-white flex items-center justify-center">
           <img 
-            src="/images/tabs/Documentos.png" 
+            src="@assets/Screenshot 2025-04-12 at 7.48.11 p.m..png" 
             alt="Gestión de Documentos" 
-            className="object-contain w-full h-full rounded-xl"  
+            className="object-contain max-w-full max-h-full rounded-xl shadow-lg"  
           />
         </div>
       ),
@@ -72,11 +72,11 @@ export function FeatureTabs() {
       title: "Configuración",
       value: "configuracion",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-6 text-xl md:text-4xl font-bold text-white">
+        <div className="w-full overflow-hidden relative h-full rounded-2xl p-2 text-xl md:text-4xl font-bold text-white flex items-center justify-center">
           <img 
-            src="/images/tabs/Configuracion.png" 
+            src="@assets/Screenshot 2025-04-12 at 7.48.27 p.m..png" 
             alt="Configuración de Usuario" 
-            className="object-contain w-full h-full rounded-xl"  
+            className="object-contain max-w-full max-h-full rounded-xl shadow-lg"  
           />
         </div>
       ),
@@ -97,15 +97,15 @@ export function FeatureTabs() {
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-white">
           Todo lo que necesitas en un solo lugar
         </h2>
-        <div className="h-[35rem] md:h-[40rem] [perspective:1000px] relative flex flex-col max-w-5xl mx-auto w-full items-start justify-start">
+        <div className="h-[40rem] md:h-[45rem] [perspective:1000px] relative flex flex-col max-w-5xl mx-auto w-full items-center justify-center">
           <div className="w-full h-full">
             {/* Tab Controls */}
-            <div className="flex flex-row items-center justify-start p-2 bg-zinc-800 rounded-full border border-amber-500/30">
+            <div className="flex flex-row items-center justify-center p-2 overflow-x-auto mx-auto bg-zinc-800 rounded-full border border-amber-500/30">
               {tabs.map((tab, index) => (
                 <button
                   key={tab.value}
                   onClick={() => handleTabChange(tab.value, index)}
-                  className={`relative px-4 py-2 rounded-full transition-all duration-300 ease-out focus:outline-none text-white font-medium
+                  className={`relative px-5 py-2 mx-1 rounded-full transition-all duration-300 ease-out focus:outline-none text-white font-medium
                     ${activeTab === tab.value ? "bg-amber-500/30 border border-amber-500/50" : ""}`}
                 >
                   {tab.title}
