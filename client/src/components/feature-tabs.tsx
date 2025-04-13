@@ -9,7 +9,7 @@ export function FeatureTabs() {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-2 text-xl md:text-4xl font-bold text-white flex items-center justify-center">
           <img 
-            src="@assets/Screenshot 2025-04-12 at 7.47.11 p.m..png" 
+            src="/attached_assets/Screenshot 2025-04-12 at 7.47.11 p.m..png" 
             alt="Vista del Dashboard" 
             className="object-contain max-w-full max-h-full rounded-xl shadow-lg" 
           />
@@ -22,7 +22,7 @@ export function FeatureTabs() {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-2 text-xl md:text-4xl font-bold text-white flex items-center justify-center">
           <img 
-            src="@assets/Screenshot 2025-04-12 at 7.47.33 p.m..png" 
+            src="/attached_assets/Screenshot 2025-04-12 at 7.47.33 p.m..png" 
             alt="Gestión de Pagos" 
             className="object-contain max-w-full max-h-full rounded-xl shadow-lg"  
           />
@@ -35,7 +35,7 @@ export function FeatureTabs() {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-2 text-xl md:text-4xl font-bold text-white flex items-center justify-center">
           <img 
-            src="@assets/Screenshot 2025-04-12 at 7.47.46 p.m..png" 
+            src="/attached_assets/Screenshot 2025-04-12 at 7.47.46 p.m..png" 
             alt="Gestión de Incidencias" 
             className="object-contain max-w-full max-h-full rounded-xl shadow-lg"  
           />
@@ -48,7 +48,7 @@ export function FeatureTabs() {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-2 text-xl md:text-4xl font-bold text-white flex items-center justify-center">
           <img 
-            src="@assets/Screenshot 2025-04-12 at 7.48.00 p.m..png" 
+            src="/attached_assets/Screenshot 2025-04-12 at 7.48.00 p.m..png" 
             alt="Gestión de Reservas" 
             className="object-contain max-w-full max-h-full rounded-xl shadow-lg"  
           />
@@ -61,7 +61,7 @@ export function FeatureTabs() {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-2 text-xl md:text-4xl font-bold text-white flex items-center justify-center">
           <img 
-            src="@assets/Screenshot 2025-04-12 at 7.48.11 p.m..png" 
+            src="/attached_assets/Screenshot 2025-04-12 at 7.48.11 p.m..png" 
             alt="Gestión de Documentos" 
             className="object-contain max-w-full max-h-full rounded-xl shadow-lg"  
           />
@@ -74,7 +74,7 @@ export function FeatureTabs() {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-2 text-xl md:text-4xl font-bold text-white flex items-center justify-center">
           <img 
-            src="@assets/Screenshot 2025-04-12 at 7.48.27 p.m..png" 
+            src="/attached_assets/Screenshot 2025-04-12 at 7.48.27 p.m..png" 
             alt="Configuración de Usuario" 
             className="object-contain max-w-full max-h-full rounded-xl shadow-lg"  
           />
