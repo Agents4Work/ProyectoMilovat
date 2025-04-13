@@ -9,7 +9,7 @@ export function FeatureTabs() {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-2 text-xl md:text-4xl font-bold text-white flex items-center justify-center">
           <img 
-            src="/attached_assets/Screenshot 2025-04-12 at 7.47.11 p.m..png" 
+            src="https://via.placeholder.com/800x450?text=Dashboard" 
             alt="Vista del Dashboard" 
             className="object-contain max-w-full max-h-full rounded-xl shadow-lg" 
           />
