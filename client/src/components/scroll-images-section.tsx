@@ -105,8 +105,8 @@ export function ScrollImagesSection() {
             ))}
           </ScrollVelocity>
 
-          {/* Texto con desplazamiento más rápido */}
-          <ScrollVelocity velocity={3.5} className="py-6 bg-amber-500/20 rounded-full text-white">
+          {/* Texto con desplazamiento mucho más lento */}
+          <ScrollVelocity velocity={0.875} className="py-6 bg-amber-500/20 rounded-full text-white">
             Milovat • Administración de Edificios • Comunidad • Confort • Seguridad • Tranquilidad
           </ScrollVelocity>
         </div>
