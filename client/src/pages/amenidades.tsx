@@ -33,6 +33,8 @@ interface Reservacion {
   horaFin: string; // formato: HH:MM (24h)
   usuario: string;
   nombreUsuario?: string; // Nombre completo del residente (opcional para mantener compatibilidad)
+  cantidadPersonas?: number; // Cantidad de personas en la reserva
+  capacidadTotal?: number; // Capacidad total de la amenidad
   estado: 'pendiente' | 'confirmada' | 'cancelada';
 }
 

@@ -46,6 +46,7 @@ export function AmenidadModal({
   const [horaFin, setHoraFin] = useState<string>("");
   const [nombreResidente, setNombreResidente] = useState<string>("");
   const [departamento, setDepartamento] = useState<string>("");
+  const [cantidadPersonas, setCantidadPersonas] = useState<string>("1");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Solo muestra las horas disponibles para seleccionar
@@ -65,6 +66,8 @@ export function AmenidadModal({
     horaFin: string;
     usuario: string;
     nombreUsuario: string;
+    cantidadPersonas: number;
+    capacidadTotal: number;
   }
 
   // Manejador para reservar la amenidad
@@ -100,6 +103,18 @@ export function AmenidadModal({
       return;
     }
 
+    // Validamos la cantidad de personas
+    const numPersonas = parseInt(cantidadPersonas, 10);
+    if (isNaN(numPersonas) || numPersonas < 1 || numPersonas > amenidad.capacidad) {
+      toast({
+        title: "Error",
+        description: `La cantidad de personas debe ser un número entre 1 y ${amenidad.capacidad}`,
+        variant: "destructive"
+      });
+      setIsSubmitting(false);
+      return;
+    }
+    
     // Creamos el objeto de reserva
     const nuevaReserva: EventoReserva = {
       amenidadId: amenidad.id,
@@ -107,7 +122,9 @@ export function AmenidadModal({
       horaInicio,
       horaFin,
       usuario: departamento.trim(),
-      nombreUsuario: nombreResidente.trim()
+      nombreUsuario: nombreResidente.trim(),
+      cantidadPersonas: numPersonas,
+      capacidadTotal: amenidad.capacidad
     };
     
     // Simulamos la reserva (aquí iría la llamada al API)
@@ -120,7 +137,7 @@ export function AmenidadModal({
       
       toast({
         title: "Reserva realizada",
-        description: `Has reservado ${amenidad.nombre} para el ${format(fecha, "d 'de' MMMM", { locale: es })} de ${horaInicio} a ${horaFin}`,
+        description: `Has reservado ${amenidad.nombre} para el ${format(fecha, "d 'de' MMMM", { locale: es })} de ${horaInicio} a ${horaFin} para ${numPersonas} personas`,
       });
       setIsSubmitting(false);
       onClose();
@@ -130,6 +147,7 @@ export function AmenidadModal({
       setHoraFin("");
       setNombreResidente("");
       setDepartamento("");
+      setCantidadPersonas("1");
     }, 800);
   };
 
@@ -187,6 +205,20 @@ export function AmenidadModal({
                     onChange={(e) => setNombreResidente(e.target.value)}
                     className="w-full bg-zinc-800 border border-zinc-700 rounded p-2 text-sm"
                     placeholder="Ingresa tu nombre completo"
+                  />
+                </div>
+                <div className="flex flex-col space-y-1">
+                  <Label className="text-sm text-zinc-400">
+                    Cantidad de personas: <span className="text-amber-500">{cantidadPersonas}/{amenidad.capacidad}</span>
+                  </Label>
+                  <input
+                    type="number"
+                    min="1"
+                    max={amenidad.capacidad}
+                    value={cantidadPersonas}
+                    onChange={(e) => setCantidadPersonas(e.target.value)}
+                    className="w-full bg-zinc-800 border border-zinc-700 rounded p-2 text-sm"
+                    placeholder="Ingresa la cantidad de personas"
                   />
                 </div>
               </div>
