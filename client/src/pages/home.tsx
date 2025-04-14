@@ -1,3 +1,20 @@
+/**
+ * Página Home
+ * 
+ * Página principal de la aplicación que muestra la información de presentación
+ * de Milovat a los usuarios. Contiene una interfaz visualmente atractiva con 
+ * animaciones y secciones informativas sobre los servicios.
+ * 
+ * Características principales:
+ * - Animación de carga inicial (IntroLoader)
+ * - Sección hero con texto animado y fondo con rutas en movimiento
+ * - Secciones informativas sobre la plataforma de administración de edificios
+ * - Navegación interna entre secciones mediante desplazamiento suave
+ * - Información visual de las funcionalidades mediante pestañas interactivas
+ * - Transiciones animadas entre componentes usando framer-motion
+ * - Pie de página con información de contacto
+ */
+
 import { useEffect, useRef, useState } from "react";
 import { AnimatedHero } from "@/components/animated-hero";
 import { BackgroundPaths } from "@/components/background-paths";

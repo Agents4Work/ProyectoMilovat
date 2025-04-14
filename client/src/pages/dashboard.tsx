@@ -1,3 +1,20 @@
+/**
+ * Página Dashboard
+ * 
+ * Panel principal de la aplicación Milovat para la administración de edificios.
+ * Proporciona una vista general de las funcionalidades principales y acceso
+ * rápido a las tareas más comunes.
+ * 
+ * Características principales:
+ * - Panel de control con tarjetas informativas para diferentes módulos
+ * - Gestión de visitantes con registro y seguimiento
+ * - Control de paquetería para residentes
+ * - Publicación de anuncios para la comunidad
+ * - Monitoreo de incidencias recientes
+ * - Navegación a los diferentes módulos de la aplicación
+ * - Estadísticas de uso y resumen de actividades
+ */
+
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import { DashboardSidebar } from "@/components/dashboard-sidebar";

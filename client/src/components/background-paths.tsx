@@ -1,3 +1,17 @@
+/**
+ * Componente BackgroundPaths
+ * 
+ * Este componente genera y anima un conjunto de caminos SVG que flotan
+ * en el fondo, creando un efecto visual dinámico para la sección hero.
+ * 
+ * Características principales:
+ * - Generación procedural de caminos SVG con diferentes propiedades
+ * - Animación suave y continua de los caminos usando framer-motion
+ * - Optimización de rendimiento mediante memo y useMemo
+ * - Creación de efecto visual de profundidad mediante capas
+ * - Transiciones suaves para mejorar la experiencia visual
+ */
+
 import { memo, useMemo } from "react";
 import { motion } from "framer-motion";
 
