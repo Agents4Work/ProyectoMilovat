@@ -1,3 +1,18 @@
+/**
+ * Archivo server/index.ts
+ * 
+ * Este es el punto de entrada principal del servidor Express.
+ * Configura el servidor, registra las rutas, y gestiona el middleware para
+ * el procesamiento de peticiones y manejo de errores.
+ * 
+ * Características principales:
+ * - Configuración del servidor Express y middleware básico
+ * - Sistema de logging para peticiones a la API
+ * - Manejo centralizado de errores
+ * - Configuración para desarrollo (Vite) y producción (static)
+ * - Inicia el servidor en el puerto 5000 accesible desde cualquier host (0.0.0.0)
+ */
+
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";

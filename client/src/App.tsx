@@ -1,3 +1,17 @@
+/**
+ * Archivo App.tsx
+ * 
+ * Este archivo es el punto de entrada principal de la aplicación React.
+ * Define la estructura de rutas y configura el QueryClient para gestionar
+ * las consultas a la API, utilizando wouter para la navegación.
+ * 
+ * Características principales:
+ * - Configuración del Router con wouter para gestionar la navegación
+ * - Configuración del QueryClientProvider para manejar peticiones a la API
+ * - Definición de todas las rutas disponibles en la aplicación
+ * - Integración del componente Toaster para mostrar notificaciones
+ */
+
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
