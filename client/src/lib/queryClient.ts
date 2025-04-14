@@ -1,3 +1,17 @@
+/**
+ * Archivo queryClient.ts
+ * 
+ * Configuración del cliente de consultas para la aplicación React.
+ * Proporciona funcionalidades para realizar peticiones a la API del servidor,
+ * manejar respuestas y gestionar el estado de las consultas.
+ * 
+ * Características principales:
+ * - Función apiRequest para realizar peticiones HTTP a la API
+ * - Función getQueryFn que configura el comportamiento predeterminado de las consultas
+ * - Configuración de QueryClient para gestionar el caché y comportamiento de consultas
+ * - Manejo de errores HTTP y comportamiento personalizado para código 401 (no autorizado)
+ */
+
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
 
 async function throwIfResNotOk(res: Response) {
