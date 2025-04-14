@@ -166,12 +166,12 @@ export default function Pagos() {
           
           <Card className="bg-black/20 border-zinc-800 w-full md:w-auto">
             <CardContent className="p-4">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between gap-6">
                 <div>
                   <p className="text-zinc-400 text-sm">Total pendiente</p>
                   <p className="text-2xl font-bold">${totalPendiente.toLocaleString('es-MX')}</p>
                 </div>
-                <Button className="bg-amber-500 hover:bg-amber-600 text-black">
+                <Button className="bg-amber-500 hover:bg-amber-600 text-black whitespace-nowrap">
                   Pagar todo
                 </Button>
               </div>
@@ -392,7 +392,7 @@ export default function Pagos() {
                   <span>Total a pagar</span>
                   <span>${totalPendiente.toLocaleString('es-MX')}</span>
                 </div>
-                <p className="text-zinc-500 text-sm">Fecha límite de pago: 25 de abril, 2025</p>
+                <p className="text-zinc-500 text-sm">Proceda a realizar sus pagos en la fecha indicada</p>
               </div>
             </div>
           </CardContent>
