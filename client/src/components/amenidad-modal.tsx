@@ -44,7 +44,7 @@ export function AmenidadModal({
 }: AmenidadModalProps) {
   const [horaInicio, setHoraInicio] = useState<string>("");
   const [horaFin, setHoraFin] = useState<string>("");
-  const [nombreResidente, setNombreResidente] = useState<string>(usuario.nombre || "");
+  const [nombreResidente, setNombreResidente] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Solo muestra las horas disponibles para seleccionar
