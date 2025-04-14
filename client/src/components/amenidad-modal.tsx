@@ -45,6 +45,7 @@ export function AmenidadModal({
   const [horaInicio, setHoraInicio] = useState<string>("");
   const [horaFin, setHoraFin] = useState<string>("");
   const [nombreResidente, setNombreResidente] = useState<string>("");
+  const [departamento, setDepartamento] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Solo muestra las horas disponibles para seleccionar
@@ -85,6 +86,17 @@ export function AmenidadModal({
         description: "Debes ingresar tu nombre completo",
         variant: "destructive"
       });
+      setIsSubmitting(false);
+      return;
+    }
+    
+    if (!departamento.trim()) {
+      toast({
+        title: "Error",
+        description: "Debes ingresar el número de departamento",
+        variant: "destructive"
+      });
+      setIsSubmitting(false);
       return;
     }
 
@@ -94,7 +106,7 @@ export function AmenidadModal({
       fecha: format(fecha, 'yyyy-MM-dd'),
       horaInicio,
       horaFin,
-      usuario: usuario.apartamento,
+      usuario: departamento.trim(),
       nombreUsuario: nombreResidente.trim()
     };
     
@@ -116,6 +128,8 @@ export function AmenidadModal({
       // Limpiar formulario
       setHoraInicio("");
       setHoraFin("");
+      setNombreResidente("");
+      setDepartamento("");
     }, 800);
   };
 
@@ -154,10 +168,16 @@ export function AmenidadModal({
                 <span className="text-sm text-zinc-400">Horario disponible:</span>
                 <span className="text-sm">{amenidad.horario}</span>
               </div>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-sm text-zinc-400">Departamento:</span>
-                  <span className="text-sm">{usuario.apartamento}</span>
+              <div className="space-y-3">
+                <div className="flex flex-col space-y-1">
+                  <Label className="text-sm text-zinc-400">Número de departamento:</Label>
+                  <input
+                    type="text"
+                    value={departamento}
+                    onChange={(e) => setDepartamento(e.target.value)}
+                    className="w-full bg-zinc-800 border border-zinc-700 rounded p-2 text-sm"
+                    placeholder="Ejemplo: 4B, 104, etc."
+                  />
                 </div>
                 <div className="flex flex-col space-y-1">
                   <Label className="text-sm text-zinc-400">Nombre del residente:</Label>
@@ -263,7 +283,7 @@ export function AmenidadModal({
           <Button 
             className="bg-amber-500 hover:bg-amber-600 text-black" 
             onClick={handleReservar}
-            disabled={!horaInicio || !horaFin || isSubmitting}
+            disabled={!horaInicio || !horaFin || !nombreResidente.trim() || !departamento.trim() || isSubmitting}
           >
             {isSubmitting ? "Enviando..." : "Confirmar Reserva"}
           </Button>
