@@ -49,74 +49,11 @@ export default function Pagos() {
   const [activeTab, setActiveTab] = useState("servicios");
   const [showAllMultas, setShowAllMultas] = useState(false);
   
-  // Datos de servicios
-  const [servicios] = useState<Servicio[]>([
-    {
-      id: "1",
-      nombre: "Gas",
-      descripcion: "Consumo mensual de gas",
-      monto: 650,
-      fechaVencimiento: "25 abr 2025",
-      iconoUrl: "gas.jpg",
-      estado: "Pendiente"
-    },
-    {
-      id: "2",
-      nombre: "Internet",
-      descripcion: "Servicio de internet de alta velocidad",
-      monto: 450,
-      fechaVencimiento: "25 abr 2025",
-      iconoUrl: "inteligente.jpg",
-      estado: "Pagado"
-    },
-    {
-      id: "3",
-      nombre: "Luz",
-      descripcion: "Consumo eléctrico mensual",
-      monto: 720,
-      fechaVencimiento: "25 abr 2025",
-      iconoUrl: "rayo.jpg",
-      estado: "Pendiente"
-    },
-    {
-      id: "4",
-      nombre: "Agua",
-      descripcion: "Consumo de agua potable",
-      monto: 380,
-      fechaVencimiento: "25 abr 2025",
-      iconoUrl: "gota.jpg",
-      estado: "Pendiente"
-    },
-    {
-      id: "5",
-      nombre: "Mantenimiento",
-      descripcion: "Mantenimiento de áreas comunes",
-      monto: 1200,
-      fechaVencimiento: "25 abr 2025",
-      iconoUrl: "edificio.jpg",
-      estado: "Pendiente"
-    }
-  ]);
+  // Datos de servicios (vacío inicialmente, se cargaría de la API)
+  const [servicios] = useState<Servicio[]>([]);
   
-  // Datos de multas
-  const [multas] = useState<Multa[]>([
-    {
-      id: "1",
-      motivo: "Ruido excesivo",
-      descripcion: "Reporte por ruido excesivo después de las 23:00 hrs",
-      monto: 500,
-      fecha: "2 abr 2025",
-      estado: "Pendiente"
-    },
-    {
-      id: "2",
-      motivo: "Uso indebido de estacionamiento",
-      descripcion: "Estacionamiento en área no asignada por más de 3 horas",
-      monto: 350,
-      fecha: "8 abr 2025",
-      estado: "Pagado"
-    }
-  ]);
+  // Datos de multas (vacío inicialmente, se cargaría de la API)
+  const [multas] = useState<Multa[]>([]);
   
   // Cálculo de totales
   const totalServicios = servicios
