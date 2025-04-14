@@ -1,3 +1,21 @@
+/**
+ * Componente FeatureTabs
+ * 
+ * Este componente implementa una interfaz de pestañas interactiva que muestra 
+ * diferentes aspectos del sistema de administración de edificios.
+ * 
+ * Características principales:
+ * - Sistema de navegación por pestañas con animaciones suaves
+ * - Muestra imágenes representativas de cada sección (Dashboard, Pagos, etc.)
+ * - Transiciones animadas entre pestañas utilizando framer-motion
+ * - Diseño responsive que se adapta a diferentes tamaños de pantalla
+ * - Integración con el componente ScrollImagesSection para mostrar una galería 
+ *   de imágenes desplazables debajo del contenido principal
+ * 
+ * Las pestañas permiten al usuario explorar visualmente las diferentes 
+ * funcionalidades del sistema sin necesidad de navegar entre múltiples páginas.
+ */
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { DemoImages } from './demo-images';

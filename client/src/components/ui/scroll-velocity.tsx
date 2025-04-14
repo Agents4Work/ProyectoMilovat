@@ -1,3 +1,18 @@
+/**
+ * Componente ScrollVelocity
+ * 
+ * Este componente proporciona una funcionalidad de desplazamiento horizontal automático 
+ * para elementos (imágenes o texto). Diseñado para crear efectos de carrusel infinito donde 
+ * los elementos se mueven horizontalmente, dando la sensación de un bucle continuo.
+ * 
+ * Características principales:
+ * - Movimiento automático horizontal con velocidad configurable
+ * - Respuesta al desplazamiento vertical del usuario
+ * - Duplicación automática de elementos para evitar transiciones visibles
+ * - Compatible con contenido de tipo texto o elementos React
+ * - Animación suave mediante framer-motion
+ */
+
 "use client"
 
 import * as React from "react"

@@ -1,3 +1,19 @@
+/**
+ * Componente ScrollImagesSection
+ * 
+ * Esta sección implementa una presentación dinámica de imágenes que se desplazan
+ * horizontalmente utilizando el componente ScrollVelocity. Consta de:
+ * 
+ * - Título y subtítulo que presentan la propuesta de valor de Milovat
+ * - Dos filas de imágenes que se desplazan en direcciones opuestas
+ * - Una barra de texto que se desplaza horizontalmente con palabras clave
+ * 
+ * El efecto visual crea un entorno dinámico para mostrar imágenes de edificios,
+ * familias y espacios, representando la esencia de comunidad y administración de edificios.
+ * Las velocidades están ajustadas para ofrecer un movimiento suave pero constante,
+ * mejorando la experiencia del usuario sin distraer del contenido principal.
+ */
+
 import React from 'react';
 import { ScrollVelocity } from "./ui/scroll-velocity";
 

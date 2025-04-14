@@ -1,3 +1,20 @@
+/**
+ * Componente Footer
+ * 
+ * Este componente implementa el pie de página de la aplicación con información
+ * de contacto de la empresa Milovat Consulting.
+ * 
+ * Características principales:
+ * - Disposición en grid para organizar las diferentes secciones de información
+ * - Muestra el logo de la empresa, ubicación física, teléfonos de contacto y correo
+ * - Enlaces a redes sociales (Instagram, Twitter, LinkedIn, Facebook)
+ * - Diseño responsive que se adapta a diferentes tamaños de pantalla
+ * - Estilo visual con fondo negro y detalles en color amber para resaltar elementos
+ * 
+ * El footer proporciona información institucional esencial para contacto y
+ * ayuda a reforzar la identidad de marca en la parte inferior de la aplicación.
+ */
+
 import React from 'react';
 import { FaInstagram, FaTwitter, FaLinkedin, FaFacebook, FaMapMarkerAlt, FaPhone, FaEnvelope } from 'react-icons/fa';
 import logoImg from '../assets/logo-footer.png';
