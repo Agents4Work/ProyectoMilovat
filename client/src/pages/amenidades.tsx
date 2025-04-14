@@ -47,7 +47,7 @@ export default function Amenidades() {
   });
   
   // Lista de amenidades disponibles
-  const [amenidades] = useState<Amenidad[]>([
+  const [amenidades, setAmenidades] = useState<Amenidad[]>([
     {
       id: "1",
       nombre: "Salón de eventos / fiestas",
@@ -55,17 +55,7 @@ export default function Amenidades() {
       descripcion: "Espacio amplio ideal para celebraciones y reuniones, con capacidad para 50 personas",
       horario: "8:00 - 22:00",
       capacidad: 50,
-      reservaciones: [
-        {
-          id: "r1",
-          amenidadId: "1",
-          fecha: "2025-04-12",
-          horaInicio: "18:00",
-          horaFin: "22:00",
-          usuario: "2A",
-          estado: 'confirmada'
-        }
-      ]
+      reservaciones: []
     },
     {
       id: "2",
@@ -83,17 +73,7 @@ export default function Amenidades() {
       descripcion: "Equipado con máquinas cardiovasculares, pesas y área de entrenamiento",
       horario: "6:00 - 22:00",
       capacidad: 15,
-      reservaciones: [
-        {
-          id: "r2",
-          amenidadId: "3",
-          fecha: "2025-04-11",
-          horaInicio: "7:00",
-          horaFin: "8:00",
-          usuario: "4B",
-          estado: 'confirmada'
-        }
-      ]
+      reservaciones: []
     },
     {
       id: "4",
@@ -120,17 +100,7 @@ export default function Amenidades() {
       descripcion: "Piscina climatizada con área de descanso y sombrillas",
       horario: "7:00 - 21:00",
       capacidad: 25,
-      reservaciones: [
-        {
-          id: "r3",
-          amenidadId: "6",
-          fecha: "2025-04-11",
-          horaInicio: "15:00",
-          horaFin: "16:00",
-          usuario: "5C",
-          estado: 'confirmada'
-        }
-      ]
+      reservaciones: []
     },
     {
       id: "7",
@@ -214,6 +184,36 @@ export default function Amenidades() {
     setShowModal(true);
   };
 
+  // Controlador para agregar nuevas reservas
+  const agregarReserva = (e: Event) => {
+    const evento = e as CustomEvent;
+    const reserva = evento.detail;
+
+    // Buscamos la amenidad para agregarle la reserva
+    setAmenidades(prev => {
+      return prev.map(amenidad => {
+        if (amenidad.id === reserva.amenidadId) {
+          return {
+            ...amenidad,
+            reservaciones: [
+              ...amenidad.reservaciones,
+              {
+                id: `r${Date.now()}`,
+                amenidadId: reserva.amenidadId,
+                fecha: reserva.fecha,
+                horaInicio: reserva.horaInicio,
+                horaFin: reserva.horaFin,
+                usuario: reserva.usuario,
+                estado: 'confirmada' as 'confirmada'
+              }
+            ]
+          };
+        }
+        return amenidad;
+      });
+    });
+  };
+
   useEffect(() => {
     // Get user role from session storage
     const role = sessionStorage.getItem('userRole') as "resident" | "admin" | null;
@@ -225,6 +225,14 @@ export default function Amenidades() {
     }
     
     setUserRole(role);
+
+    // Escuchar el evento personalizado de nueva reserva
+    document.addEventListener('nuevaReserva', agregarReserva);
+    
+    // Limpieza al desmontar el componente
+    return () => {
+      document.removeEventListener('nuevaReserva', agregarReserva);
+    };
   }, [navigate]);
   
   // Wait until we have determined the user role

@@ -55,6 +55,15 @@ export function AmenidadModal({
     return h.hora > horaInicio;
   });
 
+  // Declaramos una propiedad onReservationComplete en las props del componente
+  interface EventoReserva {
+    amenidadId: string;
+    fecha: string;
+    horaInicio: string;
+    horaFin: string;
+    usuario: string;
+  }
+
   // Manejador para reservar la amenidad
   const handleReservar = () => {
     if (!horaInicio || !horaFin) {
@@ -68,8 +77,23 @@ export function AmenidadModal({
 
     setIsSubmitting(true);
     
+    // Creamos el objeto de reserva
+    const nuevaReserva: EventoReserva = {
+      amenidadId: amenidad.id,
+      fecha: format(fecha, 'yyyy-MM-dd'),
+      horaInicio,
+      horaFin,
+      usuario: usuario.apartamento
+    };
+    
     // Simulamos la reserva (aquí iría la llamada al API)
     setTimeout(() => {
+      // Evento personalizado para comunicar la nueva reserva
+      const reservaEvent = new CustomEvent('nuevaReserva', { 
+        detail: nuevaReserva
+      });
+      document.dispatchEvent(reservaEvent);
+      
       toast({
         title: "Reserva realizada",
         description: `Has reservado ${amenidad.nombre} para el ${format(fecha, "d 'de' MMMM", { locale: es })} de ${horaInicio} a ${horaFin}`,
