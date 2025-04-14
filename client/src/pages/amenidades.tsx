@@ -208,6 +208,8 @@ export default function Amenidades() {
                 horaFin: reserva.horaFin,
                 usuario: reserva.usuario,
                 nombreUsuario: reserva.nombreUsuario,
+                cantidadPersonas: reserva.cantidadPersonas,
+                capacidadTotal: reserva.capacidadTotal,
                 estado: 'confirmada' as 'confirmada'
               }
             ]

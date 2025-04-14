@@ -1,16 +1,18 @@
 'use client'
 
 import { useState } from "react";
-import { format } from "date-fns";
+import { format, addDays } from "date-fns";
 import { es } from "date-fns/locale";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
-import { Calendar as CalendarIcon, Clock, Info } from "lucide-react";
+import { Calendar as CalendarIcon, Clock, Info, ChevronDown } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 // Definición de propiedades para el modal
 interface AmenidadModalProps {
@@ -42,12 +44,14 @@ export function AmenidadModal({
   usuario,
   horarios
 }: AmenidadModalProps) {
+  const [fechaSeleccionada, setFechaSeleccionada] = useState<Date>(fecha);
   const [horaInicio, setHoraInicio] = useState<string>("");
   const [horaFin, setHoraFin] = useState<string>("");
   const [nombreResidente, setNombreResidente] = useState<string>("");
   const [departamento, setDepartamento] = useState<string>("");
   const [cantidadPersonas, setCantidadPersonas] = useState<string>("1");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [mostrarCalendario, setMostrarCalendario] = useState(false);
 
   // Solo muestra las horas disponibles para seleccionar
   const horariosDisponibles = horarios.filter(h => h.disponible);
@@ -118,7 +122,7 @@ export function AmenidadModal({
     // Creamos el objeto de reserva
     const nuevaReserva: EventoReserva = {
       amenidadId: amenidad.id,
-      fecha: format(fecha, 'yyyy-MM-dd'),
+      fecha: format(fechaSeleccionada, 'yyyy-MM-dd'),
       horaInicio,
       horaFin,
       usuario: departamento.trim(),
@@ -137,7 +141,7 @@ export function AmenidadModal({
       
       toast({
         title: "Reserva realizada",
-        description: `Has reservado ${amenidad.nombre} para el ${format(fecha, "d 'de' MMMM", { locale: es })} de ${horaInicio} a ${horaFin} para ${numPersonas} personas`,
+        description: `Has reservado ${amenidad.nombre} para el ${format(fechaSeleccionada, "d 'de' MMMM", { locale: es })} de ${horaInicio} a ${horaFin} para ${numPersonas} personas`,
       });
       setIsSubmitting(false);
       onClose();
@@ -167,9 +171,28 @@ export function AmenidadModal({
               <CalendarIcon className="h-4 w-4 text-amber-500" />
               <Label>Fecha de reserva</Label>
             </div>
-            <div className="p-2 rounded bg-zinc-900 text-sm">
-              {format(fecha, "EEEE d 'de' MMMM 'de' yyyy", { locale: es })}
-            </div>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="w-full justify-between bg-zinc-900 border-zinc-800 hover:bg-zinc-800 hover:text-white"
+                >
+                  {format(fechaSeleccionada, "EEEE d 'de' MMMM 'de' yyyy", { locale: es })}
+                  <ChevronDown className="ml-2 h-4 w-4 opacity-50" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0 bg-zinc-900 border-zinc-800">
+                <Calendar
+                  mode="single"
+                  selected={fechaSeleccionada}
+                  onSelect={(date) => date && setFechaSeleccionada(date)}
+                  disabled={(date) => date < new Date()} // Deshabilita fechas anteriores a hoy
+                  initialFocus
+                  fromDate={new Date()} // Solo permite seleccionar desde la fecha actual
+                  toDate={addDays(new Date(), 90)} // Permite reservar hasta 90 días en el futuro
+                />
+              </PopoverContent>
+            </Popover>
           </div>
           
           <div className="grid gap-2">
