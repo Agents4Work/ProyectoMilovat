@@ -321,16 +321,14 @@ export default function Dashboard() {
                       <div className="flex flex-col">
                         <div className="flex justify-between items-center">
                           <span className="text-xs text-zinc-500">Total activos:</span>
-                          <span className="text-lg font-bold text-zinc-300">8</span>
+                          <span className="text-lg font-bold text-zinc-300">-</span>
                         </div>
                         <div className="flex justify-between items-center mb-1">
                           <span className="text-xs text-zinc-500">Por renovar:</span>
-                          <span className="text-sm text-zinc-400">2 contratos</span>
+                          <span className="text-sm text-zinc-400">-</span>
                         </div>
                         <div className="flex flex-wrap gap-1 mt-1">
-                          <Badge variant="outline" className="text-[10px] h-5 border-zinc-700 bg-zinc-800/50 text-zinc-400">Seguridad</Badge>
-                          <Badge variant="outline" className="text-[10px] h-5 border-zinc-700 bg-zinc-800/50 text-zinc-400">Limpieza</Badge>
-                          <Badge variant="outline" className="text-[10px] h-5 border-zinc-700 bg-zinc-800/50 text-zinc-400">Mantenimiento</Badge>
+                          <Badge variant="outline" className="text-[10px] h-5 border-zinc-700 bg-zinc-800/50 text-zinc-400">-</Badge>
                         </div>
                       </div>
                     </CardContent>
@@ -358,15 +356,15 @@ export default function Dashboard() {
                       <div className="flex flex-col">
                         <div className="flex justify-between items-center">
                           <span className="text-xs text-zinc-500">Sin resolver:</span>
-                          <span className="text-lg font-bold text-zinc-300">5</span>
+                          <span className="text-lg font-bold text-zinc-300">-</span>
                         </div>
                         <div className="flex justify-between items-center">
                           <span className="text-xs text-zinc-500">Nuevas hoy:</span>
-                          <span className="text-sm text-zinc-400">2 incidencias</span>
+                          <span className="text-sm text-zinc-400">-</span>
                         </div>
                         <div className="flex justify-between items-center">
                           <span className="text-xs text-zinc-500">Total mensual:</span>
-                          <span className="text-sm text-zinc-400">14 reportes</span>
+                          <span className="text-sm text-zinc-400">-</span>
                         </div>
                       </div>
                     </CardContent>
