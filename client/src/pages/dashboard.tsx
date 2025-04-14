@@ -61,74 +61,17 @@ export default function Dashboard() {
   const [filtroAnuncios, setFiltroAnuncios] = useState<"todos" | "destacados">("todos");
   const [searchTerm, setSearchTerm] = useState("");
   
-  // Información del usuario actual (simulación)
+  // Información del usuario actual (se obtendría de la autenticación real)
   const [currentUser] = useState({
-    nombre: "Carlos Ramírez", 
-    apartamento: "4B"
+    nombre: "", 
+    apartamento: ""
   });
   
-  // Datos de ejemplo para anuncios
-  const [anuncios, setAnuncios] = useState<Anuncio[]>([
-    {
-      id: "1",
-      titulo: "Mantenimiento de Elevadores",
-      contenido: "Se realizará mantenimiento en los elevadores el día 15 de abril de 2025 de 9:00 a 14:00 horas. Durante este periodo los elevadores estarán fuera de servicio. Disculpe las molestias.",
-      categoria: "mantenimiento",
-      destacado: true,
-      fechaCreacion: "2025-04-10T10:00:00",
-      autor: "Administración"
-    },
-    {
-      id: "2",
-      titulo: "Reunión de Propietarios",
-      contenido: "Se convoca a reunión de propietarios el día 20 de abril a las 19:00 horas en el salón de eventos para tratar temas relacionados con el presupuesto anual y proyectos de mejora.",
-      categoria: "comunicados",
-      destacado: true,
-      fechaCreacion: "2025-04-09T15:30:00",
-      autor: "Administración"
-    },
-    {
-      id: "3",
-      titulo: "Nuevo sistema de seguridad",
-      contenido: "Informamos que se ha implementado un nuevo sistema de seguridad en el edificio que incluye reconocimiento facial para el ingreso. Todos los residentes deben registrarse en administración.",
-      categoria: "seguridad",
-      destacado: false,
-      imageUrl: "/anuncios/seguridad.jpg",
-      fechaCreacion: "2025-04-08T09:15:00",
-      autor: "Administración"
-    }
-  ]);
+  // Estado para anuncios (vacío inicialmente, se cargaría de la API)
+  const [anuncios, setAnuncios] = useState<Anuncio[]>([]);
 
-  // Datos de ejemplo para paquetes
-  const [paquetes] = useState<Paquete[]>([
-    {
-      id: "1",
-      empresa: "Amazon",
-      fechaLlegada: "11 abr 2025",
-      hora: "10:25 AM",
-      destinatario: "Carlos Ramírez",
-      estado: "Pendiente",
-      apartamento: "4B"
-    },
-    {
-      id: "2",
-      empresa: "DHL",
-      fechaLlegada: "10 abr 2025",
-      hora: "15:40 PM",
-      destinatario: "Lucía González",
-      estado: "Pendiente",
-      apartamento: "2A"
-    },
-    {
-      id: "3",
-      empresa: "FedEx",
-      fechaLlegada: "09 abr 2025",
-      hora: "12:15 PM",
-      destinatario: "Carlos Ramírez",
-      estado: "Recogido",
-      apartamento: "4B"
-    }
-  ]);
+  // Estado para paquetes (vacío inicialmente, se cargaría de la API)
+  const [paquetes] = useState<Paquete[]>([]);
   
   // Filtrar paquetes solo para el usuario actual
   const paquetesUsuario = paquetes.filter(p => 
@@ -268,15 +211,15 @@ export default function Dashboard() {
                       <div className="flex flex-col">
                         <div className="flex justify-between items-center">
                           <span className="text-xs text-zinc-500">Hoy:</span>
-                          <span className="text-lg font-bold text-zinc-300">12</span>
+                          <span className="text-lg font-bold text-zinc-300">-</span>
                         </div>
                         <div className="flex justify-between items-center">
                           <span className="text-xs text-zinc-500">Registrados:</span>
-                          <span className="text-sm text-zinc-400">26</span>
+                          <span className="text-sm text-zinc-400">-</span>
                         </div>
                         <div className="flex justify-between items-center">
                           <span className="text-xs text-zinc-500">Completados:</span>
-                          <span className="text-sm text-zinc-400">14</span>
+                          <span className="text-sm text-zinc-400">-</span>
                         </div>
                       </div>
                     </CardContent>
@@ -304,15 +247,15 @@ export default function Dashboard() {
                       <div className="flex flex-col">
                         <div className="flex justify-between items-center">
                           <span className="text-xs text-zinc-500">Recaudado:</span>
-                          <span className="text-lg font-bold text-zinc-300">50%</span>
+                          <span className="text-lg font-bold text-zinc-300">-</span>
                         </div>
                         <div className="flex justify-between items-center">
                           <span className="text-xs text-zinc-500">Pendiente:</span>
-                          <span className="text-sm text-zinc-400">$125,000</span>
+                          <span className="text-sm text-zinc-400">-</span>
                         </div>
                         <div className="flex justify-between items-center">
                           <span className="text-xs text-zinc-500">Con multas:</span>
-                          <span className="text-sm text-zinc-400">4 departamentos</span>
+                          <span className="text-sm text-zinc-400">-</span>
                         </div>
                       </div>
                     </CardContent>
@@ -340,15 +283,15 @@ export default function Dashboard() {
                       <div className="flex flex-col">
                         <div className="flex justify-between items-center">
                           <span className="text-xs text-zinc-500">Reservas hoy:</span>
-                          <span className="text-lg font-bold text-zinc-300">3</span>
+                          <span className="text-lg font-bold text-zinc-300">-</span>
                         </div>
                         <div className="flex justify-between items-center">
                           <span className="text-xs text-zinc-500">Más popular:</span>
-                          <span className="text-sm text-zinc-400">Alberca</span>
+                          <span className="text-sm text-zinc-400">-</span>
                         </div>
                         <div className="flex justify-between items-center">
                           <span className="text-xs text-zinc-500">Total semanal:</span>
-                          <span className="text-sm text-zinc-400">18 reservas</span>
+                          <span className="text-sm text-zinc-400">-</span>
                         </div>
                       </div>
                     </CardContent>
