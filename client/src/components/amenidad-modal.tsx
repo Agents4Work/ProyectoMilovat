@@ -44,6 +44,7 @@ export function AmenidadModal({
 }: AmenidadModalProps) {
   const [horaInicio, setHoraInicio] = useState<string>("");
   const [horaFin, setHoraFin] = useState<string>("");
+  const [nombreResidente, setNombreResidente] = useState<string>(usuario.nombre || "");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Solo muestra las horas disponibles para seleccionar
@@ -62,6 +63,7 @@ export function AmenidadModal({
     horaInicio: string;
     horaFin: string;
     usuario: string;
+    nombreUsuario: string;
   }
 
   // Manejador para reservar la amenidad
@@ -77,13 +79,23 @@ export function AmenidadModal({
 
     setIsSubmitting(true);
     
+    if (!nombreResidente.trim()) {
+      toast({
+        title: "Error",
+        description: "Debes ingresar tu nombre completo",
+        variant: "destructive"
+      });
+      return;
+    }
+
     // Creamos el objeto de reserva
     const nuevaReserva: EventoReserva = {
       amenidadId: amenidad.id,
       fecha: format(fecha, 'yyyy-MM-dd'),
       horaInicio,
       horaFin,
-      usuario: usuario.apartamento
+      usuario: usuario.apartamento,
+      nombreUsuario: nombreResidente.trim()
     };
     
     // Simulamos la reserva (aquí iría la llamada al API)
@@ -142,9 +154,21 @@ export function AmenidadModal({
                 <span className="text-sm text-zinc-400">Horario disponible:</span>
                 <span className="text-sm">{amenidad.horario}</span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-sm text-zinc-400">Reservado por:</span>
-                <span className="text-sm">{usuario.nombre} ({usuario.apartamento})</span>
+              <div className="space-y-2">
+                <div className="flex justify-between">
+                  <span className="text-sm text-zinc-400">Departamento:</span>
+                  <span className="text-sm">{usuario.apartamento}</span>
+                </div>
+                <div className="flex flex-col space-y-1">
+                  <Label className="text-sm text-zinc-400">Nombre del residente:</Label>
+                  <input
+                    type="text"
+                    value={nombreResidente}
+                    onChange={(e) => setNombreResidente(e.target.value)}
+                    className="w-full bg-zinc-800 border border-zinc-700 rounded p-2 text-sm"
+                    placeholder="Ingresa tu nombre completo"
+                  />
+                </div>
               </div>
             </div>
           </div>

@@ -32,6 +32,7 @@ interface Reservacion {
   horaInicio: string; // formato: HH:MM (24h)
   horaFin: string; // formato: HH:MM (24h)
   usuario: string;
+  nombreUsuario?: string; // Nombre completo del residente (opcional para mantener compatibilidad)
   estado: 'pendiente' | 'confirmada' | 'cancelada';
 }
 
@@ -204,6 +205,7 @@ export default function Amenidades() {
                 horaInicio: reserva.horaInicio,
                 horaFin: reserva.horaFin,
                 usuario: reserva.usuario,
+                nombreUsuario: reserva.nombreUsuario,
                 estado: 'confirmada' as 'confirmada'
               }
             ]
@@ -298,7 +300,11 @@ export default function Amenidades() {
                       allReservaciones.map((reserva, index) => (
                         <tr key={index} className="border-b border-zinc-800 hover:bg-zinc-800/30">
                           <td className="py-3 px-4 font-medium">{reserva.amenidadNombre}</td>
-                          <td className="py-3 px-4">{reserva.usuario}</td>
+                          <td className="py-3 px-4">
+                            {reserva.nombreUsuario ? 
+                              `${reserva.nombreUsuario} (${reserva.usuario})` : 
+                              reserva.usuario}
+                          </td>
                           <td className="py-3 px-4">{format(new Date(reserva.fecha), "d 'de' MMMM, yyyy", { locale: es })}</td>
                           <td className="py-3 px-4">{reserva.horaInicio} - {reserva.horaFin}</td>
                           <td className="py-3 px-4">
@@ -412,7 +418,12 @@ export default function Amenidades() {
                       <div key={idx} className="p-2 rounded bg-zinc-800 text-xs">
                         <p className="font-medium">{reserva.amenidadNombre}</p>
                         <p className="text-zinc-400">{format(new Date(reserva.fecha), "d 'de' MMMM", { locale: es })}</p>
-                        <p className="text-zinc-400">{reserva.horaInicio} - {reserva.horaFin}, Dept. {reserva.usuario}</p>
+                        <p className="text-zinc-400">
+                          {reserva.horaInicio} - {reserva.horaFin}, 
+                          {reserva.nombreUsuario ? 
+                            ` ${reserva.nombreUsuario} (${reserva.usuario})` : 
+                            ` Dept. ${reserva.usuario}`}
+                        </p>
                       </div>
                     ))}
                   
@@ -561,7 +572,7 @@ export default function Amenidades() {
                                   <p className="text-zinc-400">
                                     {reserva.usuario === currentUser.apartamento ? 
                                       "Tu reserva" : 
-                                      `Reservado por: ${reserva.usuario}`}
+                                      `Reservado por: ${reserva.nombreUsuario ? reserva.nombreUsuario : reserva.usuario}`}
                                   </p>
                                 </div>
                               ))
