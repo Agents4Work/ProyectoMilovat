@@ -40,54 +40,8 @@ export default function Multas() {
   const [showModal, setShowModal] = useState(false);
   const [showNuevaMultaModal, setShowNuevaMultaModal] = useState(false);
   
-  // Lista de multas (datos de ejemplo)
-  const [multas, setMultas] = useState<Multa[]>([
-    {
-      id: "1",
-      departamento: "2A",
-      propietario: "Ana González",
-      monto: 1500,
-      estatus: "Incompleto",
-      descripcion: "Ruido excesivo después de las 22:00 hrs. Múltiples reportes de vecinos por fiesta realizada el día sábado 5 de abril. Segunda infracción en el mes.",
-      fecha: "2025-04-06"
-    },
-    {
-      id: "2",
-      departamento: "4B",
-      propietario: "Carlos Ramírez",
-      monto: 500,
-      estatus: "Completo",
-      descripcion: "Obstrucción de áreas comunes. Colocación de objetos personales en el pasillo que impiden el libre tránsito.",
-      fecha: "2025-04-02"
-    },
-    {
-      id: "3",
-      departamento: "7C",
-      propietario: "María Sánchez",
-      monto: 2000,
-      estatus: "Incompleto",
-      descripcion: "Daños a propiedad común. Rayones en pared del elevador realizados por hijo menor de edad. Se requiere pago para restauración.",
-      fecha: "2025-04-08"
-    },
-    {
-      id: "4",
-      departamento: "5D",
-      propietario: "Juan Méndez",
-      monto: 800,
-      estatus: "Incompleto",
-      descripcion: "Uso indebido de estacionamiento. Ocupación recurrente de espacios asignados a otros residentes.",
-      fecha: "2025-04-05"
-    },
-    {
-      id: "5",
-      departamento: "1F",
-      propietario: "Sofía Torres",
-      monto: 1200,
-      estatus: "Completo",
-      descripcion: "Incumplimiento de reglamento de mascotas. Perro sin correa en áreas comunes y no recoger desechos.",
-      fecha: "2025-04-01"
-    }
-  ]);
+  // Lista de multas (en un entorno real se cargarían de una API)
+  const [multas, setMultas] = useState<Multa[]>([]);
 
   // Filtrar multas basado en la búsqueda
   const filteredMultas = multas.filter(multa => 
@@ -99,7 +53,7 @@ export default function Multas() {
   const montoTotal = multas.reduce((total, multa) => total + multa.monto, 0);
   const departamentosConMultas = new Set(multas.map(multa => multa.departamento)).size;
   const multasCompletas = multas.filter(multa => multa.estatus === "Completo").length;
-  const porcentajeCompleto = Math.round((multasCompletas / multas.length) * 100);
+  const porcentajeCompleto = multas.length > 0 ? Math.round((multasCompletas / multas.length) * 100) : 0;
 
   // Formatear fecha para mostrarla en formato legible
   const formatearFecha = (fechaStr: string) => {
@@ -229,7 +183,7 @@ export default function Multas() {
                 </div>
                 <div>
                   <div className="text-2xl font-bold">{departamentosConMultas}</div>
-                  <p className="text-xs text-zinc-500">De {departamentosConMultas + 5} departamentos totales</p>
+                  <p className="text-xs text-zinc-500">Departamentos con sanciones</p>
                 </div>
               </div>
             </CardContent>
