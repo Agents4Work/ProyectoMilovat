@@ -176,31 +176,13 @@ export default function Multas() {
     
     setUserRole(role);
     
-    // Cargar datos de ejemplo solo para propósitos de prueba (en un entorno real se obtendría de una API)
-    if (multas.length === 0) {
-      // Estos datos se cargarán solo para poder probar la funcionalidad de exportación CSV
-      setMultas([
-        {
-          id: "1",
-          departamento: "2A",
-          propietario: "Ana González",
-          monto: 1500,
-          estatus: "Incompleto",
-          descripcion: "Ruido excesivo después de las 22:00 hrs. Múltiples reportes de vecinos.",
-          fecha: "2025-04-06"
-        },
-        {
-          id: "2",
-          departamento: "4B",
-          propietario: "Carlos Ramírez",
-          monto: 500,
-          estatus: "Completo",
-          descripcion: "Obstrucción de áreas comunes.",
-          fecha: "2025-04-02"
-        }
-      ]);
-    }
-  }, [navigate, multas.length]);
+    // En un entorno real, aquí se cargarían las multas desde una API
+    // Por ejemplo: 
+    // fetch('/api/multas')
+    //   .then(res => res.json())
+    //   .then(data => setMultas(data));
+    
+  }, [navigate]);
   
   // Wait until we have determined the user role
   if (!userRole) {

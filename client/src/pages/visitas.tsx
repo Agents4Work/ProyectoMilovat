@@ -43,54 +43,8 @@ export default function Visitas() {
   const [searchTerm, setSearchTerm] = useState('');
   const [showRegistroModal, setShowRegistroModal] = useState(false);
   
-  // Lista de visitas (datos de ejemplo)
-  const [visitas, setVisitas] = useState<Visita[]>([
-    {
-      id: "1",
-      residente: "Ana González",
-      departamento: "2A",
-      visitante: "Carlos Martínez",
-      fechaEntrada: "2025-04-10T14:30:00",
-      fechaSalida: "2025-04-10T18:45:00",
-      estado: 'Completada'
-    },
-    {
-      id: "2",
-      residente: "Roberto Vega",
-      departamento: "5C",
-      visitante: "María López",
-      fechaEntrada: "2025-04-11T10:15:00",
-      fechaSalida: null,
-      estado: 'Activa'
-    },
-    {
-      id: "3",
-      residente: "Laura Sánchez",
-      departamento: "3B",
-      visitante: "Pedro Ramírez",
-      fechaEntrada: "2025-04-12T12:00:00",
-      fechaSalida: "2025-04-12T14:20:00",
-      estado: 'Completada'
-    },
-    {
-      id: "4",
-      residente: "Miguel Torres",
-      departamento: "1D",
-      visitante: "Julia García",
-      fechaEntrada: "2025-04-12T16:30:00",
-      fechaSalida: null,
-      estado: 'Activa'
-    },
-    {
-      id: "5",
-      residente: "Carmen Flores",
-      departamento: "7A",
-      visitante: "Jorge Mendoza",
-      fechaEntrada: "2025-04-13T09:00:00",
-      fechaSalida: null,
-      estado: 'Pendiente'
-    }
-  ]);
+  // Lista de visitas (en un entorno real se cargarían de una API)
+  const [visitas, setVisitas] = useState<Visita[]>([]);
 
   // Filtrar visitas basado en la búsqueda
   const filteredVisitas = visitas.filter(visita => 
@@ -173,6 +127,48 @@ export default function Visitas() {
     toast({
       title: "Estado actualizado",
       description: `La visita ha sido marcada como ${nuevoEstado}`,
+    });
+  };
+  
+  // Función para exportar visitas a CSV
+  const handleExportarCSV = () => {
+    // Si no hay visitas, mostrar mensaje y no hacer nada
+    if (visitas.length === 0) {
+      toast({
+        title: "No hay datos para exportar",
+        description: "No se encontraron visitas para exportar",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    // Crear cabeceras CSV
+    let csvContent = "ID,Residente,Departamento,Visitante,Fecha de Entrada,Fecha de Salida,Estado\n";
+    
+    // Añadir cada visita al CSV
+    visitas.forEach(visita => {
+      // Escapar comillas en los nombres para evitar problemas con el CSV
+      const residenteEscapado = visita.residente.replace(/"/g, '""');
+      const visitanteEscapado = visita.visitante.replace(/"/g, '""');
+      
+      csvContent += `${visita.id},"${residenteEscapado}",${visita.departamento},"${visitanteEscapado}",${visita.fechaEntrada},${visita.fechaSalida || ""},${visita.estado}\n`;
+    });
+    
+    // Crear blob y descargar
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', `visitas_${new Date().toISOString().split('T')[0]}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    // Notificar al usuario
+    toast({
+      title: "Exportación exitosa",
+      description: `Se han exportado ${visitas.length} visitas a formato CSV`,
     });
   };
 
@@ -333,6 +329,7 @@ export default function Visitas() {
             <Button 
               variant="outline" 
               className="border-amber-500/30 bg-amber-500/10 text-amber-500 hover:bg-amber-500/20"
+              onClick={handleExportarCSV}
             >
               Exportar
             </Button>
