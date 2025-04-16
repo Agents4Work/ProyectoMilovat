@@ -44,7 +44,9 @@ function Router() {
       <Route path="/dashboard/multas" component={Multas} />
       <Route path="/dashboard/visitas" component={Visitas} />
       <Route path="/dashboard/costos" component={Costos} />
+      <Route path="/costos" component={Costos} />
       <Route path="/dashboard/proveedores" component={Proveedores} />
+      <Route path="/proveedores" component={Proveedores} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -58,183 +58,8 @@ export default function Costos() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCosto, setSelectedCosto] = useState<CostoData | null>(null);
   
-  // Datos de ejemplo para costos
-  const [costos] = useState<CostoData[]>([
-    {
-      departamento: "1A",
-      titular: "Carlos Mendoza",
-      montoTotal: 2450,
-      montoMantenimiento: 1200,
-      fechaCobro: "2025-04-01",
-      fechaPago: "2025-04-03",
-      pagado: true,
-      multado: false,
-      servicios: [
-        { nombre: "Mantenimiento", monto: 1200, estado: "Pagado" },
-        { nombre: "Agua", monto: 380, estado: "Pagado" },
-        { nombre: "Gas", monto: 250, estado: "Pagado" },
-        { nombre: "Luz", monto: 320, estado: "Pagado" },
-        { nombre: "Internet", monto: 300, estado: "Pagado" }
-      ]
-    },
-    {
-      departamento: "2B",
-      titular: "Ana Gómez",
-      montoTotal: 2300,
-      montoMantenimiento: 1200,
-      fechaCobro: "2025-04-01",
-      fechaPago: null,
-      pagado: false,
-      multado: true,
-      servicios: [
-        { nombre: "Mantenimiento", monto: 1200, estado: "Pendiente" },
-        { nombre: "Agua", monto: 350, estado: "Pendiente" },
-        { nombre: "Gas", monto: 230, estado: "Pendiente" },
-        { nombre: "Luz", monto: 290, estado: "Pendiente" },
-        { nombre: "Internet", monto: 230, estado: "Pendiente" }
-      ]
-    },
-    {
-      departamento: "3C",
-      titular: "Roberto Sánchez",
-      montoTotal: 2650,
-      montoMantenimiento: 1200,
-      fechaCobro: "2025-04-01",
-      fechaPago: "2025-04-05",
-      pagado: true,
-      multado: false,
-      servicios: [
-        { nombre: "Mantenimiento", monto: 1200, estado: "Pagado" },
-        { nombre: "Agua", monto: 420, estado: "Pagado" },
-        { nombre: "Gas", monto: 280, estado: "Pagado" },
-        { nombre: "Luz", monto: 350, estado: "Pagado" },
-        { nombre: "Internet", monto: 300, estado: "Pagado" },
-        { nombre: "Amenidades", monto: 100, estado: "Pagado" }
-      ]
-    },
-    {
-      departamento: "4D",
-      titular: "María Rodríguez",
-      montoTotal: 2400,
-      montoMantenimiento: 1200,
-      fechaCobro: "2025-04-01",
-      fechaPago: null,
-      pagado: false,
-      multado: false,
-      servicios: [
-        { nombre: "Mantenimiento", monto: 1200, estado: "Pendiente" },
-        { nombre: "Agua", monto: 360, estado: "Pendiente" },
-        { nombre: "Gas", monto: 240, estado: "Pendiente" },
-        { nombre: "Luz", monto: 300, estado: "Pendiente" },
-        { nombre: "Internet", monto: 300, estado: "Pendiente" }
-      ]
-    },
-    {
-      departamento: "5A",
-      titular: "José López",
-      montoTotal: 2750,
-      montoMantenimiento: 1200,
-      fechaCobro: "2025-04-01",
-      fechaPago: "2025-04-07",
-      pagado: true,
-      multado: false,
-      servicios: [
-        { nombre: "Mantenimiento", monto: 1200, estado: "Pagado" },
-        { nombre: "Agua", monto: 450, estado: "Pagado" },
-        { nombre: "Gas", monto: 320, estado: "Pagado" },
-        { nombre: "Luz", monto: 380, estado: "Pagado" },
-        { nombre: "Internet", monto: 300, estado: "Pagado" },
-        { nombre: "Amenidades", monto: 100, estado: "Pagado" }
-      ]
-    },
-    {
-      departamento: "6B",
-      titular: "Patricia Torres",
-      montoTotal: 2500,
-      montoMantenimiento: 1200,
-      fechaCobro: "2025-04-01",
-      fechaPago: null,
-      pagado: false,
-      multado: true,
-      servicios: [
-        { nombre: "Mantenimiento", monto: 1200, estado: "Pendiente" },
-        { nombre: "Agua", monto: 380, estado: "Pendiente" },
-        { nombre: "Gas", monto: 270, estado: "Pendiente" },
-        { nombre: "Luz", monto: 350, estado: "Pendiente" },
-        { nombre: "Internet", monto: 300, estado: "Pendiente" }
-      ]
-    },
-    {
-      departamento: "7C",
-      titular: "Javier Fernández",
-      montoTotal: 2600,
-      montoMantenimiento: 1200,
-      fechaCobro: "2025-04-01",
-      fechaPago: "2025-04-02",
-      pagado: true,
-      multado: false,
-      servicios: [
-        { nombre: "Mantenimiento", monto: 1200, estado: "Pagado" },
-        { nombre: "Agua", monto: 400, estado: "Pagado" },
-        { nombre: "Gas", monto: 280, estado: "Pagado" },
-        { nombre: "Luz", monto: 320, estado: "Pagado" },
-        { nombre: "Internet", monto: 300, estado: "Pagado" },
-        { nombre: "Amenidades", monto: 100, estado: "Pagado" }
-      ]
-    },
-    {
-      departamento: "8D",
-      titular: "Lucía Martínez",
-      montoTotal: 2350,
-      montoMantenimiento: 1200,
-      fechaCobro: "2025-04-01",
-      fechaPago: null,
-      pagado: false,
-      multado: true,
-      servicios: [
-        { nombre: "Mantenimiento", monto: 1200, estado: "Pendiente" },
-        { nombre: "Agua", monto: 340, estado: "Pendiente" },
-        { nombre: "Gas", monto: 230, estado: "Pendiente" },
-        { nombre: "Luz", monto: 280, estado: "Pendiente" },
-        { nombre: "Internet", monto: 300, estado: "Pendiente" }
-      ]
-    },
-    {
-      departamento: "9A",
-      titular: "Miguel Pérez",
-      montoTotal: 2800,
-      montoMantenimiento: 1200,
-      fechaCobro: "2025-04-01",
-      fechaPago: "2025-04-06",
-      pagado: true,
-      multado: false,
-      servicios: [
-        { nombre: "Mantenimiento", monto: 1200, estado: "Pagado" },
-        { nombre: "Agua", monto: 450, estado: "Pagado" },
-        { nombre: "Gas", monto: 330, estado: "Pagado" },
-        { nombre: "Luz", monto: 420, estado: "Pagado" },
-        { nombre: "Internet", monto: 300, estado: "Pagado" },
-        { nombre: "Amenidades", monto: 100, estado: "Pagado" }
-      ]
-    },
-    {
-      departamento: "10B",
-      titular: "Carmen Ruiz",
-      montoTotal: 2520,
-      montoMantenimiento: 1200,
-      fechaCobro: "2025-04-01",
-      fechaPago: null,
-      pagado: false,
-      multado: false,
-      servicios: [
-        { nombre: "Mantenimiento", monto: 1200, estado: "Pendiente" },
-        { nombre: "Agua", monto: 380, estado: "Pendiente" },
-        { nombre: "Gas", monto: 270, estado: "Pendiente" },
-        { nombre: "Luz", monto: 370, estado: "Pendiente" },
-        { nombre: "Internet", monto: 300, estado: "Pendiente" }
-      ]
-    }
-  ]);
+  // Datos para costos (en un entorno real se cargarían de una API)
+  const [costos, setCostos] = useState<CostoData[]>([]);
 
   // Datos para los gráficos
   const pagadoVsNoPagado = [
@@ -242,18 +67,18 @@ export default function Costos() {
     { name: 'No Pagado', value: costos.filter(c => !c.pagado).length }
   ];
   
-  const porcentajePagado = (costos.filter(c => c.pagado).length / costos.length) * 100;
+  const porcentajePagado = costos.length > 0 ? (costos.filter(c => c.pagado).length / costos.length) * 100 : 0;
   
   const datosMontosMensuales = [
-    { mes: 'Ene', monto: 25000 },
-    { mes: 'Feb', monto: 24500 },
-    { mes: 'Mar', monto: 25200 },
-    { mes: 'Abr', monto: 24800 },
-    { mes: 'May', monto: 25300 },
-    { mes: 'Jun', monto: 26000 },
+    { mes: 'Ene', monto: 0 },
+    { mes: 'Feb', monto: 0 },
+    { mes: 'Mar', monto: 0 },
+    { mes: 'Abr', monto: 0 },
+    { mes: 'May', monto: 0 },
+    { mes: 'Jun', monto: 0 },
   ];
   
-  const porcentajeMultas = (costos.filter(c => c.multado).length / costos.length) * 100;
+  const porcentajeMultas = costos.length > 0 ? (costos.filter(c => c.multado).length / costos.length) * 100 : 0;
   
   // Colores para los gráficos
   const COLORS = ['#10b981', '#ef4444'];
