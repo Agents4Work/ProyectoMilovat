@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, Download, Plus, FileText } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { ProveedorModal, ProveedorFormData } from "@/components/proveedor-modal";
+import { toast } from "@/hooks/use-toast";
 
 // Definición de un proveedor
 interface Proveedor {
@@ -27,130 +29,8 @@ export default function Proveedores() {
   const [, navigate] = useLocation();
   const [userRole, setUserRole] = useState<"resident" | "admin" | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-
-  // Datos de ejemplo para proveedores
-  const [proveedores] = useState<Proveedor[]>([
-    {
-      id: "1",
-      servicio: "Limpieza",
-      nombre: "Clean Services S.A.",
-      monto: 15000,
-      frecuencia: 'mensual',
-      comentarios: "Servicio de limpieza de áreas comunes y mantenimiento básico",
-      contratoUrl: "/contratos/limpieza-cleanservices.pdf",
-      fechaInicio: "2025-01-01",
-      fechaTermino: "2025-12-31",
-      estado: 'activo'
-    },
-    {
-      id: "2",
-      servicio: "Jardinería",
-      nombre: "Green Gardens",
-      monto: 8500,
-      frecuencia: 'mensual',
-      comentarios: "Mantenimiento de jardines y áreas verdes",
-      contratoUrl: "/contratos/jardineria-greengardens.pdf",
-      fechaInicio: "2025-02-15",
-      fechaTermino: "2026-02-14",
-      estado: 'activo'
-    },
-    {
-      id: "3",
-      servicio: "Seguridad",
-      nombre: "SafeGuard Security",
-      monto: 25000,
-      frecuencia: 'mensual',
-      comentarios: "Servicio de vigilancia 24/7, incluye monitoreo de cámaras",
-      contratoUrl: "/contratos/seguridad-safeguard.pdf",
-      fechaInicio: "2025-01-01",
-      fechaTermino: "2025-12-31",
-      estado: 'activo'
-    },
-    {
-      id: "4",
-      servicio: "Mantenimiento Elevadores",
-      nombre: "Lift Maintenance Co.",
-      monto: 12000,
-      frecuencia: 'trimestral',
-      comentarios: "Servicio preventivo y correctivo para los elevadores",
-      contratoUrl: "/contratos/elevadores-liftmaintenance.pdf",
-      fechaInicio: "2025-01-01",
-      fechaTermino: "2025-12-31",
-      estado: 'activo'
-    },
-    {
-      id: "5",
-      servicio: "Fumigación",
-      nombre: "Pest Control Plus",
-      monto: 5000,
-      frecuencia: 'trimestral',
-      comentarios: "Servicio de control de plagas en áreas comunes",
-      contratoUrl: "/contratos/fumigacion-pestcontrol.pdf",
-      fechaInicio: "2025-03-10",
-      fechaTermino: "2026-03-09",
-      estado: 'activo'
-    },
-    {
-      id: "6",
-      servicio: "Internet y Telecomunicaciones",
-      nombre: "ConnectNet",
-      monto: 18000,
-      frecuencia: 'mensual',
-      comentarios: "Servicio de internet de fibra óptica para áreas comunes y sistema de intercomunicación",
-      contratoUrl: "/contratos/internet-connectnet.pdf",
-      fechaInicio: "2025-01-15",
-      fechaTermino: "2026-01-14",
-      estado: 'activo'
-    },
-    {
-      id: "7",
-      servicio: "Impermeabilización",
-      nombre: "WaterProof Solutions",
-      monto: 75000,
-      frecuencia: 'único',
-      comentarios: "Trabajo de impermeabilización del techo y terrazas",
-      contratoUrl: "/contratos/impermeabilizacion-waterproof.pdf",
-      fechaInicio: "2025-05-20",
-      fechaTermino: null,
-      estado: 'inactivo'
-    },
-    {
-      id: "8",
-      servicio: "Mantenimiento Piscina",
-      nombre: "Blue Pool Services",
-      monto: 6000,
-      frecuencia: 'mensual',
-      comentarios: "Limpieza y mantenimiento de la piscina y áreas adyacentes",
-      contratoUrl: "/contratos/piscina-bluepool.pdf",
-      fechaInicio: "2025-01-01",
-      fechaTermino: "2025-12-31",
-      estado: 'activo'
-    },
-    {
-      id: "9",
-      servicio: "Mantenimiento Sistema Eléctrico",
-      nombre: "ElectriPower",
-      monto: 9000,
-      frecuencia: 'semestral',
-      comentarios: "Revisión y mantenimiento de instalaciones eléctricas comunes",
-      contratoUrl: "/contratos/electrico-electripower.pdf",
-      fechaInicio: "2025-02-01",
-      fechaTermino: "2026-01-31",
-      estado: 'activo'
-    },
-    {
-      id: "10",
-      servicio: "Pintura",
-      nombre: "ColorPaint Pro",
-      monto: 120000,
-      frecuencia: 'único',
-      comentarios: "Servicio de pintura para fachada e interiores de áreas comunes",
-      contratoUrl: "/contratos/pintura-colorpaint.pdf",
-      fechaInicio: "2025-07-01",
-      fechaTermino: null,
-      estado: 'inactivo'
-    }
-  ]);
+  const [showModal, setShowModal] = useState(false);
+  const [proveedores, setProveedores] = useState<Proveedor[]>([]);
 
   // Filtrar proveedores basado en la búsqueda
   const proveedoresFiltrados = proveedores.filter(proveedor => 
@@ -168,11 +48,40 @@ export default function Proveedores() {
     }).format(monto);
   };
 
+  // Manejar añadir nuevo proveedor
+  const handleAgregarProveedor = (formData: ProveedorFormData) => {
+    // Crear nuevo proveedor desde los datos del formulario
+    const nuevoProveedor: Proveedor = {
+      id: `prov_${Date.now()}`,  // Generamos un ID único
+      servicio: formData.servicio,
+      nombre: formData.nombre,
+      monto: parseFloat(formData.monto),
+      frecuencia: formData.frecuencia,
+      comentarios: formData.comentarios,
+      contratoUrl: "#", // En un sistema real, esto sería la URL del contrato subido
+      fechaInicio: formData.fechaInicio,
+      fechaTermino: formData.fechaTermino || null,
+      estado: formData.estado
+    };
+    
+    // Añadir a la lista de proveedores
+    setProveedores(prev => [...prev, nuevoProveedor]);
+    
+    // Mostrar mensaje de éxito
+    toast({
+      title: "Proveedor añadido",
+      description: `El proveedor ${nuevoProveedor.nombre} ha sido añadido exitosamente.`
+    });
+  };
+
   // Descargar contrato (simulado)
   const handleDescargarContrato = (contratoUrl: string, proveedorNombre: string) => {
     // En un entorno real, esto redigiría a la URL real del contrato
     // Para este ejemplo, simulamos una descarga mostrando una alerta
-    alert(`Descargando contrato de ${proveedorNombre}.\nEn un entorno real, se descargaría desde: ${contratoUrl}`);
+    toast({
+      title: "Descargando contrato",
+      description: `Contrato de ${proveedorNombre} en proceso de descarga.`
+    });
   };
 
   useEffect(() => {
@@ -201,6 +110,13 @@ export default function Proveedores() {
   
   return (
     <div className="flex h-screen bg-background">
+      {/* Modal para añadir nuevo proveedor */}
+      <ProveedorModal 
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        onSave={handleAgregarProveedor}
+      />
+      
       {/* Sidebar */}
       <DashboardSidebar userRole={userRole} />
       
@@ -223,6 +139,7 @@ export default function Proveedores() {
           
           <Button 
             className="bg-amber-500 hover:bg-amber-600 text-black"
+            onClick={() => setShowModal(true)}
           >
             <Plus className="h-4 w-4 mr-2" />
             Nuevo Proveedor
