@@ -116,6 +116,47 @@ export default function Multas() {
     // Actualizar la lista de multas
     setMultas([...multas, nuevaMulta]);
   };
+  
+  // Función para exportar multas a CSV
+  const handleExportarCSV = () => {
+    // Si no hay multas, mostrar mensaje y no hacer nada
+    if (multas.length === 0) {
+      toast({
+        title: "No hay datos para exportar",
+        description: "No se encontraron multas para exportar",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    // Crear cabeceras CSV
+    let csvContent = "ID,Departamento,Propietario,Monto,Fecha,Estatus,Descripción\n";
+    
+    // Añadir cada multa al CSV
+    multas.forEach(multa => {
+      // Escapar comillas en la descripción para evitar problemas con el CSV
+      const descripcionEscapada = multa.descripcion.replace(/"/g, '""');
+      
+      csvContent += `${multa.id},${multa.departamento},"${multa.propietario}",${multa.monto},${multa.fecha},${multa.estatus},"${descripcionEscapada}"\n`;
+    });
+    
+    // Crear blob y descargar
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', `multas_${new Date().toISOString().split('T')[0]}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    // Notificar al usuario
+    toast({
+      title: "Exportación exitosa",
+      description: `Se han exportado ${multas.length} multas a formato CSV`,
+    });
+  };
 
   useEffect(() => {
     // Get user role from session storage
@@ -134,7 +175,32 @@ export default function Multas() {
     }
     
     setUserRole(role);
-  }, [navigate]);
+    
+    // Cargar datos de ejemplo solo para propósitos de prueba (en un entorno real se obtendría de una API)
+    if (multas.length === 0) {
+      // Estos datos se cargarán solo para poder probar la funcionalidad de exportación CSV
+      setMultas([
+        {
+          id: "1",
+          departamento: "2A",
+          propietario: "Ana González",
+          monto: 1500,
+          estatus: "Incompleto",
+          descripcion: "Ruido excesivo después de las 22:00 hrs. Múltiples reportes de vecinos.",
+          fecha: "2025-04-06"
+        },
+        {
+          id: "2",
+          departamento: "4B",
+          propietario: "Carlos Ramírez",
+          monto: 500,
+          estatus: "Completo",
+          descripcion: "Obstrucción de áreas comunes.",
+          fecha: "2025-04-02"
+        }
+      ]);
+    }
+  }, [navigate, multas.length]);
   
   // Wait until we have determined the user role
   if (!userRole) {
@@ -237,6 +303,7 @@ export default function Multas() {
             <Button 
               variant="outline" 
               className="border-amber-500/30 bg-amber-500/10 text-amber-500 hover:bg-amber-500/20"
+              onClick={handleExportarCSV}
             >
               Exportar
             </Button>
