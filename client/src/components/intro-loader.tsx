@@ -132,7 +132,7 @@ const IntroLoader = memo(function IntroLoader() {
           <motion.img 
             src={logoImage} 
             alt="Milovat Logo" 
-            className="h-36 md:h-44 lg:h-48 mb-4" 
+            className="h-36 md:h-44 lg:h-48 mb-4 object-contain" 
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
