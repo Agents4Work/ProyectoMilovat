@@ -1,15 +1,35 @@
+# backend/main.py
+
 from fastapi import FastAPI
-from backend.routes import users  # importaremos esto ya
+from backend.routes import users, auth
+from backend.routes import apartments
+from backend.routes import bookings
+from backend.routes import deliveries
+from backend.routes import documents
+from backend.routes import incidents
+from backend.routes import payments
+from backend.routes import providers
+from backend.routes import reserves
+from backend.routes import users
 
-app = FastAPI()
+app = FastAPI(
+    title="Milovat API",
+    version="1.0.0"
+)
 
-# Enrutar
+# Rutas
 app.include_router(users.router, prefix="/users", tags=["Usuarios"])
+app.include_router(auth.router, prefix="/auth", tags=["Autenticación"])
+app.include_router(apartments.router, prefix="/apartments", tags=["Apartments"])
+app.include_router(bookings.router, prefix="/bookings", tags=["Bookings"])
+app.include_router(deliveries.router, prefix="/deliveries", tags=["Deliveries"])
+app.include_router(documents.router, prefix="/documents", tags=["Documents"])
+app.include_router(incidents.router, prefix="/incidents", tags=["Incidents"])
+app.include_router(payments.router, prefix="/payments", tags=["Payments"])
+app.include_router(providers.router, prefix="/providers", tags=["Providers"])
+app.include_router(reserves.router, prefix="/reserves", tags=["Reserves"])
+app.include_router(users.router, prefix="/users", tags=["Users"])
 
 @app.get("/")
 def root():
-    return {"msg": "Backend IAS conectado Mongo"}
-
-from backend.routes import auth
-
-app.include_router(auth.router, prefix="/auth", tags=["Autenticación"])
+    return {"msg": "Backend IAS conectado a MongoDB"}
