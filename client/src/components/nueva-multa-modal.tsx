@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "@/hooks/use-toast";
+import type { NewFine } from "@/pages/multas";
 
 // Lista de departamentos (ejemplos)
 const departamentos = [
@@ -20,33 +21,24 @@ const departamentos = [
   "7A", "7B", "7C", "7D", "7E", "7F",
 ];
 
-// Definición de propiedades para el modal
 interface NuevaMultaModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (multa: {
-    departamento: string;
-    propietario: string;
-    monto: number;
-    descripcion: string;
-    fecha: string;
-  }) => void;
+  onSave: (multa: NewFine) => void;
 }
 
-export function NuevaMultaModal({
+export default function NuevaMultaModal({
   isOpen,
   onClose,
   onSave
 }: NuevaMultaModalProps) {
-  // Estado para el formulario
   const [departamento, setDepartamento] = useState("");
   const [propietario, setPropietario] = useState("");
   const [monto, setMonto] = useState("");
   const [descripcion, setDescripcion] = useState("");
-  const [fecha, setFecha] = useState(new Date().toISOString().split('T')[0]); // Formato YYYY-MM-DD
+  const [fecha, setFecha] = useState(new Date().toISOString().split('T')[0]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Función para verificar si el formulario es válido
   const isFormValid = () => {
     return (
       departamento.trim() !== "" && 
@@ -59,7 +51,6 @@ export function NuevaMultaModal({
     );
   };
 
-  // Función para limpiar el formulario
   const resetForm = () => {
     setDepartamento("");
     setPropietario("");
@@ -69,7 +60,6 @@ export function NuevaMultaModal({
     setIsSubmitting(false);
   };
 
-  // Función para guardar la multa
   const handleSubmit = () => {
     if (!isFormValid()) {
       toast({
@@ -82,16 +72,15 @@ export function NuevaMultaModal({
 
     setIsSubmitting(true);
 
-    // Crear el objeto de multa
-    const nuevaMulta = {
+    const nuevaMulta: NewFine = {
       departamento,
       propietario,
       monto: Number(monto),
       descripcion,
-      fecha
+      fecha,
+      estatus: "Incompleto" // ✅ incluido para cumplir con el tipo
     };
 
-    // Simulamos un breve retraso para guardar
     setTimeout(() => {
       onSave(nuevaMulta);
       resetForm();
@@ -103,7 +92,6 @@ export function NuevaMultaModal({
     }, 500);
   };
 
-  // Manejador para limpiar al cerrar
   const handleClose = () => {
     resetForm();
     onClose();
@@ -118,17 +106,12 @@ export function NuevaMultaModal({
             Completa los datos para registrar una nueva multa
           </DialogDescription>
         </DialogHeader>
-        
+
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="departamento" className="text-right">
-              Departamento
-            </Label>
+            <Label htmlFor="departamento" className="text-right">Departamento</Label>
             <div className="col-span-3">
-              <Select
-                value={departamento}
-                onValueChange={setDepartamento}
-              >
+              <Select value={departamento} onValueChange={setDepartamento}>
                 <SelectTrigger className="bg-zinc-900 border-zinc-800">
                   <SelectValue placeholder="Selecciona un departamento" />
                 </SelectTrigger>
@@ -142,11 +125,9 @@ export function NuevaMultaModal({
               </Select>
             </div>
           </div>
-          
+
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="propietario" className="text-right">
-              Propietario
-            </Label>
+            <Label htmlFor="propietario" className="text-right">Propietario</Label>
             <Input
               id="propietario"
               value={propietario}
@@ -155,11 +136,9 @@ export function NuevaMultaModal({
               placeholder="Nombre del propietario"
             />
           </div>
-          
+
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="monto" className="text-right">
-              Monto
-            </Label>
+            <Label htmlFor="monto" className="text-right">Monto</Label>
             <div className="col-span-3 relative">
               <span className="absolute left-3 top-2.5 text-zinc-400">$</span>
               <Input
@@ -173,11 +152,9 @@ export function NuevaMultaModal({
               />
             </div>
           </div>
-          
+
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="fecha" className="text-right">
-              Fecha de Emisión
-            </Label>
+            <Label htmlFor="fecha" className="text-right">Fecha de Emisión</Label>
             <Input
               id="fecha"
               type="date"
@@ -186,11 +163,9 @@ export function NuevaMultaModal({
               className="col-span-3 bg-zinc-900 border-zinc-800"
             />
           </div>
-          
+
           <div className="grid grid-cols-4 items-start gap-4">
-            <Label htmlFor="descripcion" className="text-right pt-2">
-              Descripción
-            </Label>
+            <Label htmlFor="descripcion" className="text-right pt-2">Descripción</Label>
             <Textarea
               id="descripcion"
               value={descripcion}
@@ -200,20 +175,10 @@ export function NuevaMultaModal({
             />
           </div>
         </div>
-        
+
         <DialogFooter>
-          <Button 
-            variant="outline" 
-            onClick={handleClose}
-            className="border-zinc-800"
-          >
-            Cancelar
-          </Button>
-          <Button 
-            onClick={handleSubmit}
-            disabled={!isFormValid() || isSubmitting}
-            className="bg-amber-500 hover:bg-amber-600 text-black"
-          >
+          <Button variant="outline" onClick={handleClose} className="border-zinc-800">Cancelar</Button>
+          <Button onClick={handleSubmit} disabled={!isFormValid() || isSubmitting} className="bg-amber-500 hover:bg-amber-600 text-black">
             {isSubmitting ? "Guardando..." : "Guardar Multa"}
           </Button>
         </DialogFooter>

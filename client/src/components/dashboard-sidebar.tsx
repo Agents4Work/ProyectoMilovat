@@ -1,68 +1,27 @@
+'use client';
+
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter";
+import { Button } from "@/components/ui/button";
 import Logo from "@/components/logo";
 import {
-  Home,
-  CreditCard,
-  Calendar,
-  AlertTriangle,
-  FileText,
-  Settings,
-  LogOut,
-  Truck,
-  DollarSign,
-  Ban,
-  Users
+  Home, CreditCard, Calendar, AlertTriangle, FileText, Settings,
+  LogOut, Truck, DollarSign, Ban, Users
 } from "lucide-react";
 
-/**
- * Interfaz NavItem
- * 
- * Define la estructura de cada elemento de navegación en la barra lateral.
- * 
- * @property icon - Icono que representa visualmente la opción de menú
- * @property label - Texto descriptivo que aparece junto al icono
- * @property href - Ruta de navegación que se activará al hacer clic
- */
 interface NavItem {
   icon: JSX.Element;
   label: string;
   href: string;
 }
 
-/**
- * Interfaz DashboardSidebarProps
- * 
- * Define las propiedades recibidas por el componente DashboardSidebar.
- * 
- * @property userRole - Rol del usuario que determina qué opciones de menú se mostrarán
- *                     "resident" para residentes del edificio
- *                     "admin" para administradores del sistema
- */
 interface DashboardSidebarProps {
   userRole: "resident" | "admin";
 }
 
-/**
- * Componente DashboardSidebar
- * 
- * Este componente representa la barra lateral de navegación del panel de control.
- * Muestra diferentes opciones de menú según el rol del usuario (residente o administrador).
- * 
- * Funcionalidades:
- * - Muestra el logo de Milovat y el rol del usuario
- * - Presenta un menú de navegación con iconos y etiquetas
- * - Resalta visualmente la opción de menú activa
- * - Proporciona una sección para información del usuario y cierre de sesión
- * - Adapta las opciones de menú según el rol del usuario
- * 
- * @param userRole - Rol del usuario ("resident" o "admin")
- */
-export function DashboardSidebar({ userRole }: DashboardSidebarProps) {
+function DashboardSidebar({ userRole }: DashboardSidebarProps) {
   const [location, navigate] = useLocation();
-  
-  // Determinar qué ruta está activa basado en la ubicación actual
+
   const getActivePath = () => {
     if (location.startsWith('/dashboard/configuracion')) return '/dashboard/configuracion';
     if (location.startsWith('/dashboard/pagos')) return '/dashboard/pagos';
@@ -75,9 +34,9 @@ export function DashboardSidebar({ userRole }: DashboardSidebarProps) {
     if (location.startsWith('/dashboard/visitas')) return '/dashboard/visitas';
     return '/dashboard';
   };
-  
+
   const activePath = getActivePath();
-  
+
   const residentNavItems: NavItem[] = [
     { icon: <Home className="h-5 w-5" />, label: "Dashboard", href: "/dashboard" },
     { icon: <CreditCard className="h-5 w-5" />, label: "Pagos", href: "/dashboard/pagos" },
@@ -86,8 +45,7 @@ export function DashboardSidebar({ userRole }: DashboardSidebarProps) {
     { icon: <FileText className="h-5 w-5" />, label: "Documentos", href: "/dashboard/documentos" },
     { icon: <Settings className="h-5 w-5" />, label: "Configuración", href: "/dashboard/configuracion" },
   ];
-  
-  // Opciones específicas para el administrador
+
   const adminNavItems: NavItem[] = [
     { icon: <Home className="h-5 w-5" />, label: "Dashboard", href: "/dashboard" },
     { icon: <Truck className="h-5 w-5" />, label: "Proveedores", href: "/dashboard/proveedores" },
@@ -98,27 +56,19 @@ export function DashboardSidebar({ userRole }: DashboardSidebarProps) {
     { icon: <Users className="h-5 w-5" />, label: "Visitas", href: "/dashboard/visitas" },
     { icon: <Settings className="h-5 w-5" />, label: "Configuración", href: "/dashboard/configuracion" },
   ];
-  
-  // Choose the right navigation items based on user role
+
   const navItems = userRole === "admin" ? adminNavItems : residentNavItems;
 
+  const handleNavigation = (href: string) => navigate(href);
 
-  
-  const handleNavigation = (href: string) => {
-    navigate(href);
-  };
-  
   const handleLogout = () => {
-    // Clear session storage
     sessionStorage.removeItem('userRole');
     sessionStorage.removeItem('isDevelopment');
-    // Navigate to home page
     navigate('/');
   };
-  
+
   return (
     <aside className="w-64 bg-sidebar border-r border-sidebar-border flex flex-col h-screen">
-      {/* Logo & User role */}
       <div className="p-4 border-b border-sidebar-border">
         <div className="flex items-center gap-3">
           <Logo size="sm" />
@@ -128,8 +78,7 @@ export function DashboardSidebar({ userRole }: DashboardSidebarProps) {
           {userRole === "resident" ? "Residente" : "Administrador"}
         </p>
       </div>
-      
-      {/* Navigation Menu */}
+
       <nav className="flex-grow py-4 overflow-y-auto">
         <ul className="space-y-1 px-2">
           {navItems.map((item) => (
@@ -150,8 +99,7 @@ export function DashboardSidebar({ userRole }: DashboardSidebarProps) {
           ))}
         </ul>
       </nav>
-      
-      {/* User Profile & Logout */}
+
       <div className="p-4 border-t border-sidebar-border mt-auto">
         <div className="flex items-center gap-3 mb-4">
           <div className="h-10 w-10 rounded-full bg-sidebar-accent/10 flex items-center justify-center">
@@ -162,7 +110,7 @@ export function DashboardSidebar({ userRole }: DashboardSidebarProps) {
             <p className="text-sm text-sidebar-foreground/70">dev@milovat.com</p>
           </div>
         </div>
-        
+
         <Button
           variant="outline"
           className="w-full flex items-center justify-center gap-2 text-sidebar-foreground/70 hover:text-sidebar-foreground"
@@ -175,3 +123,5 @@ export function DashboardSidebar({ userRole }: DashboardSidebarProps) {
     </aside>
   );
 }
+
+export default DashboardSidebar;

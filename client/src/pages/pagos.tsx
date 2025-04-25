@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
-import { DashboardSidebar } from "@/components/dashboard-sidebar";
+import  DashboardSidebar  from "@/components/dashboard-sidebar";
 import {
   Card,
   CardContent,

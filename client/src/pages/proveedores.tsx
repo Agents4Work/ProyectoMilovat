@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
-import { DashboardSidebar } from "@/components/dashboard-sidebar";
+import  DashboardSidebar  from "@/components/dashboard-sidebar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

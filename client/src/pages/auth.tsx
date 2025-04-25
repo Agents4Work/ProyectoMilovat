@@ -105,8 +105,8 @@ export default function Auth() {
                 <Checkbox
                   id="remember-me"
                   checked={rememberMe}
-                  onCheckedChange={(checked) =>
-                    setRememberMe(checked as boolean)
+                  onCheckedChange={(checked : boolean) =>
+                    setRememberMe(checked)
                   }
                 />
                 <Label htmlFor="remember-me" className="text-sm">Recordarme</Label>

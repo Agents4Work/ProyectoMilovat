@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
-import { DashboardSidebar } from "@/components/dashboard-sidebar";
+import  DashboardSidebar  from "@/components/dashboard-sidebar";
 import { IncidenciaFormModal } from "@/components/incidencia-form-modal";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";

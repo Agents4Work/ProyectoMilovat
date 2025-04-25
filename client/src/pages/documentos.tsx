@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
-import { DashboardSidebar } from "@/components/dashboard-sidebar";
+import  DashboardSidebar  from "@/components/dashboard-sidebar";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, FileText, FolderClosed, Grid, List } from "lucide-react";
