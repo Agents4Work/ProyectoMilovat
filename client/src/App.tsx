@@ -28,7 +28,7 @@ import Amenidades from "@/pages/amenidades";
 import Multas from "@/pages/multas";
 import Visitas from "@/pages/visitas";
 import Costos from "@/pages/costos";
-import Proveedores from "@/pages/proveedores";
+import Proveedores from "@/pages/dashboard/proveedores";
 
 function Router() {
   return (

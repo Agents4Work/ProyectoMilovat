@@ -18,6 +18,7 @@ def serialize_announcement(a):
         "description": a.get("description", "Sin descripción"),
         "category": a.get("category", "general"),
         "highlight": a.get("highlight", False),
+        "imageUrl": a.get("imageUrl", ""),
         "date": a.get("date", datetime.utcnow()),
         "createdAt": a.get("createdAt", datetime.utcnow()),
         "updatedAt": a.get("updatedAt", datetime.utcnow()),
@@ -37,7 +38,7 @@ class AnnouncementOut(AnnouncementIn):
     updatedAt: datetime
 
 # GET /announcements
-@router.get("/", response_model=List[AnnouncementOut], dependencies=[Depends(verify_token)])
+@router.get("", response_model=List[AnnouncementOut], dependencies=[Depends(verify_token)])
 def get_announcements(db: Database = Depends(get_db)):
     try:
         data = db["announcements"].find().sort("date", -1)
@@ -46,7 +47,7 @@ def get_announcements(db: Database = Depends(get_db)):
         raise HTTPException(status_code=500, detail=f"Error al obtener anuncios: {str(e)}")
 
 # POST /announcements
-@router.post("/", response_model=AnnouncementOut, dependencies=[Depends(verify_token)])
+@router.post("", response_model=AnnouncementOut, dependencies=[Depends(verify_token)])
 def create_announcement(data: AnnouncementIn, db: Database = Depends(get_db)):
     try:
         now = datetime.utcnow()

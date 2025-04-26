@@ -23,7 +23,6 @@ import DashboardSidebar from "@/components/dashboard-sidebar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
 import {
   Search, PlusCircle, AlertTriangle
 } from "lucide-react";
@@ -32,11 +31,12 @@ import { PackageListModal } from "@/components/package-list-modal";
 import { CrearAnuncioModal } from "@/components/crear-anuncio-modal";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
+import { Badge } from "@/components/ui/badge";
 import { toast } from "@/hooks/use-toast";
 import { useCreateAnuncio } from "@/hooks/useCreateAnuncio";
 import { useAnnouncements } from "@/hooks/useAnnouncements";
 
-// Interfaces
+// Interfaces para tipos
 interface Paquete {
   id: string;
   empresa: string;
@@ -45,6 +45,17 @@ interface Paquete {
   destinatario: string;
   estado: "Pendiente" | "Recogido";
   apartamento: string;
+}
+
+interface Anuncio {
+  id: string;
+  titulo: string;
+  contenido: string;
+  categoria: string;
+  destacado: boolean;
+  imageUrl?: string;
+  fechaCreacion: string;
+  autor: string;
 }
 
 export default function Dashboard() {
@@ -59,11 +70,7 @@ export default function Dashboard() {
   const { data: anuncios = [], refetch } = useAnnouncements();
   const createAnuncio = useCreateAnuncio();
 
-  const [currentUser] = useState({
-    nombre: "",
-    apartamento: ""
-  });
-
+  const [currentUser] = useState({ nombre: "", apartamento: "" });
   const [paquetes] = useState<Paquete[]>([]);
   const paquetesUsuario = paquetes.filter(p => userRole === "admin" || p.apartamento === currentUser.apartamento);
   const pendingPackages = paquetesUsuario.filter(p => p.estado === "Pendiente").length;
@@ -74,7 +81,9 @@ export default function Dashboard() {
     setUserRole(role);
   }, [navigate]);
 
-  if (!userRole) return <div className="flex items-center justify-center h-screen">Cargando...</div>;
+  if (!userRole) {
+    return <div className="flex items-center justify-center h-screen">Cargando...</div>;
+  }
 
   return (
     <div className="flex h-screen bg-background">
@@ -85,8 +94,8 @@ export default function Dashboard() {
           Dashboard {userRole === "admin" ? "de Administrador" : ""}
         </h1>
 
+        {/* Panel principal de anuncios */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* 🟡 Anuncios */}
           <div className="lg:col-span-2">
             <Card className="border-zinc-800 bg-zinc-900/50">
               <CardHeader className="border-b border-zinc-800 pb-4">
@@ -109,36 +118,52 @@ export default function Dashboard() {
 
               <CardContent className="p-4 divide-y divide-zinc-800">
                 {anuncios.length > 0 ? (
-                  anuncios.map((anuncio: any) => (
-                    <div key={anuncio._id} className={`py-4 ${anuncio.highlight ? 'bg-amber-500/5 -mx-4 px-4 border-l-4 border-amber-500' : ''}`}>
-                      <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-lg font-medium">{anuncio.title}</h3>
-                        {anuncio.highlight && (
-                          <Badge variant="outline" className="border-amber-500/30 bg-amber-500/10 text-amber-500">
-                            <AlertTriangle className="h-3 w-3 mr-1" />
-                            Destacado
-                          </Badge>
-                        )}
-                      </div>
-                      <div className="mb-3">
-                        <Badge variant="outline" className="border-zinc-700/50 bg-zinc-800/30 text-zinc-400">
-                          {anuncio.category}
-                        </Badge>
-                        <span className="text-xs text-zinc-500 ml-2">
-                          {anuncio.createdAt ? format(new Date(anuncio.createdAt), "d 'de' MMMM, yyyy", { locale: es }) : "Fecha desconocida"}
-                        </span>
-                      </div>
-                      <p className="text-zinc-300 mb-3">{anuncio.description}</p>
-                      {anuncio.imageUrl && (
-                        <div className="rounded-md overflow-hidden mb-3 bg-zinc-800/30 max-h-56">
-                          <img src={anuncio.imageUrl} alt={anuncio.title} className="w-full h-full object-cover" />
+                  anuncios
+                    .filter((a: Anuncio) =>
+                      filtroAnuncios === "todos" || a.destacado
+                    )
+                    .filter((a: Anuncio) =>
+                      typeof a.titulo === "string" &&
+                      a.titulo.toLowerCase().includes(searchTerm.toLowerCase())
+                    )
+                    .map((anuncio: Anuncio) => (
+                      <div
+                        key={anuncio.id}
+                        className={`py-4 ${anuncio.destacado
+                          ? 'bg-amber-500/5 -mx-4 px-4 border-l-4 border-amber-500'
+                          : ''}`}
+                      >
+                        <div className="flex justify-between items-start mb-2">
+                          <h3 className="text-lg font-medium">{anuncio.titulo}</h3>
+                          {anuncio.destacado && (
+                            <Badge
+                              variant="outline"
+                              className="border-amber-500/30 bg-amber-500/10 text-amber-500"
+                            >
+                              <AlertTriangle className="h-3 w-3 mr-1" />
+                              Destacado
+                            </Badge>
+                          )}
                         </div>
-                      )}
-                      <div className="text-right text-xs text-zinc-500">{anuncio.autor || "Administración"}</div>
-                    </div>
-                  ))
+                        <div className="mb-3">
+                          <Badge variant="outline" className="border-zinc-700/50 bg-zinc-800/30 text-zinc-400">
+                            {anuncio.categoria}
+                          </Badge>
+                          <span className="text-xs text-zinc-500 ml-2">
+                            {format(new Date(anuncio.fechaCreacion), "d 'de' MMMM, yyyy", { locale: es })}
+                          </span>
+                        </div>
+                        <p className="text-zinc-300 mb-3">{anuncio.contenido}</p>
+                        {anuncio.imageUrl && (
+                          <div className="rounded-md overflow-hidden mb-3 bg-zinc-800/30 max-h-56">
+                            <img src={anuncio.imageUrl} alt={anuncio.titulo} className="w-full h-full object-cover" />
+                          </div>
+                        )}
+                        <div className="text-right text-xs text-zinc-500">{anuncio.autor}</div>
+                      </div>
+                    ))
                 ) : (
-                  <div className="min-h-[200px] flex items-center justify-center text-zinc-500">
+                  <div className="min-h-[300px] flex items-center justify-center text-zinc-500">
                     No hay anuncios todavía
                   </div>
                 )}
@@ -146,7 +171,7 @@ export default function Dashboard() {
             </Card>
           </div>
 
-          {/* 🔎 Filtro */}
+          {/* Filtros */}
           <div>
             <div className="relative">
               <Search className="absolute left-3 top-3 h-4 w-4 text-zinc-500" />
@@ -161,14 +186,18 @@ export default function Dashboard() {
             <div className="mt-4 flex space-x-2">
               <Button
                 variant="outline"
-                className={`${filtroAnuncios === "todos" ? "border-amber-500 bg-amber-500/20 text-amber-500" : "border-amber-500/30 bg-amber-500/10 text-amber-500 hover:bg-amber-500/20"} flex-1`}
+                className={`${filtroAnuncios === "todos"
+                  ? "border-amber-500 bg-amber-500/20 text-amber-500"
+                  : "border-amber-500/30 bg-amber-500/10 text-amber-500 hover:bg-amber-500/20"} flex-1`}
                 onClick={() => setFiltroAnuncios("todos")}
               >
                 Todos
               </Button>
               <Button
                 variant="outline"
-                className={`${filtroAnuncios === "destacados" ? "border-amber-500 bg-amber-500/20 text-amber-500" : "border-amber-500/30 bg-amber-500/10 text-amber-500 hover:bg-amber-500/20"} flex-1`}
+                className={`${filtroAnuncios === "destacados"
+                  ? "border-amber-500 bg-amber-500/20 text-amber-500"
+                  : "border-amber-500/30 bg-amber-500/10 text-amber-500 hover:bg-amber-500/20"} flex-1`}
                 onClick={() => setFiltroAnuncios("destacados")}
               >
                 Destacados
@@ -181,6 +210,7 @@ export default function Dashboard() {
       {/* Modales */}
       <VisitFormModal isOpen={showVisitForm} onClose={() => setShowVisitForm(false)} />
       <PackageListModal isOpen={showPackageList} onClose={() => setShowPackageList(false)} paquetes={paquetesUsuario} />
+
       <CrearAnuncioModal
         isOpen={showAnuncioModal}
         onClose={() => setShowAnuncioModal(false)}
@@ -188,15 +218,15 @@ export default function Dashboard() {
           try {
             await createAnuncio.mutateAsync({
               ...anuncio,
-              fechaCreacion: new Date().toISOString(),
+              fechaCreacion: new Date().toISOString()
             });
             toast({
               title: "Anuncio creado",
-              description: "Se ha publicado correctamente.",
+              description: "Se ha publicado correctamente",
             });
             setShowAnuncioModal(false);
             refetch();
-          } catch (err) {
+          } catch {
             toast({
               title: "Error",
               description: "No se pudo guardar el anuncio",

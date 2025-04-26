@@ -30,6 +30,14 @@ class IncidentIn(BaseModel):
     priority: Optional[str] = "medium"
     category: Optional[str] = "general"
 
+class IncidentUpdate(BaseModel):
+    userId: Optional[str]
+    title: Optional[str]
+    description: Optional[str]
+    status: Optional[str]
+    priority: Optional[str]
+    category: Optional[str]
+
 class IncidentOut(IncidentIn):
     _id: str
     createdAt: datetime
@@ -71,7 +79,7 @@ def create_incident(data: IncidentIn, db: Database = Depends(get_db)):
 
 # PATCH /incidents/{id}
 @router.patch("/{id}", response_model=IncidentOut, dependencies=[Depends(verify_token)])
-def update_incident(id: str, data: IncidentIn, db: Database = Depends(get_db)):
+def update_incident(id: str, data: IncidentUpdate, db: Database = Depends(get_db)):
     try:
         update_data = {k: v for k, v in data.dict().items() if v is not None}
         if "userId" in update_data:

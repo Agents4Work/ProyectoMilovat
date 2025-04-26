@@ -14,7 +14,7 @@ router = APIRouter()
 def serialize_provider(provider):
     provider["_id"] = str(provider["_id"])
     provider["documentId"] = str(provider.get("documentId", ""))
-    provider["company"] = provider.get("company", "")
+    provider["name"] = provider.get("name", "")
     provider["service"] = provider.get("service", "")
     provider["email"] = provider.get("email", "")
     provider["phone"] = provider.get("phone", "")
@@ -25,7 +25,7 @@ def serialize_provider(provider):
 
 # Modelos
 class ProviderIn(BaseModel):
-    company: str
+    name: str
     service: str
     email: str
     phone: str
@@ -38,7 +38,7 @@ class ProviderOut(ProviderIn):
     updatedAt: datetime
 
 # GET /providers
-@router.get("/", response_model=List[ProviderOut], dependencies=[Depends(verify_token)])
+@router.get("", response_model=List[ProviderOut], dependencies=[Depends(verify_token)])
 def get_providers(db: Database = Depends(get_db)):
     try:
         providers = [serialize_provider(p) for p in db["providers"].find()]
@@ -58,11 +58,12 @@ def get_provider(id: str, db: Database = Depends(get_db)):
         raise HTTPException(status_code=500, detail=f"Error al obtener proveedor: {str(e)}")
 
 # POST /providers
-@router.post("/", response_model=ProviderOut, dependencies=[Depends(verify_token)])
+@router.post("", response_model=ProviderOut, dependencies=[Depends(verify_token)])
 def create_provider(data: ProviderIn, db: Database = Depends(get_db)):
     try:
         now = datetime.utcnow()
         provider = data.dict()
+
         if provider.get("documentId"):
             provider["documentId"] = ObjectId(provider["documentId"])
         provider.update({"createdAt": now, "updatedAt": now})

@@ -1,46 +1,34 @@
+"use client";
+
 import { useState } from "react";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
+  Dialog, DialogContent, DialogDescription, DialogFooter,
+  DialogHeader, DialogTitle
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
+import { useCreateIncident } from "@/hooks/useCreateIncident";
+import { toast } from "@/hooks/use-toast";
 
 interface IncidenciaFormModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data: {
-    titulo: string;
-    descripcion: string;
-    departamento: string;
-  }) => void;
+  onSuccess?: () => void; // Para refrescar datos si se necesita
 }
 
-export function IncidenciaFormModal({
-  isOpen,
-  onClose,
-  onSubmit,
-}: IncidenciaFormModalProps) {
+export function IncidenciaFormModal({ isOpen, onClose, onSuccess }: IncidenciaFormModalProps) {
   const [titulo, setTitulo] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [departamento, setDepartamento] = useState("");
   const [formError, setFormError] = useState("");
 
-  const handleSubmit = () => {
-    // Validación simple
+  const createIncident = useCreateIncident();
+
+  const handleSubmit = async () => {
     if (!titulo.trim()) {
       setFormError("El título es obligatorio");
       return;
@@ -54,19 +42,32 @@ export function IncidenciaFormModal({
       return;
     }
 
-    // Enviar datos
-    onSubmit({
-      titulo,
-      descripcion,
-      departamento,
-    });
+    try {
+      await createIncident.mutateAsync({
+        userId: sessionStorage.getItem("userId") || "000000000000000000000000", // Usa el real de sessionStorage
+        title: titulo,
+        description: descripcion,
+        category: departamento,
+      });
 
-    // Limpiar formulario
-    setTitulo("");
-    setDescripcion("");
-    setDepartamento("");
-    setFormError("");
-    onClose();
+      toast({
+        title: "Incidencia creada",
+        description: "Tu reporte fue registrado correctamente.",
+      });
+
+      setTitulo("");
+      setDescripcion("");
+      setDepartamento("");
+      setFormError("");
+      onClose();
+      onSuccess?.(); // Refreshea datos si existe el callback
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "No se pudo registrar la incidencia.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -80,6 +81,7 @@ export function IncidenciaFormModal({
         </DialogHeader>
 
         <div className="space-y-4 py-4">
+          {/* Campo Título */}
           <div className="space-y-2">
             <Label htmlFor="titulo">Título</Label>
             <Input
@@ -91,6 +93,7 @@ export function IncidenciaFormModal({
             />
           </div>
 
+          {/* Campo Descripción */}
           <div className="space-y-2">
             <Label htmlFor="descripcion">Descripción</Label>
             <Textarea
@@ -103,6 +106,7 @@ export function IncidenciaFormModal({
             />
           </div>
 
+          {/* Campo Departamento */}
           <div className="space-y-2">
             <Label htmlFor="departamento">Departamento</Label>
             <Select value={departamento} onValueChange={setDepartamento}>
@@ -127,10 +131,7 @@ export function IncidenciaFormModal({
           <Button variant="outline" onClick={onClose} className="border-zinc-800">
             Cancelar
           </Button>
-          <Button 
-            onClick={handleSubmit}
-            className="bg-amber-500 hover:bg-amber-600 text-black"
-          >
+          <Button onClick={handleSubmit} className="bg-amber-500 hover:bg-amber-600 text-black">
             Crear Incidencia
           </Button>
         </DialogFooter>

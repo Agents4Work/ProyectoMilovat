@@ -1,8 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
-
-const API = "http://localhost:8000/announcements";
-const getToken = () => sessionStorage.getItem("token");
+import axios from "@/lib/axios";
 
 export const useCreateAnuncio = () => {
   const queryClient = useQueryClient();
@@ -10,25 +7,22 @@ export const useCreateAnuncio = () => {
   return useMutation({
     mutationFn: async (anuncio: {
       titulo: string;
-      contenido: string;
-      categoria: string;
-      destacado: boolean;
+      contenido?: string;
+      categoria?: string;
+      destacado?: boolean;
+      imageUrl?: string;
       fechaCreacion: string;
     }) => {
       const body = {
         title: anuncio.titulo,
-        description: anuncio.contenido,
-        category: anuncio.categoria,
-        highlight: anuncio.destacado,
-        date: anuncio.fechaCreacion, // ISO string expected
+        description: anuncio.contenido ?? "",
+        category: anuncio.categoria ?? "general",
+        highlight: anuncio.destacado ?? false,
+        imageUrl: anuncio.imageUrl ?? "",
+        date: anuncio.fechaCreacion,
       };
 
-      const res = await axios.post(API, body, {
-        headers: {
-          Authorization: `Bearer ${getToken()}`
-        }
-      });
-
+      const res = await axios.post("/announcements", body);
       return res.data;
     },
     onSuccess: () => {
