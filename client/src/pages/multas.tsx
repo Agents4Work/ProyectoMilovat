@@ -31,7 +31,7 @@ export interface Multa {
   estatus: 'Completo' | 'Incompleto';
 }
 
-export type NewFine = Omit<Multa, 'id'>;
+export type NewFine = Omit<Multa, 'id' | 'estatus'>;
 
 export default function Multas() {
   const [, navigate] = useLocation();
@@ -45,14 +45,14 @@ export default function Multas() {
   const createFine = useCreateFine();
   const markFineAsPaid = useMarkFineAsPaid();
 
-  const filteredMultas = multas.filter((m: Multa) =>
+  const filteredMultas = multas.filter((m) =>
     m.departamento.toLowerCase().includes(searchTerm.toLowerCase()) ||
     m.propietario.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const montoTotal = multas.reduce((acc: number, multa: Multa) => acc + multa.monto, 0);
-  const departamentosConMultas = new Set(multas.map((m: Multa) => m.departamento)).size;
-  const multasCompletas = multas.filter((m: Multa) => m.estatus === 'Completo').length;
+  const montoTotal = multas.reduce((acc, multa) => acc + multa.monto, 0);
+  const departamentosConMultas = new Set(multas.map(m => m.departamento)).size;
+  const multasCompletas = multas.filter(m => m.estatus === 'Completo').length;
   const porcentajeCompleto = multas.length > 0
     ? Math.round((multasCompletas / multas.length) * 100)
     : 0;
@@ -76,26 +76,35 @@ export default function Multas() {
       await markFineAsPaid.mutateAsync(id);
       toast({
         title: 'Multa pagada',
-        description: 'El estado ha sido actualizado',
+        description: 'El estado ha sido actualizado correctamente',
       });
       refetch();
       setShowModal(false);
     } catch {
       toast({
         title: 'Error',
-        description: 'No se pudo actualizar la multa',
+        description: 'No se pudo actualizar el estado de la multa',
         variant: 'destructive',
       });
     }
   };
 
   const handleAgregarMulta = async (nuevaMulta: NewFine) => {
-    await createFine.mutateAsync({
-      ...nuevaMulta,
-      estatus: 'Incompleto',
-    } as Multa);
-    setShowNuevaMultaModal(false);
-    refetch();
+    try {
+      await createFine.mutateAsync(nuevaMulta);
+      setShowNuevaMultaModal(false);
+      toast({
+        title: 'Multa agregada',
+        description: 'La multa fue registrada correctamente',
+      });
+      refetch();
+    } catch {
+      toast({
+        title: 'Error',
+        description: 'No se pudo crear la nueva multa',
+        variant: 'destructive',
+      });
+    }
   };
 
   const handleExportarCSV = () => {
@@ -109,7 +118,7 @@ export default function Multas() {
     }
 
     let csv = 'ID,Departamento,Propietario,Monto,Fecha,Estatus,Descripción\n';
-    multas.forEach((m: Multa) => {
+    multas.forEach((m) => {
       const desc = m.descripcion.replace(/"/g, '""');
       csv += `${m.id},${m.departamento},"${m.propietario}",${m.monto},${m.fecha},${m.estatus},"${desc}"\n`;
     });
@@ -119,10 +128,7 @@ export default function Multas() {
     const link = document.createElement('a');
     link.setAttribute('href', url);
     link.setAttribute('download', `multas_${new Date().toISOString().split('T')[0]}.csv`);
-    link.style.visibility = 'hidden';
-    document.body.appendChild(link);
     link.click();
-    document.body.removeChild(link);
   };
 
   useEffect(() => {
@@ -194,7 +200,7 @@ export default function Multas() {
               </TableHeader>
               <TableBody>
                 {filteredMultas.length > 0 ? (
-                  filteredMultas.map((multa: Multa) => (
+                  filteredMultas.map((multa) => (
                     <TableRow key={multa.id}>
                       <TableCell>{multa.departamento}</TableCell>
                       <TableCell>{multa.propietario}</TableCell>

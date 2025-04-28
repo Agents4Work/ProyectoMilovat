@@ -3,15 +3,15 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
 import DashboardSidebar from "@/components/dashboard-sidebar";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
+import { DatePicker } from "@/components/ui/datePicker"; // 🔥 Nuevo
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { Badge } from "@/components/ui/badge";
-import { AlertCircle, Calendar as CalendarIcon, CheckCircle2, Clock } from "lucide-react";
 import { AmenidadModal } from "@/components/amenidad-modal";
 import { useBookings, Booking } from "@/hooks/useBookings";
+import { useAvailableTimes } from "@/hooks/useAvailableTimes"; // 🔥 Nuevo
 
 export default function Amenidades() {
   const [, navigate] = useLocation();
@@ -24,6 +24,19 @@ export default function Amenidades() {
   });
 
   const { data: bookings = [], refetch } = useBookings();
+
+  const mockAmenidad = {
+    id: "mock-id",
+    nombre: "Salón de eventos",
+    descripcion: "Descripción de prueba",
+    horario: "8:00 - 22:00",
+    capacidad: 50
+  };
+
+  const { data: horariosDisponibles = [] } = useAvailableTimes(
+    mockAmenidad.nombre,
+    date ? date.toISOString().split("T")[0] : ""
+  );
 
   useEffect(() => {
     const role = sessionStorage.getItem('userRole') as "resident" | "admin" | null;
@@ -41,21 +54,6 @@ export default function Amenidades() {
   const reservasFiltradas = bookings.filter((reserva) =>
     date ? format(new Date(reserva.fechaInicio), 'yyyy-MM-dd') === format(date, 'yyyy-MM-dd') : true
   );
-
-  const mockAmenidad = {
-    id: "mock-id",
-    nombre: "Salón de eventos",
-    descripcion: "Descripción de prueba",
-    horario: "8:00 - 22:00",
-    capacidad: 50
-  };
-
-  const mockHorarios = [
-    { hora: "08:00", disponible: true },
-    { hora: "09:00", disponible: true },
-    { hora: "10:00", disponible: false },
-    { hora: "11:00", disponible: true }
-  ];
 
   const renderAdminView = () => (
     <div className="flex h-screen bg-background">
@@ -113,13 +111,7 @@ export default function Amenidades() {
             <CardTitle>Calendario de Reservas</CardTitle>
           </CardHeader>
           <CardContent className="p-4">
-            <Calendar
-              mode="single"
-              selected={date}
-              onSelect={setDate}
-              className="mx-auto"
-              locale={es}
-            />
+            <DatePicker date={date} onChange={setDate} />
           </CardContent>
           <CardFooter className="flex justify-between p-4">
             <Button onClick={() => setShowModal(true)} className="bg-amber-500 hover:bg-amber-600 text-black">
@@ -159,7 +151,7 @@ export default function Amenidades() {
             amenidad={mockAmenidad}
             fecha={date || new Date()}
             usuario={currentUser}
-            horarios={mockHorarios}
+            horarios={horariosDisponibles}
           />
         )}
       </main>

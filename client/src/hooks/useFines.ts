@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "@/lib/axios";
 
+// Interfaces
 export interface Fine {
   id: string;
   departamento: string;
@@ -19,7 +20,9 @@ export const useFines = () =>
     queryFn: async () => {
       const res = await axios.get<Fine[]>("/fines");
       return res.data;
-    }
+    },
+    staleTime: 1000 * 60 * 5, // 5 min frescura
+    retry: 1, // Un solo intento de reintento
   });
 
 export const useCreateFine = () => {

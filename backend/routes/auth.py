@@ -5,7 +5,7 @@ from pydantic import BaseModel
 from backend.db.mongo import get_db
 from pymongo.database import Database
 from backend.utils.jwt_handler import create_access_token
-from backend.utils.security import verify_token  # nuevo import con HTTPBearer
+from backend.utils.security import verify_token  # sigue igual
 
 router = APIRouter()
 
@@ -35,11 +35,15 @@ def login(payload: LoginRequest, db: Database = Depends(get_db)):
         "userId": token_data["user_id"]
     }
 
-# Ruta protegida con HTTP Bearer
+# Ruta protegida
 @router.get("/me")
 def get_me(payload: dict = Depends(verify_token)):
     return {
         "user_id": payload["user_id"],
         "role": payload["role"]
     }
+
+# 🆕 NUEVO: Función para que otros módulos usen (ej. visits.py)
+def get_current_user(payload: dict = Depends(verify_token)):
+    return payload
 

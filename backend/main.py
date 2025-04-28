@@ -1,34 +1,23 @@
-# backend/main.py
-
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware  # Importa el middleware
+from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
+
 load_dotenv()
 
-from backend.routes import users, auth
-from backend.routes import apartments
-from backend.routes import bookings
-from backend.routes import deliveries
-from backend.routes import documents
-from backend.routes import incidents
-from backend.routes import payments
-from backend.routes import providers
-from backend.routes import reserves
-from backend.routes import announcements
-from backend.routes import fines
+from backend.routes import users, auth, apartments, bookings, deliveries, documents, incidents, payments, providers, reserves, announcements, fines
+from backend.routes import visits
 
 app = FastAPI(
     title="Milovat API",
     version="1.0.0"
 )
 
-#Habilita CORS para permitir peticiones desde el frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["*"],  # Permitir todo para dev
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["Authorization", "Content-Type"],
+    allow_headers=["*"],
 )
 
 # Rutas
@@ -44,6 +33,7 @@ app.include_router(providers.router, prefix="/providers", tags=["Providers"])
 app.include_router(reserves.router, prefix="/reserves", tags=["Reserves"])
 app.include_router(announcements.router, prefix="/announcements", tags=["Announcements"])
 app.include_router(fines.router, prefix="/fines", tags=["Multas"])
+app.include_router(visits.router, prefix="/visits", tags=["Visits"])
 
 @app.get("/")
 def root():

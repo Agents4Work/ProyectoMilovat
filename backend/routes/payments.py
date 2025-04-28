@@ -10,22 +10,26 @@ from backend.utils.security import verify_token
 
 router = APIRouter()
 
-# Serializador
+# ✅ Serializador actualizado 🔥
 def serialize_payment(payment):
-    payment["_id"] = str(payment["_id"])
-    payment["apartmentId"] = str(payment.get("apartmentId", ""))
-    payment["status"] = payment.get("status", "pending")
-    payment["concept"] = payment.get("concept", "")
-    payment["amount"] = float(payment.get("amount", 0))
-    payment["dueDate"] = payment.get("dueDate", datetime.utcnow())
-    payment["paymentDate"] = payment.get("paymentDate", None)
-    payment["createdAt"] = payment.get("createdAt", datetime.utcnow())
-    payment["updatedAt"] = payment.get("updatedAt", datetime.utcnow())
-    return payment
+    try:
+        return {
+            "_id": str(payment["_id"]),
+            "apartmentId": str(payment.get("apartmentId") or ""),
+            "concept": payment.get("concept", ""),
+            "amount": float(payment.get("amount", 0)),
+            "dueDate": payment.get("dueDate", datetime.utcnow()),
+            "status": payment.get("status", "pending"),
+            "paymentDate": payment.get("paymentDate", None),
+            "createdAt": payment.get("createdAt", datetime.utcnow()),
+            "updatedAt": payment.get("updatedAt", datetime.utcnow()),
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error al serializar pago: {str(e)}")
 
-# Modelos
+# 📦 Modelos
 class PaymentIn(BaseModel):
-    apartmentId: str
+    apartmentId: Optional[str] = None
     amount: float
     concept: str
     dueDate: datetime
@@ -63,7 +67,8 @@ def create_payment(data: PaymentIn, db: Database = Depends(get_db)):
     try:
         now = datetime.utcnow()
         payment = data.dict()
-        payment["apartmentId"] = ObjectId(payment["apartmentId"])
+        if payment.get("apartmentId"):
+            payment["apartmentId"] = ObjectId(payment["apartmentId"])
         payment.update({"createdAt": now, "updatedAt": now})
         result = db["payments"].insert_one(payment)
         new_payment = db["payments"].find_one({"_id": result.inserted_id})
@@ -76,7 +81,7 @@ def create_payment(data: PaymentIn, db: Database = Depends(get_db)):
 def update_payment(id: str, data: PaymentIn, db: Database = Depends(get_db)):
     try:
         update_data = {k: v for k, v in data.dict().items() if v is not None}
-        if "apartmentId" in update_data:
+        if update_data.get("apartmentId"):
             update_data["apartmentId"] = ObjectId(update_data["apartmentId"])
         update_data["updatedAt"] = datetime.utcnow()
         result = db["payments"].update_one({"_id": ObjectId(id)}, {"$set": update_data})
